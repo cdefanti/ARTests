@@ -23,7 +23,6 @@ public class NetworkManager : MonoBehaviour {
         public string IP;
         public bool visible;
         public bool connected;
-        public Queue<string> messages = new Queue<string>(100);
 
         public UdpClient client;
 
@@ -39,11 +38,6 @@ public class NetworkManager : MonoBehaviour {
         public Vector3 pos_diff = new Vector3();
 
         public Dictionary<int, Pose> objects;
-
-        public void pushMessage(string m)
-        {
-            messages.Enqueue(m);
-        }
 
         public void setRot (Quaternion q)
         {
@@ -150,30 +144,12 @@ public class NetworkManager : MonoBehaviour {
         root["id"] = myId;
         root["type"] = "CONNECT";
         root["info"] = "";
-        c.pushMessage(root.ToString());
+        SendMessage(root.ToString(), c);
         
         Clients[id] = c;
 
         // return true to signal connection was OK
         return true;
-    }
-
-    // broadcast message to everyone
-    public void StageData(string message)
-    {
-        foreach (int id in KnownIds)
-        {
-            if (id != myId)
-            {
-                StageData(message, id);
-            }
-        }
-    }
-
-    // broadcast message to one client
-    public void StageData(string message, int id)
-    {
-        Clients[id].pushMessage(message);
     }
 
     // the next few methods allow other Unity objects to use stored network data
@@ -222,24 +198,28 @@ public class NetworkManager : MonoBehaviour {
         root["info"]["pos"]["x"] = pos.x;
         root["info"]["pos"]["y"] = pos.y;
         root["info"]["pos"]["z"] = pos.z;
-        StageData(root.ToString());
-        SendData();
+        SendData(root.ToString());
     }
 
-    void SendData()
+    // send message to everyone
+    public void SendData(string message)
     {
-        // batch send all queued messages
-        // queue might not be necessary, maybe we want to send things ASAP
-        foreach (VRClient c in Clients.Values)
+        foreach (int id in KnownIds)
         {
-            while (c.connected && c.messages.Count > 0)
+            if (id != myId)
             {
-                string m = c.messages.Dequeue();
-                Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(m);
-                IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
-                c.client.Send(sendbuf, sendbuf.Length, sendEP);
+                SendData(message, id);
             }
         }
+    }
+
+    // send message to one specific client
+    public void SendData(string message, int id)
+    {
+        VRClient c = Clients[id];
+        Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
+        IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
+        c.client.Send(sendbuf, sendbuf.Length, sendEP);
     }
 
     private void OnApplicationQuit()

@@ -120,7 +120,7 @@ public class Tracker : MonoBehaviour {
         root["info"]["diff"]["x"] = rawpos.x;
         root["info"]["diff"]["y"] = rawpos.y;
         root["info"]["diff"]["z"] = rawpos.z;
-        network.StageData(root.ToString(), id);
+        network.SendData(root.ToString(), id);
 
         // if we receive data from them, we can now figure out the positional and rotational difference
         if (network.Clients[id].connected)
