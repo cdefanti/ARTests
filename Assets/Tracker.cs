@@ -112,15 +112,12 @@ public class Tracker : MonoBehaviour {
 
         // send over tracker position in camera frame
         // this is the vector from our client to their client
-        JSONNode root = JSON.Parse("{}");
-        root["id"] = network.myId;
-        root["type"] = "POSE_OTHER";
-        root["info"] = JSON.Parse("{}");
-        root["info"]["diff"] = JSON.Parse("{}");
-        root["info"]["diff"]["x"] = rawpos.x;
-        root["info"]["diff"]["y"] = rawpos.y;
-        root["info"]["diff"]["z"] = rawpos.z;
-        network.SendData(root.ToString(), id);
+        JSONNode info = JSON.Parse("{}");
+        info["diff"] = JSON.Parse("{}");
+        info["diff"]["x"] = rawpos.x;
+        info["diff"]["y"] = rawpos.y;
+        info["diff"]["z"] = rawpos.z;
+        network.SendData(info, "POSE_OTHER", id);
 
         // if we receive data from them, we can now figure out the positional and rotational difference
         if (network.Clients[id].connected)

@@ -20,21 +20,18 @@ public class SyncObject : MonoBehaviour {
         {
             Vector3 pos = transform.position;
             Quaternion rot = transform.rotation;
-            JSONNode root = JSON.Parse("{}");
-            root["id"] = ownerId;
-            root["type"] = "POSE_OBJECT";
-            root["info"] = JSON.Parse("{}");
-            root["info"]["id"] = objId;
-            root["info"]["rot"] = JSON.Parse("{}");
-            root["info"]["rot"]["x"] = rot.x;
-            root["info"]["rot"]["y"] = rot.y;
-            root["info"]["rot"]["z"] = rot.z;
-            root["info"]["rot"]["w"] = rot.w;
-            root["info"]["pos"] = JSON.Parse("{}");
-            root["info"]["pos"]["x"] = pos.x;
-            root["info"]["pos"]["y"] = pos.y;
-            root["info"]["pos"]["z"] = pos.z;
-            network.StageData(root.ToString());
+            JSONNode info = JSON.Parse("{}");
+            info["id"] = objId;
+            info["rot"] = JSON.Parse("{}");
+            info["rot"]["x"] = rot.x;
+            info["rot"]["y"] = rot.y;
+            info["rot"]["z"] = rot.z;
+            info["rot"]["w"] = rot.w;
+            info["pos"] = JSON.Parse("{}");
+            info["pos"]["x"] = pos.x;
+            info["pos"]["y"] = pos.y;
+            info["pos"]["z"] = pos.z;
+            network.SendData(info, "POSE_OBJECT");
         } else
         {
             Pose p = network.GetObjectPoseData(ownerId, objId);

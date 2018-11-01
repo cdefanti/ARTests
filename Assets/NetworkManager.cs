@@ -17,12 +17,14 @@ public class NetworkManager : MonoBehaviour {
 
     public Dictionary<int, VRClient> Clients;
 
+    // TODO: move this into a separate class file, maybe bundle with the tracker.
     public class VRClient
     {
         public int TrackerID;
         public string IP;
         public bool visible;
         public bool connected;
+        public int lastPacketID = 0;
 
         public UdpClient client;
 
@@ -39,17 +41,17 @@ public class NetworkManager : MonoBehaviour {
 
         public Dictionary<int, Pose> objects;
 
-        public void setRot (Quaternion q)
+        public void SetRot (Quaternion q)
         {
             rot = q;
         }
 
-        public void setPos(Vector3 p)
+        public void SetPos(Vector3 p)
         {
             pos = p;
         }
 
-        public void setRelPos (Vector3 p)
+        public void SetRelPos (Vector3 p)
         {
             relPos = p;
         }
@@ -60,6 +62,7 @@ public class NetworkManager : MonoBehaviour {
     bool active;
 
     float updateTime;
+    public int lastPacketID = 0;
 
     UdpClient client;
     Thread pthread;
@@ -140,11 +143,8 @@ public class NetworkManager : MonoBehaviour {
         c.client.Client.Bind(ipep);
         c.connected = true;
         // send connection packet so the other client can perform a handshake
-        JSONNode root = JSON.Parse("{}");
-        root["id"] = myId;
-        root["type"] = "CONNECT";
-        root["info"] = "";
-        SendMessage(root.ToString(), c);
+        JSONNode info = JSON.Parse("{}");
+        SendData(info, "CONNECT", id);
         
         Clients[id] = c;
 
@@ -158,10 +158,8 @@ public class NetworkManager : MonoBehaviour {
     {
         if (Clients.ContainsKey(clientId))
         {
-            Debug.Log("UNITY: found client");
             if (Clients[clientId].objects.ContainsKey(objectId))
             {
-                Debug.Log("UNITY: found object");
                 return Clients[clientId].objects[objectId];
             }
         } 
@@ -185,41 +183,60 @@ public class NetworkManager : MonoBehaviour {
         // broadcast our pose to everyone we're connected to
         Vector3 pos = GoogleARCore.Frame.Pose.position;
         Quaternion rot = GoogleARCore.Frame.Pose.rotation;
-        JSONNode root = JSON.Parse("{}");
-        root["id"] = myId;
-        root["type"] = "POSE_SELF";
-        root["info"] = JSON.Parse("{}");
-        root["info"]["rot"] = JSON.Parse("{}");
-        root["info"]["rot"]["x"] = rot.x;
-        root["info"]["rot"]["y"] = rot.y;
-        root["info"]["rot"]["z"] = rot.z;
-        root["info"]["rot"]["w"] = rot.w;
-        root["info"]["pos"] = JSON.Parse("{}");
-        root["info"]["pos"]["x"] = pos.x;
-        root["info"]["pos"]["y"] = pos.y;
-        root["info"]["pos"]["z"] = pos.z;
-        SendData(root.ToString());
-    }
-
-    // send message to everyone
-    public void SendData(string message)
-    {
-        foreach (int id in KnownIds)
-        {
-            if (id != myId)
-            {
-                SendData(message, id);
-            }
-        }
+        JSONNode info = JSON.Parse("{}");
+        info["rot"] = JSON.Parse("{}");
+        info["rot"]["x"] = rot.x;
+        info["rot"]["y"] = rot.y;
+        info["rot"]["z"] = rot.z;
+        info["rot"]["w"] = rot.w;
+        info["pos"] = JSON.Parse("{}");
+        info["pos"]["x"] = pos.x;
+        info["pos"]["y"] = pos.y;
+        info["pos"]["z"] = pos.z;
+        SendData(info, "POSE_SELF");
     }
 
     // send message to one specific client
-    public void SendData(string message, int id)
+    // pass -1 as id (or leave blank) to broadcast to everyone
+    public void SendData(JSONNode data, string type, int id=-1)
     {
-        VRClient c = Clients[id];
-        Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
-        IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
-        c.client.Send(sendbuf, sendbuf.Length, sendEP);
+        JSONNode root = JSON.Parse("{}");
+        root["id"] = myId;
+        root["type"] = "POSE_SELF";
+        root["info"] = data;
+        lastPacketID++;
+        root["packetID"] = lastPacketID;
+        string message = root.ToString();
+        if (id == -1)
+        {
+            foreach (int otherid in KnownIds)
+            {
+                if (otherid != myId)
+                {
+                    VRClient c = Clients[otherid];
+                    Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
+                    IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
+                    c.client.Send(sendbuf, sendbuf.Length, sendEP);
+                }
+            }
+        } else
+        {
+            VRClient c = Clients[id];
+            Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
+            IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
+            c.client.Send(sendbuf, sendbuf.Length, sendEP);
+        }
+    }
+
+    public void ForwardMessage(string message, List<int> ids)
+    {
+        foreach (int id in ids)
+        {
+            VRClient c = Clients[id];
+            Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
+            IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
+            c.client.Send(sendbuf, sendbuf.Length, sendEP);
+        }
     }
 
     private void OnApplicationQuit()
@@ -262,6 +279,11 @@ public class NetworkManager : MonoBehaviour {
     {
         var root = JSON.Parse(json);
         int id = root["id"].AsInt;
+        if (root["packetID"].AsInt <= Clients[id].lastPacketID)
+        {
+            // ignore old packets
+            return;
+        }
         if (root["type"] == "CONNECT")
         {
             Connect(id);
@@ -274,14 +296,14 @@ public class NetworkManager : MonoBehaviour {
             Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
                                       root["info"]["pos"]["y"].AsFloat,
                                       root["info"]["pos"]["z"].AsFloat);
-            Clients[id].setRot(rot);
-            Clients[id].setPos(pos);
+            Clients[id].SetRot(rot);
+            Clients[id].SetPos(pos);
         }  else if (root["type"] == "POSE_OTHER")
         {
              Vector3 relpos = new Vector3(root["info"]["diff"]["x"].AsFloat,
                                           root["info"]["diff"]["y"].AsFloat,
                                           root["info"]["diff"]["z"].AsFloat);
-            Clients[id].setRelPos(relpos);
+            Clients[id].SetRelPos(relpos);
         } else if (root["type"] == "POSE_OBJECT")
         {
             int objId = root["info"]["id"].AsInt;
@@ -296,6 +318,11 @@ public class NetworkManager : MonoBehaviour {
             Clients[id].objects[objId] = new Pose(pos, rot);
 
         }
+        // forward data to connected clients
+        List<int> forward_list = (List<int>)KnownIds.Clone();
+        forward_list.Remove(myId);
+        forward_list.Remove(id);
+        ForwardMessage(json, forward_list);
     }
 
     // async callback method
