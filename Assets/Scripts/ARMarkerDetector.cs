@@ -29,7 +29,7 @@
             detectorParameters = DetectorParameters.Create();
 
             // Dictionary holds set of all available markers
-            dictionary = CvAruco.GetPredefinedDictionary(PredefinedDictionaryName.Dict6X6_250);
+            dictionary = CvAruco.GetPredefinedDictionary(PredefinedDictionaryName.DictArucoOriginal);
         }
 
         public bool GetTrackerCorners(int id, out Point2f[] output)

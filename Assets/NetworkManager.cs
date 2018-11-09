@@ -319,6 +319,7 @@ public class NetworkManager : MonoBehaviour {
 
         }
         // forward data to connected clients
+        // TODO: we want better rules for forwarding, maybe based on proximity or visibility
         List<int> forward_list = (List<int>)KnownIds.Clone();
         forward_list.Remove(myId);
         forward_list.Remove(id);

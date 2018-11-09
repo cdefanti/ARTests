@@ -37,7 +37,8 @@ public class Tracker : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         TrackerMesh.SetActive(tracked);
-        if (network.Clients[id].connected)
+        
+        if (network.Clients.ContainsKey(id) && network.Clients[id].connected)
         {
             TrackerMesh.GetComponent<Renderer>().material.color = Color.green;
         } else
@@ -66,6 +67,7 @@ public class Tracker : MonoBehaviour {
                 }
             }
         }
+        
 
         // standard OpenCV algorithm to find trackers
         // finds tracker pose in frame of camera
@@ -109,7 +111,11 @@ public class Tracker : MonoBehaviour {
         pos = rawpos + cam.transform.position;
 
         transform.position = pos;
-
+        if (!network.Clients.ContainsKey(id))
+        {
+            tracked = true;
+            return;
+        }
         // send over tracker position in camera frame
         // this is the vector from our client to their client
         JSONNode info = JSON.Parse("{}");
