@@ -5,9 +5,12 @@ using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Single;
 using MathNet.Numerics.LinearAlgebra.Factorization;
 
+
+// TODO: We should rename this class, it is more of a multi-tracker resolver
 public class GroundTruthCalibrator : MonoBehaviour {
 
     public Tracker[] trackers;
+    public bool tracked;
 
 	// Use this for initialization
 	void Start () {
@@ -20,8 +23,9 @@ public class GroundTruthCalibrator : MonoBehaviour {
         // http://post.queensu.ca/~sdb2/PAPERS/PAMI-3DLS-1987.pdf
         // Some ideas simplified to account for lack of roll/pitch drift
 
-        Quaternion q = Quaternion.Inverse(transform.rotation);
-        Vector3 t = -transform.position;
+        Quaternion q = transform.rotation;
+        Vector3 t = transform.position;
+        tracked = false;
 
         // First, we calculate the centroid
 
@@ -69,22 +73,38 @@ public class GroundTruthCalibrator : MonoBehaviour {
         // Get SVD of H, H = UDV^T
         Svd<float> svd = H.Svd(true);
         svd.Solve(H);
-        // X = VU^T
-        Matrix<float> X = svd.VT.Transpose() * svd.U.Transpose();
+        // X = VU^T (= (UV^T)^T)
+        Matrix<float> X = (svd.U * svd.VT).Transpose();
         // If det(X) = +1, optimal rotation = X
-        // if det(X) = -1, the algorithm fails (bad data or degenerate cases)
-        if (X.Determinant() > 0)
+        // if det(X) = -1, either degenerate case or reflection
+        if (X.Determinant() == -1)
         {
-            Vector3 forward = new Vector3(X[0, 2], X[1, 2], X[2, 2]);
+            int flip_index = -1;
+            for (int i = 0; i < 3; i++)
+            {
+                if (svd.W[i, i] == 0)
+                {
+                    flip_index = i;
+                    break;
+                }
+            }
+            // VT' flips the row where the corresponding singular value is 0
+            Matrix<float> VTp = DenseMatrix.Create(3, 3, 0f);
+            svd.VT.CopyTo(VTp);
+            VTp[flip_index, 0] = -VTp[flip_index, 0];
+            VTp[flip_index, 1] = -VTp[flip_index, 1];
+            VTp[flip_index, 2] = -VTp[flip_index, 2];
 
-            q = Quaternion.LookRotation(forward);
-            t = rc - q * oc;
-        } else
-        {
-            // no solution
+            X = (svd.U * VTp).Transpose();
         }
 
-        transform.position = -t;
-        transform.rotation = Quaternion.Inverse(q);
+        Vector3 forward = new Vector3(X[0, 2], X[1, 2], X[2, 2]);
+
+        q = Quaternion.LookRotation(forward);
+        t = oc - q * rc;
+        tracked = true;
+
+        transform.position = t;
+        transform.rotation = q;
     }
 }

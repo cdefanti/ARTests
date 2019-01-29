@@ -110,8 +110,8 @@ public class NetworkManager : MonoBehaviour {
         client.Client.Bind(ep);
 
         // this is not needed, but useful for finding address in an ad-hoc network
-        string hostName = System.Net.Dns.GetHostName();
-        foreach (IPAddress addr in System.Net.Dns.GetHostEntry(hostName).AddressList)
+        string hostName = Dns.GetHostName();
+        foreach (IPAddress addr in Dns.GetHostEntry(hostName).AddressList)
         {
             Debug.Log("UNITY: IP Address: " + addr.ToString());
         }
@@ -214,17 +214,21 @@ public class NetworkManager : MonoBehaviour {
                 if (otherid != myId)
                 {
                     VRClient c = Clients[otherid];
-                    Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
-                    IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
-                    c.client.Send(sendbuf, sendbuf.Length, sendEP);
+                    if (c.connected) {
+                        Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
+                        IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
+                        c.client.Send(sendbuf, sendbuf.Length, sendEP);
+                    }
                 }
             }
         } else
         {
             VRClient c = Clients[id];
-            Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
-            IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
-            c.client.Send(sendbuf, sendbuf.Length, sendEP);
+            if (c.connected) {
+                Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
+                IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(c.IP), PORT + c.TrackerID);
+                c.client.Send(sendbuf, sendbuf.Length, sendEP);
+            }
         }
     }
 

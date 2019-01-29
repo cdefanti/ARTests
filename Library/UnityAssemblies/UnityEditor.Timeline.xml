@@ -9,14 +9,24 @@
         <para>Information currently being edited in the Timeline Editor Window.</para>
       </summary>
     </member>
-    <member name="P:UnityEditor.Timeline.TimelineEditor.playableDirector">
+    <member name="P:UnityEditor.Timeline.TimelineEditor.inspectedAsset">
       <summary>
-        <para>The PlayableDirector currently being shown in the Timeline Editor Window.</para>
+        <para>The TimelineAsset currently being shown in the Timeline window.</para>
       </summary>
     </member>
-    <member name="P:UnityEditor.Timeline.TimelineEditor.timelineAsset">
+    <member name="P:UnityEditor.Timeline.TimelineEditor.inspectedDirector">
       <summary>
-        <para>The TimelineAsset currently being shown in the Timeline Editor Window.</para>
+        <para>The PlayableDirector associated with the timeline currently being shown in the Timeline window.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEditor.Timeline.TimelineEditor.masterAsset">
+      <summary>
+        <para>The TimelineAsset at the root of the hierarchy currently being shown in the Timeline window.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEditor.Timeline.TimelineEditor.masterDirector">
+      <summary>
+        <para>The PlayableDirector responsible for the playback of the timeline currently being shown in the Timeline window.</para>
       </summary>
     </member>
   </members>

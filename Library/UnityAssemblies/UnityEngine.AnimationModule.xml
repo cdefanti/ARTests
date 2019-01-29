@@ -481,6 +481,144 @@
         <para>The weight of the animation clip.</para>
       </summary>
     </member>
+    <member name="T:UnityEngine.Animations.AimConstraint">
+      <summary>
+        <para>Constrains the orientation of an object relative to the position of one or more source objects, such that the object is facing the average position of the sources.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.aimVector">
+      <summary>
+        <para>The axis towards which the constrained object orients.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.constraintActive">
+      <summary>
+        <para>Activates or deactivates the constraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.locked">
+      <summary>
+        <para>Locks the offset and rotation at rest.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.rotationAtRest">
+      <summary>
+        <para>The rotation used when the sources have a total weight of 0.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.rotationAxis">
+      <summary>
+        <para>The axes affected by the AimConstraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.rotationOffset">
+      <summary>
+        <para>Represents an offset from the constrained orientation.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.sourceCount">
+      <summary>
+        <para>The number of sources set on the component (read-only).</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.upVector">
+      <summary>
+        <para>The up vector.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.weight">
+      <summary>
+        <para>The weight of the constraint component.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.worldUpObject">
+      <summary>
+        <para>The world up object, used to calculate the world up vector when the world up Type is AimConstraint.WorldUpType.ObjectUp or AimConstraint.WorldUpType.ObjectRotationUp.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.worldUpType">
+      <summary>
+        <para>The type of the world up vector.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.AimConstraint.worldUpVector">
+      <summary>
+        <para>The world up Vector used when the world up type is AimConstraint.WorldUpType.Vector or AimConstraint.WorldUpType.ObjectRotationUp.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Animations.AimConstraint.AddSource(UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Adds a constraint source.</para>
+      </summary>
+      <param name="source">The source object and its weight.</param>
+      <returns>
+        <para>Returns the index of the added source.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.AimConstraint.GetSource(System.Int32)">
+      <summary>
+        <para>Gets a constraint source by index.</para>
+      </summary>
+      <param name="index">The index of the source.</param>
+      <returns>
+        <para>The source object and its weight.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.AimConstraint.GetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Gets the list of sources.</para>
+      </summary>
+      <param name="sources">The list of sources to be filled by the component.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.AimConstraint.RemoveSource(System.Int32)">
+      <summary>
+        <para>Removes a source from the component.</para>
+      </summary>
+      <param name="index">The index of the source to remove.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.AimConstraint.SetSource(System.Int32,UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Sets a source at a specified index.</para>
+      </summary>
+      <param name="index">The index of the source to set.</param>
+      <param name="source">The source object and its weight.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.AimConstraint.SetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Sets the list of sources on the component.</para>
+      </summary>
+      <param name="sources">The list of sources to set.</param>
+    </member>
+    <member name="T:UnityEngine.Animations.AimConstraint.WorldUpType">
+      <summary>
+        <para>Specifies how the world up vector used by the aim constraint is defined.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.AimConstraint.WorldUpType.None">
+      <summary>
+        <para>Neither defines nor uses a world up vector.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.AimConstraint.WorldUpType.ObjectRotationUp">
+      <summary>
+        <para>Uses and defines the world up vector as relative to the local space of the object.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.AimConstraint.WorldUpType.ObjectUp">
+      <summary>
+        <para>Uses and defines the world up vector as a vector from the constrained object, in the direction of the up object.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.AimConstraint.WorldUpType.SceneUp">
+      <summary>
+        <para>Uses and defines the world up vector as the Unity scene up vector (the Y axis).</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.AimConstraint.WorldUpType.Vector">
+      <summary>
+        <para>Uses and defines the world up vector as a vector specified by the user.</para>
+      </summary>
+    </member>
     <member name="T:UnityEngine.Animations.AnimationClipPlayable">
       <summary>
         <para>A Playable that controls an AnimationClip.</para>
@@ -506,11 +644,22 @@
         <para>Returns the state of the ApplyFootIK flag.</para>
       </summary>
     </member>
+    <member name="M:UnityEngine.Animations.AnimationClipPlayable.GetApplyPlayableIK">
+      <summary>
+        <para>Returns the state of the ApplyPlayableIK flag.</para>
+      </summary>
+    </member>
     <member name="M:UnityEngine.Animations.AnimationClipPlayable.SetApplyFootIK(System.Boolean)">
       <summary>
         <para>Sets the value of the ApplyFootIK flag.</para>
       </summary>
       <param name="value">The new value of the ApplyFootIK flag.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.AnimationClipPlayable.SetApplyPlayableIK(System.Boolean)">
+      <summary>
+        <para>Requests OnAnimatorIK to be called on the animated GameObject.</para>
+      </summary>
+      <param name="value"></param>
     </member>
     <member name="T:UnityEngine.Animations.AnimationLayerMixerPlayable">
       <summary>
@@ -571,6 +720,21 @@
         <para>A new AnimationMixerPlayable linked to the PlayableGraph.</para>
       </returns>
     </member>
+    <member name="T:UnityEngine.Animations.AnimationPlayableBinding">
+      <summary>
+        <para>A PlayableBinding that contains information representing an AnimationPlayableOutput.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Animations.AnimationPlayableBinding.Create(System.String,UnityEngine.Object)">
+      <summary>
+        <para>Creates a PlayableBinding that contains information representing an AnimationPlayableOutput.</para>
+      </summary>
+      <param name="name">The name of the AnimationPlayableOutput.</param>
+      <param name="key">A reference to a UnityEngine.Object that acts as a key for this binding.</param>
+      <returns>
+        <para>Returns a PlayableBinding that contains information that is used to create an AnimationPlayableOutput.</para>
+      </returns>
+    </member>
     <member name="T:UnityEngine.Animations.AnimationPlayableOutput">
       <summary>
         <para>A IPlayableOutput implementation that connects the PlayableGraph to an Animator in the scene.</para>
@@ -620,6 +784,589 @@
       <summary>
         <para>Returns an invalid AnimatorControllerPlayable.</para>
       </summary>
+    </member>
+    <member name="T:UnityEngine.Animations.Axis">
+      <summary>
+        <para>Represents the axes used in 3D space.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.Axis.None">
+      <summary>
+        <para>Represents the case when no axis is specified.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.Axis.X">
+      <summary>
+        <para>Represents the X axis.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.Axis.Y">
+      <summary>
+        <para>Represents the Y axis.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Animations.Axis.Z">
+      <summary>
+        <para>Represents the Z axis.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.Animations.ConstraintSource">
+      <summary>
+        <para>Represents a source for the constraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ConstraintSource.sourceTransform">
+      <summary>
+        <para>The transform component of the source object.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ConstraintSource.weight">
+      <summary>
+        <para>The weight of the source in the evaluation of the constraint.</para>
+      </summary>
+    </member>
+    <member name="?:UnityEngine.Animations.IConstraint">
+      <summary>
+        <para>The common interface for constraint components.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.IConstraint.constraintActive">
+      <summary>
+        <para>Activate or deactivate the constraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.IConstraint.locked">
+      <summary>
+        <para>Lock or unlock the offset and position at rest.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.IConstraint.sourceCount">
+      <summary>
+        <para>Gets the number of sources currently set on the component.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.IConstraint.weight">
+      <summary>
+        <para>The weight of the constraint component.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Animations.IConstraint.AddSource(UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Add a constraint source.</para>
+      </summary>
+      <param name="source">The source object and its weight.</param>
+      <returns>
+        <para>Returns the index of the added source.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.IConstraint.GetSource(System.Int32)">
+      <summary>
+        <para>Gets a constraint source by index.</para>
+      </summary>
+      <param name="index">The index of the source.</param>
+      <returns>
+        <para>The source object and its weight.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.IConstraint.GetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Gets the list of sources.</para>
+      </summary>
+      <param name="sources">The list of sources to be filled by the component.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.IConstraint.RemoveSource(System.Int32)">
+      <summary>
+        <para>Removes a source from the component.</para>
+      </summary>
+      <param name="index">The index of the source to remove.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.IConstraint.SetSource(System.Int32,UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Sets a source at a specified index.</para>
+      </summary>
+      <param name="index">The index of the source to set.</param>
+      <param name="source">The source object and its weight.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.IConstraint.SetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Sets the list of sources on the component.</para>
+      </summary>
+      <param name="sources">The list of sources to set.</param>
+    </member>
+    <member name="T:UnityEngine.Animations.LookAtConstraint">
+      <summary>
+        <para>
+                Constrains the orientation of an object relative to the position of one or more source objects, such that the object is facing the average position of the sources.
+                The LookAtConstraint is a simplified Animations.AimConstraint typically used with a Camera.
+            </para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.constraintActive">
+      <summary>
+        <para>Activates or deactivates the constraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.locked">
+      <summary>
+        <para>Locks the offset and rotation at rest.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.roll">
+      <summary>
+        <para>The rotation angle along the z axis of the object. The constraint uses this property to calculate the world up vector when Animations.LookAtConstraint.UseUpObject is false.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.rotationAtRest">
+      <summary>
+        <para>The rotation used when the sources have a total weight of 0.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.rotationOffset">
+      <summary>
+        <para>Represents an offset from the constrained orientation.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.sourceCount">
+      <summary>
+        <para>The number of sources set on the component (Read Only).</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.useUpObject">
+      <summary>
+        <para>Determines how the up vector is calculated.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.weight">
+      <summary>
+        <para>The weight of the constraint component.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.LookAtConstraint.worldUpObject">
+      <summary>
+        <para>The world up object, used to calculate the world up vector when Animations.LookAtConstraint.UseUpObject is true.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Animations.LookAtConstraint.AddSource(UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Adds a constraint source.</para>
+      </summary>
+      <param name="source">The source object and its weight.</param>
+      <returns>
+        <para>Returns the index of the added source.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.LookAtConstraint.GetSource(System.Int32)">
+      <summary>
+        <para>Gets a constraint source by index.</para>
+      </summary>
+      <param name="index">The index of the source.</param>
+      <returns>
+        <para>Returns the source object and its weight.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.LookAtConstraint.GetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Gets the list of sources.</para>
+      </summary>
+      <param name="sources">The list of sources to be filled by the component.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.LookAtConstraint.RemoveSource(System.Int32)">
+      <summary>
+        <para>Removes a source from the component.</para>
+      </summary>
+      <param name="index">The index of the source to remove.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.LookAtConstraint.SetSource(System.Int32,UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Sets a source at a specified index.</para>
+      </summary>
+      <param name="index">The index of the source to set.</param>
+      <param name="source">The source object and its weight.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.LookAtConstraint.SetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Sets the list of sources on the component.</para>
+      </summary>
+      <param name="sources">The list of sources to set.</param>
+    </member>
+    <member name="T:UnityEngine.Animations.ParentConstraint">
+      <summary>
+        <para>Constrains the orientation and translation of an object to one or more source objects. The constrained object behaves as if it is in the hierarchy of the sources.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.constraintActive">
+      <summary>
+        <para>Activates or deactivates the constraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.locked">
+      <summary>
+        <para>Locks the offsets and position (translation and rotation) at rest.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.rotationAtRest">
+      <summary>
+        <para>The rotation used when the sources have a total weight of 0.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.rotationAxis">
+      <summary>
+        <para>The rotation axes affected by the ParentConstraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.rotationOffsets">
+      <summary>
+        <para>The rotation offsets from the constrained orientation.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.sourceCount">
+      <summary>
+        <para>The number of sources set on the component (read-only).</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.translationAtRest">
+      <summary>
+        <para>The position of the object in local space, used when the sources have a total weight of 0.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.translationAxis">
+      <summary>
+        <para>The translation axes affected by the ParentConstraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.translationOffsets">
+      <summary>
+        <para>The translation offsets from the constrained orientation.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ParentConstraint.weight">
+      <summary>
+        <para>The weight of the constraint component.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.AddSource(UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Adds a constraint source.</para>
+      </summary>
+      <param name="source">The source object and its weight.</param>
+      <returns>
+        <para>Returns the index of the added source.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.GetRotationOffset(System.Int32)">
+      <summary>
+        <para>Gets the rotation offset associated with a source by index.</para>
+      </summary>
+      <param name="index">The index of the constraint source.</param>
+      <returns>
+        <para>The rotation offset, as Euler angles.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.GetSource(System.Int32)">
+      <summary>
+        <para>Gets a constraint source by index.</para>
+      </summary>
+      <param name="index">The index of the source.</param>
+      <returns>
+        <para>The source object and its weight.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.GetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Gets the list of sources.</para>
+      </summary>
+      <param name="sources">The list of sources filled by the component.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.GetTranslationOffset(System.Int32)">
+      <summary>
+        <para>Gets the rotation offset associated with a source by index.</para>
+      </summary>
+      <param name="index">The index of the constraint source.</param>
+      <returns>
+        <para>The translation offset.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.RemoveSource(System.Int32)">
+      <summary>
+        <para>Removes a source from the component.</para>
+      </summary>
+      <param name="index">The index of the source to remove.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.SetRotationOffset(System.Int32,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the rotation offset associated with a source by index.</para>
+      </summary>
+      <param name="index">The index of the constraint source.</param>
+      <param name="value">The new rotation offset.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.SetSource(System.Int32,UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Sets a source at a specified index.</para>
+      </summary>
+      <param name="index">The index of the source to set.</param>
+      <param name="source">The source object and its weight.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.SetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Sets the list of sources on the component.</para>
+      </summary>
+      <param name="sources">The list of sources to set.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.ParentConstraint.SetTranslationOffset(System.Int32,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the translation offset associated with a source by index.</para>
+      </summary>
+      <param name="index">The index of the constraint source.</param>
+      <param name="value">The new translation offset.</param>
+    </member>
+    <member name="T:UnityEngine.Animations.PositionConstraint">
+      <summary>
+        <para>Constrains the position of an object relative to the position of one or more source objects.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.PositionConstraint.constraintActive">
+      <summary>
+        <para>Activates or deactivates the constraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.PositionConstraint.locked">
+      <summary>
+        <para>Locks the offset and position at rest.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.PositionConstraint.sourceCount">
+      <summary>
+        <para>The number of sources set on the component (read-only).</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.PositionConstraint.translationAtRest">
+      <summary>
+        <para>The translation used when the sources have a total weight of 0.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.PositionConstraint.translationAxis">
+      <summary>
+        <para>The axes affected by the PositionConstraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.PositionConstraint.translationOffset">
+      <summary>
+        <para>The offset from the constrained position.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.PositionConstraint.weight">
+      <summary>
+        <para>The weight of the constraint component.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Animations.PositionConstraint.AddSource(UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Adds a constraint source.</para>
+      </summary>
+      <param name="source">The source object and its weight.</param>
+      <returns>
+        <para>Returns the index of the added source.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.PositionConstraint.GetSource(System.Int32)">
+      <summary>
+        <para>Gets a constraint source by index.</para>
+      </summary>
+      <param name="index">The index of the source.</param>
+      <returns>
+        <para>The source object and its weight.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.PositionConstraint.GetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Gets the list of sources.</para>
+      </summary>
+      <param name="sources">The list of sources to be filled by the component.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.PositionConstraint.RemoveSource(System.Int32)">
+      <summary>
+        <para>Removes a source from the component.</para>
+      </summary>
+      <param name="index">The index of the source to remove.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.PositionConstraint.SetSource(System.Int32,UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Sets a source at a specified index.</para>
+      </summary>
+      <param name="index">The index of the source to set.</param>
+      <param name="source">The source object and its weight.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.PositionConstraint.SetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Sets the list of sources on the component.</para>
+      </summary>
+      <param name="sources">The list of sources to set.</param>
+    </member>
+    <member name="T:UnityEngine.Animations.RotationConstraint">
+      <summary>
+        <para>Constrains the rotation of an object relative to the rotation of one or more source objects.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.RotationConstraint.constraintActive">
+      <summary>
+        <para>Activates or deactivates the constraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.RotationConstraint.locked">
+      <summary>
+        <para>Locks the offset and rotation at rest.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.RotationConstraint.rotationAtRest">
+      <summary>
+        <para>The rotation used when the sources have a total weight of 0.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.RotationConstraint.rotationAxis">
+      <summary>
+        <para>The axes affected by the RotationConstraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.RotationConstraint.rotationOffset">
+      <summary>
+        <para>The offset from the constrained rotation.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.RotationConstraint.sourceCount">
+      <summary>
+        <para>The number of sources set on the component (read-only).</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.RotationConstraint.weight">
+      <summary>
+        <para>The weight of the constraint component.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Animations.RotationConstraint.AddSource(UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Adds a constraint source.</para>
+      </summary>
+      <param name="source">The source object and its weight.</param>
+      <returns>
+        <para>Returns the index of the added source.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.RotationConstraint.GetSource(System.Int32)">
+      <summary>
+        <para>Gets a constraint source by index.</para>
+      </summary>
+      <param name="index">The index of the source.</param>
+      <returns>
+        <para>The source object and its weight.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.RotationConstraint.GetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Gets the list of sources.</para>
+      </summary>
+      <param name="sources">The list of sources to be filled by the component.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.RotationConstraint.RemoveSource(System.Int32)">
+      <summary>
+        <para>Removes a source from the component.</para>
+      </summary>
+      <param name="index">The index of the source to remove.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.RotationConstraint.SetSource(System.Int32,UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Sets a source at a specified index.</para>
+      </summary>
+      <param name="index">The index of the source to set.</param>
+      <param name="source">The source object and its weight.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.RotationConstraint.SetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Sets the list of sources on the component.</para>
+      </summary>
+      <param name="sources">The list of sources to set.</param>
+    </member>
+    <member name="T:UnityEngine.Animations.ScaleConstraint">
+      <summary>
+        <para>Constrains the scale of an object relative to the scale of one or more source objects.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ScaleConstraint.constraintActive">
+      <summary>
+        <para>Activates or deactivates the constraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ScaleConstraint.locked">
+      <summary>
+        <para>Locks the offset and scale at rest.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ScaleConstraint.scaleAtRest">
+      <summary>
+        <para>The scale used when the sources have a total weight of 0.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ScaleConstraint.scaleOffset">
+      <summary>
+        <para>The offset from the constrained scale.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ScaleConstraint.scalingAxis">
+      <summary>
+        <para>The axes affected by the ScaleConstraint.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ScaleConstraint.sourceCount">
+      <summary>
+        <para>The number of sources set on the component (read-only).</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Animations.ScaleConstraint.weight">
+      <summary>
+        <para>The weight of the constraint component.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Animations.ScaleConstraint.AddSource(UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Adds a constraint source.</para>
+      </summary>
+      <param name="source">The source object and its weight.</param>
+      <returns>
+        <para>Returns the index of the added source.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.ScaleConstraint.GetSource(System.Int32)">
+      <summary>
+        <para>Gets a constraint source by index.</para>
+      </summary>
+      <param name="index">The index of the source.</param>
+      <returns>
+        <para>The source object and its weight.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Animations.ScaleConstraint.GetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Gets the list of sources.</para>
+      </summary>
+      <param name="sources">The list of sources to be filled by the component.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.ScaleConstraint.RemoveSource(System.Int32)">
+      <summary>
+        <para>Removes a source from the component.</para>
+      </summary>
+      <param name="index">The index of the source to remove.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.ScaleConstraint.SetSource(System.Int32,UnityEngine.Animations.ConstraintSource)">
+      <summary>
+        <para>Sets a source at a specified index.</para>
+      </summary>
+      <param name="index">The index of the source to set.</param>
+      <param name="source">The source object and its weight.</param>
+    </member>
+    <member name="M:UnityEngine.Animations.ScaleConstraint.SetSources(System.Collections.Generic.List`1&lt;UnityEngine.Animations.ConstraintSource&gt;)">
+      <summary>
+        <para>Sets the list of sources on the component.</para>
+      </summary>
+      <param name="sources">The list of sources to set.</param>
     </member>
     <member name="T:UnityEngine.AnimationState">
       <summary>
@@ -756,6 +1503,11 @@
         <para>Blends pivot point between body center of mass and feet pivot. At 0%, the blending point is body center of mass. At 100%, the blending point is feet pivot.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Animator.fireEvents">
+      <summary>
+        <para>Sets whether the Animator sends events of type AnimationEvent.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Animator.gravityWeight">
       <summary>
         <para>The current gravity weight based on current animations that are played.</para>
@@ -801,9 +1553,14 @@
         <para>Returns true if the current rig is optimizable with AnimatorUtility.OptimizeTransformHierarchy.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Animator.keepAnimatorControllerStateOnDisable">
+      <summary>
+        <para>Controls the behaviour of the Animator component when a GameObject is disabled.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Animator.layerCount">
       <summary>
-        <para>See IAnimatorControllerPlayable.layerCount.</para>
+        <para>Returns the number of layers in the controller.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Animator.layersAffectMassCenter">
@@ -823,12 +1580,12 @@
     </member>
     <member name="P:UnityEngine.Animator.parameterCount">
       <summary>
-        <para>See IAnimatorControllerPlayable.parameterCount.</para>
+        <para>Returns the number of parameters in the controller.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Animator.parameters">
       <summary>
-        <para>Read only acces to the AnimatorControllerParameters used by the animator.</para>
+        <para>The AnimatorControllerParameter list used by the animator. (Read Only)</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Animator.pivotPosition">
@@ -898,12 +1655,12 @@
     </member>
     <member name="P:UnityEngine.Animator.targetPosition">
       <summary>
-        <para>Returns the position of the target specified by SetTarget(AvatarTarget targetIndex, float targetNormalizedTime)).</para>
+        <para>Returns the position of the target specified by SetTarget.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Animator.targetRotation">
       <summary>
-        <para>Returns the rotation of the target specified by SetTarget(AvatarTarget targetIndex, float targetNormalizedTime)).</para>
+        <para>Returns the rotation of the target specified by SetTarget.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Animator.updateMode">
@@ -967,13 +1724,16 @@
     </member>
     <member name="M:UnityEngine.Animator.GetAnimatorTransitionInfo(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetAnimatorTransitionInfo.</para>
+        <para>Returns an AnimatorTransitionInfo with the informations on the current transition.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer's index.</param>
+      <returns>
+        <para>An AnimatorTransitionInfo with the informations on the current transition.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetBehaviour">
       <summary>
-        <para>Return the first StateMachineBehaviour that match type T or derived from T. Return null if none are found.</para>
+        <para>Returns the first StateMachineBehaviour that matches type T or is derived from T. Returns null if none are found.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Animator.GetBehaviours">
@@ -983,23 +1743,29 @@
     </member>
     <member name="M:UnityEngine.Animator.GetBoneTransform(UnityEngine.HumanBodyBones)">
       <summary>
-        <para>Returns transform mapped to this human bone id.</para>
+        <para>Returns Transform mapped to this human bone id.</para>
       </summary>
       <param name="humanBoneId">The human bone that is queried, see enum HumanBodyBones for a list of possible values.</param>
     </member>
     <member name="M:UnityEngine.Animator.GetBool(System.String)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetBool.</para>
+        <para>Returns the value of the given boolean parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <returns>
+        <para>The value of the parameter.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetBool(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetBool.</para>
+        <para>Returns the value of the given boolean parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <returns>
+        <para>The value of the parameter.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetCurrentAnimationClipState(System.Int32)">
       <summary>
@@ -1009,42 +1775,57 @@
     </member>
     <member name="M:UnityEngine.Animator.GetCurrentAnimatorClipInfo(System.Int32)">
       <summary>
-        <para>Access the current Animation clip’s information from the Animator.</para>
+        <para>Returns an array of all the AnimatorClipInfo in the current state of the given layer.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>An array of all the AnimatorClipInfo in the current state.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetCurrentAnimatorClipInfo(System.Int32,System.Collections.Generic.List`1&lt;UnityEngine.AnimatorClipInfo&gt;)">
       <summary>
-        <para>Get a list of AnimatorClipInfo from the Animator.</para>
+        <para>Fills clips with the list of all the AnimatorClipInfo in the current state of the given layer.</para>
       </summary>
-      <param name="layerIndex"></param>
-      <param name="clips"></param>
+      <param name="layerIndex">The layer index.</param>
+      <param name="clips">The list of AnimatorClipInfo to fill.</param>
     </member>
     <member name="M:UnityEngine.Animator.GetCurrentAnimatorClipInfoCount(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetCurrentAnimatorClipInfoCount.</para>
+        <para>Returns the number of AnimatorClipInfo in the current state.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>The number of AnimatorClipInfo in the current state.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetCurrentAnimatorStateInfo(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetCurrentAnimatorStateInfo.</para>
+        <para>Returns an AnimatorStateInfo with the information on the current state.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>An AnimatorStateInfo with the information on the current state.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetFloat(System.String)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetFloat.</para>
+        <para>Returns the value of the given float parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <returns>
+        <para>The value of the parameter.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetFloat(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetFloat.</para>
+        <para>Returns the value of the given float parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <returns>
+        <para>The value of the parameter.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetIKHintPosition(UnityEngine.AvatarIKHint)">
       <summary>
@@ -1093,35 +1874,50 @@
     </member>
     <member name="M:UnityEngine.Animator.GetInteger(System.String)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetInteger.</para>
+        <para>Returns the value of the given integer parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <returns>
+        <para>The value of the parameter.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetInteger(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetInteger.</para>
+        <para>Returns the value of the given integer parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <returns>
+        <para>The value of the parameter.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetLayerIndex(System.String)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetLayerIndex.</para>
+        <para>Returns the index of the layer with the given name.</para>
       </summary>
-      <param name="layerName"></param>
+      <param name="layerName">The layer name.</param>
+      <returns>
+        <para>The layer index.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetLayerName(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetLayerName.</para>
+        <para>Returns the layer name.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>The layer name.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetLayerWeight(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetLayerWeight.</para>
+        <para>Returns the weight of the layer at the specified index.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>The layer weight.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetNextAnimationClipState(System.Int32)">
       <summary>
@@ -1131,32 +1927,41 @@
     </member>
     <member name="M:UnityEngine.Animator.GetNextAnimatorClipInfo(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetNextAnimatorClipInfo.</para>
+        <para>Returns an array of all the AnimatorClipInfo in the next state of the given layer.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>An array of all the AnimatorClipInfo in the next state.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetNextAnimatorClipInfo(System.Int32,System.Collections.Generic.List`1&lt;UnityEngine.AnimatorClipInfo&gt;)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetNextAnimatorClipInfo.</para>
+        <para>Fills clips with the list of all the AnimatorClipInfo in the next state of the given layer.</para>
       </summary>
-      <param name="layerIndex"></param>
-      <param name="clips"></param>
+      <param name="layerIndex">The layer index.</param>
+      <param name="clips">The list of AnimatorClipInfo to fill.</param>
     </member>
     <member name="M:UnityEngine.Animator.GetNextAnimatorClipInfoCount(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetNextAnimatorClipInfoCount.</para>
+        <para>Returns the number of AnimatorClipInfo in the next state.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>The number of AnimatorClipInfo in the next state.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetNextAnimatorStateInfo(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.GetNextAnimatorStateInfo.</para>
+        <para>Returns an AnimatorStateInfo with the information on the next state.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>An AnimatorStateInfo with the information on the next state.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.GetParameter(System.Int32)">
       <summary>
-        <para>See AnimatorController.GetParameter.</para>
+        <para>See AnimatorController.parameters.</para>
       </summary>
       <param name="index"></param>
     </member>
@@ -1186,12 +1991,15 @@
     </member>
     <member name="M:UnityEngine.Animator.HasState(System.Int32,System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.HasState.</para>
+        <para>Returns true if the state exists in this layer, false otherwise.</para>
       </summary>
-      <param name="layerIndex"></param>
-      <param name="stateID"></param>
+      <param name="layerIndex">The layer index.</param>
+      <param name="stateID">The state ID.</param>
+      <returns>
+        <para>True if the state exists in this layer, false otherwise.</para>
+      </returns>
     </member>
-    <member name="M:UnityEngine.Animator.InterruptMatchTarget()">
+    <member name="M:UnityEngine.Animator.InterruptMatchTarget">
       <summary>
         <para>Interrupts the automatic target matching.</para>
       </summary>
@@ -1211,23 +2019,32 @@
     </member>
     <member name="M:UnityEngine.Animator.IsInTransition(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.IsInTransition.</para>
+        <para>Returns true if there is a transition on the given layer, false otherwise.</para>
       </summary>
-      <param name="layerIndex"></param>
+      <param name="layerIndex">The layer index.</param>
+      <returns>
+        <para>True if there is a transition on the given layer, false otherwise.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.IsParameterControlledByCurve(System.String)">
       <summary>
-        <para>See IAnimatorControllerPlayable.IsParameterControlledByCurve.</para>
+        <para>Returns true if the parameter is controlled by a curve, false otherwise.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <returns>
+        <para>True if the parameter is controlled by a curve, false otherwise.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.IsParameterControlledByCurve(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.IsParameterControlledByCurve.</para>
+        <para>Returns true if the parameter is controlled by a curve, false otherwise.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <returns>
+        <para>True if the parameter is controlled by a curve, false otherwise.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Animator.MatchTarget(UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.AvatarTarget,UnityEngine.MatchTargetWeightMask,System.Single,System.Single)">
       <summary>
@@ -1242,39 +2059,39 @@
     </member>
     <member name="M:UnityEngine.Animator.Play(System.String,System.Int32,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.Play.</para>
+        <para>Plays a state.</para>
       </summary>
-      <param name="stateName"></param>
-      <param name="layer"></param>
-      <param name="normalizedTime"></param>
-      <param name="stateNameHash"></param>
+      <param name="stateName">The state name.</param>
+      <param name="stateNameHash">The state hash name. If statNameHash is 0, it changes the current state time.</param>
+      <param name="layer">The layer index. If layer is -1, it plays the first state with the given state name or hash.</param>
+      <param name="normalizedTime">The time offset (in percentage).</param>
     </member>
     <member name="M:UnityEngine.Animator.Play(System.Int32,System.Int32,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.Play.</para>
+        <para>Plays a state.</para>
       </summary>
-      <param name="stateName"></param>
-      <param name="layer"></param>
-      <param name="normalizedTime"></param>
-      <param name="stateNameHash"></param>
+      <param name="stateName">The state name.</param>
+      <param name="stateNameHash">The state hash name. If statNameHash is 0, it changes the current state time.</param>
+      <param name="layer">The layer index. If layer is -1, it plays the first state with the given state name or hash.</param>
+      <param name="normalizedTime">The time offset (in percentage).</param>
     </member>
     <member name="M:UnityEngine.Animator.PlayInFixedTime(System.String,System.Int32,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.PlayInFixedTime.</para>
+        <para>Plays a state.</para>
       </summary>
-      <param name="stateName"></param>
-      <param name="layer"></param>
-      <param name="fixedTime"></param>
-      <param name="stateNameHash"></param>
+      <param name="stateName">The state name.</param>
+      <param name="stateNameHash">The state hash name. If statNameHash is 0, it changes the current state time.</param>
+      <param name="layer">The layer index. If layer is -1, it plays the first state with the given state name or hash.</param>
+      <param name="fixedTime">The time offset (in seconds).</param>
     </member>
     <member name="M:UnityEngine.Animator.PlayInFixedTime(System.Int32,System.Int32,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.PlayInFixedTime.</para>
+        <para>Plays a state.</para>
       </summary>
-      <param name="stateName"></param>
-      <param name="layer"></param>
-      <param name="fixedTime"></param>
-      <param name="stateNameHash"></param>
+      <param name="stateName">The state name.</param>
+      <param name="stateNameHash">The state hash name. If statNameHash is 0, it changes the current state time.</param>
+      <param name="layer">The layer index. If layer is -1, it plays the first state with the given state name or hash.</param>
+      <param name="fixedTime">The time offset (in seconds).</param>
     </member>
     <member name="M:UnityEngine.Animator.Rebind">
       <summary>
@@ -1283,17 +2100,17 @@
     </member>
     <member name="M:UnityEngine.Animator.ResetTrigger(System.String)">
       <summary>
-        <para>See IAnimatorControllerPlayable.ResetTrigger.</para>
+        <para>Resets the value of the given trigger parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
     </member>
     <member name="M:UnityEngine.Animator.ResetTrigger(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.ResetTrigger.</para>
+        <para>Resets the value of the given trigger parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetBoneLocalRotation(UnityEngine.HumanBodyBones,UnityEngine.Quaternion)">
       <summary>
@@ -1304,59 +2121,59 @@
     </member>
     <member name="M:UnityEngine.Animator.SetBool(System.String,System.Boolean)">
       <summary>
-        <para>Sets an Animator bool parameter.</para>
+        <para>Sets the value of the given boolean parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="value"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <param name="value">The new parameter value.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetBool(System.Int32,System.Boolean)">
       <summary>
-        <para>Sets an Animator bool parameter.</para>
+        <para>Sets the value of the given boolean parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="value"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <param name="value">The new parameter value.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetFloat(System.String,System.Single)">
       <summary>
         <para>Send float values to the Animator to affect transitions.</para>
       </summary>
-      <param name="name"></param>
-      <param name="value"></param>
-      <param name="dampTime"></param>
-      <param name="deltaTime"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <param name="value">The new parameter value.</param>
+      <param name="dampTime">The damper total time.</param>
+      <param name="deltaTime">The delta time to give to the damper.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetFloat(System.String,System.Single,System.Single,System.Single)">
       <summary>
         <para>Send float values to the Animator to affect transitions.</para>
       </summary>
-      <param name="name"></param>
-      <param name="value"></param>
-      <param name="dampTime"></param>
-      <param name="deltaTime"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <param name="value">The new parameter value.</param>
+      <param name="dampTime">The damper total time.</param>
+      <param name="deltaTime">The delta time to give to the damper.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetFloat(System.Int32,System.Single)">
       <summary>
         <para>Send float values to the Animator to affect transitions.</para>
       </summary>
-      <param name="name"></param>
-      <param name="value"></param>
-      <param name="dampTime"></param>
-      <param name="deltaTime"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <param name="value">The new parameter value.</param>
+      <param name="dampTime">The damper total time.</param>
+      <param name="deltaTime">The delta time to give to the damper.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetFloat(System.Int32,System.Single,System.Single,System.Single)">
       <summary>
         <para>Send float values to the Animator to affect transitions.</para>
       </summary>
-      <param name="name"></param>
-      <param name="value"></param>
-      <param name="dampTime"></param>
-      <param name="deltaTime"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <param name="value">The new parameter value.</param>
+      <param name="dampTime">The damper total time.</param>
+      <param name="deltaTime">The delta time to give to the damper.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetIKHintPosition(UnityEngine.AvatarIKHint,UnityEngine.Vector3)">
       <summary>
@@ -1402,26 +2219,26 @@
     </member>
     <member name="M:UnityEngine.Animator.SetInteger(System.String,System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.SetInteger.</para>
+        <para>Sets the value of the given integer parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="value"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <param name="value">The new parameter value.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetInteger(System.Int32,System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.SetInteger.</para>
+        <para>Sets the value of the given integer parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="value"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
+      <param name="value">The new parameter value.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetLayerWeight(System.Int32,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.SetLayerWeight.</para>
+        <para>Sets the weight of the layer at the given index.</para>
       </summary>
-      <param name="layerIndex"></param>
-      <param name="weight"></param>
+      <param name="layerIndex">The layer index.</param>
+      <param name="weight">The new layer weight.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetLookAtPosition(UnityEngine.Vector3)">
       <summary>
@@ -1502,17 +2319,17 @@
     </member>
     <member name="M:UnityEngine.Animator.SetTrigger(System.String)">
       <summary>
-        <para>See IAnimatorControllerPlayable.SetTrigger.</para>
+        <para>Sets the value of the given trigger parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetTrigger(System.Int32)">
       <summary>
-        <para>See IAnimatorControllerPlayable.SetTrigger.</para>
+        <para>Sets the value of the given trigger parameter.</para>
       </summary>
-      <param name="name"></param>
-      <param name="id"></param>
+      <param name="name">The parameter name.</param>
+      <param name="id">The parameter ID.</param>
     </member>
     <member name="M:UnityEngine.Animator.SetVector(System.String,UnityEngine.Vector3)">
       <summary>
@@ -1761,7 +2578,7 @@
     </member>
     <member name="P:UnityEngine.AnimatorStateInfo.shortNameHash">
       <summary>
-        <para>The hash is generated using Animator::StringToHash. The string to pass doest not include the parent layer's name.</para>
+        <para>The hash is generated using Animator.StringToHash. The hash does not include the name of the parent layer.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AnimatorStateInfo.speed">
@@ -1798,7 +2615,7 @@
     </member>
     <member name="P:UnityEngine.AnimatorTransitionInfo.anyState">
       <summary>
-        <para>Returns true if the transition is from an AnyState node, or from Animator.CrossFade().</para>
+        <para>Returns true if the transition is from an AnyState node, or from Animator.CrossFade.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AnimatorTransitionInfo.duration">
@@ -1880,6 +2697,61 @@
       </summary>
       <param name="go">GameObject to Optimize.</param>
       <param name="exposedTransforms">List of transform name to expose.</param>
+    </member>
+    <member name="T:UnityEngine.ArmDof">
+      <summary>
+        <para>Enumeration of all the muscles in an arm.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.ArmDownUp">
+      <summary>
+        <para>The arm down-up muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.ArmFrontBack">
+      <summary>
+        <para>The arm front-back muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.ArmRollInOut">
+      <summary>
+        <para>The arm roll in-out muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.ForeArmCloseOpen">
+      <summary>
+        <para>The forearm close-open muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.ForeArmRollInOut">
+      <summary>
+        <para>The forearm roll in-out muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.HandDownUp">
+      <summary>
+        <para>The hand down-up muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.HandInOut">
+      <summary>
+        <para>The hand in-out muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.LastArmDof">
+      <summary>
+        <para>The last value of the ArmDof enum.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.ShoulderDownUp">
+      <summary>
+        <para>The shoulder down-up muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ArmDof.ShoulderFrontBack">
+      <summary>
+        <para>The shoulder front-back muscle.</para>
+      </summary>
     </member>
     <member name="T:UnityEngine.Avatar">
       <summary>
@@ -1970,7 +2842,12 @@
     </member>
     <member name="T:UnityEngine.AvatarMask">
       <summary>
-        <para>AvatarMask are used to mask out humanoid body parts and transforms.</para>
+        <para>AvatarMask is used to mask out humanoid body parts and transforms.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.AvatarMask.humanoidBodyPartCount">
+      <summary>
+        <para>The number of humanoid body parts.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AvatarMask.transformCount">
@@ -2146,6 +3023,61 @@
         <para>The root, the position of the game object.</para>
       </summary>
     </member>
+    <member name="T:UnityEngine.BodyDof">
+      <summary>
+        <para>Enumeration of all the muscles in the body.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.ChestFrontBack">
+      <summary>
+        <para>The chest front-back muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.ChestLeftRight">
+      <summary>
+        <para>The chest left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.ChestRollLeftRight">
+      <summary>
+        <para>The chest roll left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.LastBodyDof">
+      <summary>
+        <para>The last value of the BodyDof enum.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.SpineFrontBack">
+      <summary>
+        <para>The spine front-back muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.SpineLeftRight">
+      <summary>
+        <para>The spine left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.SpineRollLeftRight">
+      <summary>
+        <para>The spine roll left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.UpperChestFrontBack">
+      <summary>
+        <para>The upper chest front-back muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.UpperChestLeftRight">
+      <summary>
+        <para>The upper chest left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.BodyDof.UpperChestRollLeftRight">
+      <summary>
+        <para>The upper chest roll left-right muscle.</para>
+      </summary>
+    </member>
     <member name="T:UnityEngine.DurationUnit">
       <summary>
         <para>Describe the unit of a duration.</para>
@@ -2159,6 +3091,1049 @@
     <member name="F:UnityEngine.DurationUnit.Normalized">
       <summary>
         <para>A normalized duration is a duration expressed in percentage.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.AnimationHumanStream">
+      <summary>
+        <para>The humanoid stream of animation data passed from one Playable to another.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.bodyLocalPosition">
+      <summary>
+        <para>The position of the body center of mass relative to the root.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.bodyLocalRotation">
+      <summary>
+        <para>The rotation of the body center of mass relative to the root.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.bodyPosition">
+      <summary>
+        <para>The position of the body center of mass in world space.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.bodyRotation">
+      <summary>
+        <para>The rotation of the body center of mass in world space.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.humanScale">
+      <summary>
+        <para>The scale of the Avatar. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.isValid">
+      <summary>
+        <para>Returns true if the stream is valid; false otherwise. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.leftFootHeight">
+      <summary>
+        <para>The left foot height from the floor. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.leftFootVelocity">
+      <summary>
+        <para>The left foot velocity from the last evaluated frame. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.rightFootHeight">
+      <summary>
+        <para>The right foot height from the floor. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationHumanStream.rightFootVelocity">
+      <summary>
+        <para>The right foot velocity from the last evaluated frame. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetGoalLocalPosition(UnityEngine.AvatarIKGoal)">
+      <summary>
+        <para>Returns the position of this IK goal relative to the root.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <returns>
+        <para>The position of this IK goal.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetGoalLocalRotation(UnityEngine.AvatarIKGoal)">
+      <summary>
+        <para>Returns the rotation of this IK goal relative to the root.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <returns>
+        <para>The rotation of this IK goal.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetGoalPosition(UnityEngine.AvatarIKGoal)">
+      <summary>
+        <para>Returns the position of this IK goal in world space.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <returns>
+        <para>The position of this IK goal.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetGoalPositionFromPose(UnityEngine.AvatarIKGoal)">
+      <summary>
+        <para>Returns the position of this IK goal in world space computed from the stream current pose.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <returns>
+        <para>The position of this IK goal.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetGoalRotation(UnityEngine.AvatarIKGoal)">
+      <summary>
+        <para>Returns the rotation of this IK goal in world space.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <returns>
+        <para>The rotation of this IK goal.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetGoalRotationFromPose(UnityEngine.AvatarIKGoal)">
+      <summary>
+        <para>Returns the rotation of this IK goal in world space computed from the stream current pose.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <returns>
+        <para>The rotation of this IK goal.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetGoalWeightPosition(UnityEngine.AvatarIKGoal)">
+      <summary>
+        <para>Returns the position weight of the IK goal.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <returns>
+        <para>The position weight of the IK goal.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetGoalWeightRotation(UnityEngine.AvatarIKGoal)">
+      <summary>
+        <para>Returns the rotation weight of the IK goal.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <returns>
+        <para>The rotation weight of the IK goal.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetHintPosition(UnityEngine.AvatarIKHint)">
+      <summary>
+        <para>Returns the position of this IK Hint in world space.</para>
+      </summary>
+      <param name="index">The AvatarIKHint that is queried.</param>
+      <returns>
+        <para>The position of this IK Hint.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetHintWeightPosition(UnityEngine.AvatarIKHint)">
+      <summary>
+        <para>Returns the position weight of the IK Hint.</para>
+      </summary>
+      <param name="index">The AvatarIKHint that is queried.</param>
+      <returns>
+        <para>The position weight of the IK Hint.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.GetMuscle(UnityEngine.Experimental.Animations.MuscleHandle)">
+      <summary>
+        <para>Returns the muscle value.</para>
+      </summary>
+      <param name="muscle">The Muscle that is queried.</param>
+      <returns>
+        <para>The muscle value.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.ResetToStancePose">
+      <summary>
+        <para>Reset the current pose to the stance pose (T Pose).</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetGoalLocalPosition(UnityEngine.AvatarIKGoal,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the position of this IK goal relative to the root.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <param name="pos">The position of this IK goal.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetGoalLocalRotation(UnityEngine.AvatarIKGoal,UnityEngine.Quaternion)">
+      <summary>
+        <para>Sets the rotation of this IK goal relative to the root.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <param name="rot">The rotation of this IK goal.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetGoalPosition(UnityEngine.AvatarIKGoal,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the position of this IK goal in world space.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <param name="pos">The position of this IK goal.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetGoalRotation(UnityEngine.AvatarIKGoal,UnityEngine.Quaternion)">
+      <summary>
+        <para>Sets the rotation of this IK goal in world space.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <param name="rot">The rotation of this IK goal.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetGoalWeightPosition(UnityEngine.AvatarIKGoal,System.Single)">
+      <summary>
+        <para>Sets the position weight of the IK goal.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <param name="value">The position weight of the IK goal.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetGoalWeightRotation(UnityEngine.AvatarIKGoal,System.Single)">
+      <summary>
+        <para>Sets the rotation weight of the IK goal.</para>
+      </summary>
+      <param name="index">The AvatarIKGoal that is queried.</param>
+      <param name="value">The rotation weight of the IK goal.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetHintPosition(UnityEngine.AvatarIKHint,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the position of this IK hint in world space.</para>
+      </summary>
+      <param name="index">The AvatarIKHint that is queried.</param>
+      <param name="pos">The position of this IK hint.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetHintWeightPosition(UnityEngine.AvatarIKHint,System.Single)">
+      <summary>
+        <para>Sets the position weight of the IK Hint.</para>
+      </summary>
+      <param name="index">The AvatarIKHint that is queried.</param>
+      <param name="value">The position weight of the IK Hint.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetLookAtBodyWeight(System.Single)">
+      <summary>
+        <para>Sets the LookAt body weight.</para>
+      </summary>
+      <param name="weight">The LookAt body weight.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetLookAtClampWeight(System.Single)">
+      <summary>
+        <para>Sets the LookAt clamp weight.</para>
+      </summary>
+      <param name="weight">The LookAt clamp weight.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetLookAtEyesWeight(System.Single)">
+      <summary>
+        <para>Sets the LookAt eyes weight.</para>
+      </summary>
+      <param name="weight">The LookAt eyes weight.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetLookAtHeadWeight(System.Single)">
+      <summary>
+        <para>Sets the LookAt head weight.</para>
+      </summary>
+      <param name="weight">The LookAt head weight.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetLookAtPosition(UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the look at position in world space.</para>
+      </summary>
+      <param name="lookAtPosition">The look at position.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SetMuscle(UnityEngine.Experimental.Animations.MuscleHandle,System.Single)">
+      <summary>
+        <para>Sets the muscle value.</para>
+      </summary>
+      <param name="muscle">The Muscle that is queried.</param>
+      <param name="value">The muscle value.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationHumanStream.SolveIK">
+      <summary>
+        <para>Execute the IK solver.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.AnimationScriptPlayable">
+      <summary>
+        <para>A Playable that can run a custom, multi-threaded animation job.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationScriptPlayable.Create(UnityEngine.Playables.PlayableGraph,T,System.Int32)">
+      <summary>
+        <para>Creates an AnimationScriptPlayable in the PlayableGraph.</para>
+      </summary>
+      <param name="graph">The PlayableGraph object that will own the AnimationScriptPlayable.</param>
+      <param name="job">The IAnimationJob to execute when processing the playable.</param>
+      <param name="inputCount">The number of inputs on the playable.</param>
+      <param name="jobData"></param>
+      <returns>
+        <para>A new AnimationScriptPlayable linked to the PlayableGraph.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationScriptPlayable.GetJobData">
+      <summary>
+        <para>Gets the job data contained in the playable.</para>
+      </summary>
+      <returns>
+        <para>Returns the IAnimationJob data contained in the playable.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationScriptPlayable.GetProcessInputs">
+      <summary>
+        <para>Returns whether the playable inputs will be processed or not.</para>
+      </summary>
+      <returns>
+        <para>true if the inputs will be processed; false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationScriptPlayable.SetJobData(T)">
+      <summary>
+        <para>Sets a new job data in the playable.</para>
+      </summary>
+      <param name="jobData">The new IAnimationJob data to set in the playable.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationScriptPlayable.SetProcessInputs(System.Boolean)">
+      <summary>
+        <para>Sets the new value for processing the inputs or not.</para>
+      </summary>
+      <param name="value">The new value for processing the inputs or not.</param>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.AnimationStream">
+      <summary>
+        <para>The stream of animation data passed from one Playable to another.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationStream.angularVelocity">
+      <summary>
+        <para>Gets or sets the avatar angular velocity for the evaluated frame.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationStream.deltaTime">
+      <summary>
+        <para>Gets the delta time for the evaluated frame. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationStream.inputStreamCount">
+      <summary>
+        <para>Gets the number of input streams. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationStream.isHumanStream">
+      <summary>
+        <para>Returns true if the stream is from a humanoid avatar; false otherwise. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationStream.isValid">
+      <summary>
+        <para>Returns true if the stream is valid; false otherwise. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationStream.rootMotionPosition">
+      <summary>
+        <para>Gets the root motion position for the evaluated frame. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationStream.rootMotionRotation">
+      <summary>
+        <para>Gets the root motion rotation for the evaluated frame. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.AnimationStream.velocity">
+      <summary>
+        <para>Gets or sets the avatar velocity for the evaluated frame.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationStream.AsHuman">
+      <summary>
+        <para>Gets the same stream, but as an AnimationHumanStream.</para>
+      </summary>
+      <returns>
+        <para>Returns the same stream, but as an AnimationHumanStream.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimationStream.GetInputStream(System.Int32)">
+      <summary>
+        <para>Gets the AnimationStream of the playable input at index.</para>
+      </summary>
+      <param name="index">The input index.</param>
+      <returns>
+        <para>Returns the AnimationStream of the playable input at index. Returns an invalid stream if the input is not an animation Playable.</para>
+      </returns>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.AnimatorJobExtensions">
+      <summary>
+        <para>Static class providing extension methods for Animator and the animation C# jobs.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimatorJobExtensions.BindSceneProperty(UnityEngine.Animator,UnityEngine.Transform,System.Type,System.String)">
+      <summary>
+        <para>Create a PropertySceneHandle representing the new binding on the Component property of a Transform in the scene.</para>
+      </summary>
+      <param name="animator">The Animator instance the method is called on.</param>
+      <param name="transform">The Transform to target.</param>
+      <param name="type">The Component type.</param>
+      <param name="property">The property to bind.</param>
+      <returns>
+        <para>The PropertySceneHandle representing the new binding.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimatorJobExtensions.BindSceneTransform(UnityEngine.Animator,UnityEngine.Transform)">
+      <summary>
+        <para>Create a TransformSceneHandle representing the new binding between the Animator and a Transform in the scene.</para>
+      </summary>
+      <param name="animator">The Animator instance the method is called on.</param>
+      <param name="transform">The Transform to bind.</param>
+      <returns>
+        <para>The TransformSceneHandle representing the new binding.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimatorJobExtensions.BindStreamProperty(UnityEngine.Animator,UnityEngine.Transform,System.Type,System.String)">
+      <summary>
+        <para>Create a PropertyStreamHandle representing the new binding on the Component property of a Transform already bound to the Animator.</para>
+      </summary>
+      <param name="animator">The Animator instance the method is called on.</param>
+      <param name="transform">The Transform to target.</param>
+      <param name="type">The Component type.</param>
+      <param name="property">The property to bind.</param>
+      <returns>
+        <para>The PropertyStreamHandle representing the new binding.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimatorJobExtensions.BindStreamTransform(UnityEngine.Animator,UnityEngine.Transform)">
+      <summary>
+        <para>Create a TransformStreamHandle representing the new binding between the Animator and a Transform already bound to the Animator.</para>
+      </summary>
+      <param name="animator">The Animator instance the method is called on.</param>
+      <param name="transform">The Transform to bind.</param>
+      <returns>
+        <para>The TransformStreamHandle representing the new binding.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimatorJobExtensions.CloseAnimationStream(UnityEngine.Animator,UnityEngine.Experimental.Animations.AnimationStream&amp;)">
+      <summary>
+        <para>Close a stream that has been opened using OpenAnimationStream.</para>
+      </summary>
+      <param name="animator">The Animator instance the method is called on.</param>
+      <param name="stream">The stream to close.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimatorJobExtensions.OpenAnimationStream(UnityEngine.Animator,UnityEngine.Experimental.Animations.AnimationStream&amp;)">
+      <summary>
+        <para>Open a new stream on the Animator.</para>
+      </summary>
+      <param name="animator">The Animator instance the method is called on.</param>
+      <param name="stream">The new stream.</param>
+      <returns>
+        <para>Whether or not the stream have been opened.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimatorJobExtensions.ResolveAllSceneHandles(UnityEngine.Animator)">
+      <summary>
+        <para>Newly created handles are always resolved lazily on the next access when the jobs are run. To avoid a cpu spike while evaluating the jobs you can manually resolve all handles from the main thread.</para>
+      </summary>
+      <param name="animator">The Animator instance the method is called on.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.AnimatorJobExtensions.ResolveAllStreamHandles(UnityEngine.Animator)">
+      <summary>
+        <para>Newly created handles are always resolved lazily on the next access when the jobs are run. To avoid a cpu spike while evaluating the jobs you can manually resolve all handles from the main thread.</para>
+      </summary>
+      <param name="animator">The Animator instance the method is called on.</param>
+    </member>
+    <member name="?:UnityEngine.Experimental.Animations.IAnimationJob">
+      <summary>
+        <para>The interface defining an animation job to use with an IAnimationJobPlayable.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.IAnimationJob.ProcessAnimation(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Defines what to do when processing the animation.</para>
+      </summary>
+      <param name="stream">The animation stream to work on.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.IAnimationJob.ProcessRootMotion(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Defines what to do when processing the root motion.</para>
+      </summary>
+      <param name="stream">The animation stream to work on.</param>
+    </member>
+    <member name="?:UnityEngine.Experimental.Animations.IAnimationJobPlayable">
+      <summary>
+        <para>The interface defining an animation playable that uses IAnimationJob.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.IAnimationJobPlayable.GetJobData">
+      <summary>
+        <para>Gets the job data contained in the playable.</para>
+      </summary>
+      <returns>
+        <para>Returns the IAnimationJob data contained in the playable.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.IAnimationJobPlayable.SetJobData(T)">
+      <summary>
+        <para>Sets a new job data in the playable.</para>
+      </summary>
+      <param name="jobData">The new IAnimationJob data to set in the playable.</param>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.MuscleHandle">
+      <summary>
+        <para>Handle for a muscle in the AnimationHumanStream.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.MuscleHandle.dof">
+      <summary>
+        <para>The muscle human sub-part. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.MuscleHandle.humanPartDof">
+      <summary>
+        <para>The muscle human part. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.MuscleHandle.muscleHandleCount">
+      <summary>
+        <para>The total number of DoF parts in a humanoid. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Experimental.Animations.MuscleHandle.name">
+      <summary>
+        <para>The name of the muscle. (Read Only)</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.MuscleHandle.#ctor(UnityEngine.BodyDof)">
+      <summary>
+        <para>The different constructors that creates the muscle handle.</para>
+      </summary>
+      <param name="bodyDof">The muscle body sub-part.</param>
+      <param name="headDof">The muscle head sub-part.</param>
+      <param name="partDof">The muscle human part.</param>
+      <param name="legDof">The muscle leg sub-part.</param>
+      <param name="armDof">The muscle arm sub-part.</param>
+      <param name="fingerDof">The muscle finger sub-part.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.MuscleHandle.#ctor(UnityEngine.HeadDof)">
+      <summary>
+        <para>The different constructors that creates the muscle handle.</para>
+      </summary>
+      <param name="bodyDof">The muscle body sub-part.</param>
+      <param name="headDof">The muscle head sub-part.</param>
+      <param name="partDof">The muscle human part.</param>
+      <param name="legDof">The muscle leg sub-part.</param>
+      <param name="armDof">The muscle arm sub-part.</param>
+      <param name="fingerDof">The muscle finger sub-part.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.MuscleHandle.#ctor">
+      <summary>
+        <para>The different constructors that creates the muscle handle.</para>
+      </summary>
+      <param name="bodyDof">The muscle body sub-part.</param>
+      <param name="headDof">The muscle head sub-part.</param>
+      <param name="partDof">The muscle human part.</param>
+      <param name="legDof">The muscle leg sub-part.</param>
+      <param name="armDof">The muscle arm sub-part.</param>
+      <param name="fingerDof">The muscle finger sub-part.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.MuscleHandle.#ctor">
+      <summary>
+        <para>The different constructors that creates the muscle handle.</para>
+      </summary>
+      <param name="bodyDof">The muscle body sub-part.</param>
+      <param name="headDof">The muscle head sub-part.</param>
+      <param name="partDof">The muscle human part.</param>
+      <param name="legDof">The muscle leg sub-part.</param>
+      <param name="armDof">The muscle arm sub-part.</param>
+      <param name="fingerDof">The muscle finger sub-part.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.MuscleHandle.#ctor(UnityEngine.HumanPartDof,UnityEngine.LegDof)">
+      <summary>
+        <para>The different constructors that creates the muscle handle.</para>
+      </summary>
+      <param name="bodyDof">The muscle body sub-part.</param>
+      <param name="headDof">The muscle head sub-part.</param>
+      <param name="partDof">The muscle human part.</param>
+      <param name="legDof">The muscle leg sub-part.</param>
+      <param name="armDof">The muscle arm sub-part.</param>
+      <param name="fingerDof">The muscle finger sub-part.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.MuscleHandle.#ctor(UnityEngine.HumanPartDof,UnityEngine.ArmDof)">
+      <summary>
+        <para>The different constructors that creates the muscle handle.</para>
+      </summary>
+      <param name="bodyDof">The muscle body sub-part.</param>
+      <param name="headDof">The muscle head sub-part.</param>
+      <param name="partDof">The muscle human part.</param>
+      <param name="legDof">The muscle leg sub-part.</param>
+      <param name="armDof">The muscle arm sub-part.</param>
+      <param name="fingerDof">The muscle finger sub-part.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.MuscleHandle.#ctor(UnityEngine.HumanPartDof,UnityEngine.FingerDof)">
+      <summary>
+        <para>The different constructors that creates the muscle handle.</para>
+      </summary>
+      <param name="bodyDof">The muscle body sub-part.</param>
+      <param name="headDof">The muscle head sub-part.</param>
+      <param name="partDof">The muscle human part.</param>
+      <param name="legDof">The muscle leg sub-part.</param>
+      <param name="armDof">The muscle arm sub-part.</param>
+      <param name="fingerDof">The muscle finger sub-part.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.MuscleHandle.GetMuscleHandles(UnityEngine.Experimental.Animations.MuscleHandle[])">
+      <summary>
+        <para>Fills the array with all the possible muscle handles on a humanoid.</para>
+      </summary>
+      <param name="muscleHandles">An array of MuscleHandle.</param>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.PropertySceneHandle">
+      <summary>
+        <para>Handle for a Component property on an object in the scene.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.GetBool(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the boolean property value from an object in the scene.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+      <returns>
+        <para>The boolean property value.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.GetFloat(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the float property value from an object in the scene.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+      <returns>
+        <para>The float property value.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.GetInt(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the integer property value from an object in the scene.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+      <returns>
+        <para>The integer property value.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.IsResolved(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Returns whether or not the handle is resolved.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+      <returns>
+        <para>Returns true if the handle is resolved, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.IsValid(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Returns whether or not the handle is valid.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+      <returns>
+        <para>Whether or not the handle is valid.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.Resolve(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Resolves the handle.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.SetBool(UnityEngine.Experimental.Animations.AnimationStream,System.Boolean)">
+      <summary>
+        <para>Sets the boolean property value to an object in the scene.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+      <param name="value">The new boolean property value.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.SetFloat(UnityEngine.Experimental.Animations.AnimationStream,System.Single)">
+      <summary>
+        <para>Sets the float property value to an object in the scene.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+      <param name="value">The new float property value.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertySceneHandle.SetInt(UnityEngine.Experimental.Animations.AnimationStream,System.Int32)">
+      <summary>
+        <para>Sets the integer property value to an object in the scene.</para>
+      </summary>
+      <param name="stream">The AnimationStream managing this handle.</param>
+      <param name="value">The new integer property value.</param>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.PropertyStreamHandle">
+      <summary>
+        <para>Handle for a Component property on an object in the AnimationStream.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.GetBool(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the boolean property value from a stream.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+      <returns>
+        <para>The boolean property value.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.GetFloat(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the float property value from a stream.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+      <returns>
+        <para>The float property value.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.GetInt(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the integer property value from a stream.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+      <returns>
+        <para>The integer property value.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.IsResolved(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Returns whether or not the handle is resolved.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+      <returns>
+        <para>Returns true if the handle is resolved, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.IsValid(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Returns whether or not the handle is valid.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+      <returns>
+        <para>Whether or not the handle is valid.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.Resolve(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Resolves the handle.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.SetBool(UnityEngine.Experimental.Animations.AnimationStream,System.Boolean)">
+      <summary>
+        <para>Sets the boolean property value into a stream.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+      <param name="value">The new boolean property value.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.SetFloat(UnityEngine.Experimental.Animations.AnimationStream,System.Single)">
+      <summary>
+        <para>Sets the float property value into a stream.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+      <param name="value">The new float property value.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.PropertyStreamHandle.SetInt(UnityEngine.Experimental.Animations.AnimationStream,System.Int32)">
+      <summary>
+        <para>Sets the integer property value into a stream.</para>
+      </summary>
+      <param name="stream">The AnimationStream holding the animated values.</param>
+      <param name="value">The new integer property value.</param>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.TransformSceneHandle">
+      <summary>
+        <para>Position, rotation and scale of an object in the scene.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.GetLocalPosition(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the position of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <returns>
+        <para>The position of the transform relative to the parent.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.GetLocalRotation(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the rotation of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <returns>
+        <para>The rotation of the transform relative to the parent.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.GetLocalScale(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the scale of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <returns>
+        <para>The scale of the transform relative to the parent.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.GetPosition(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the position of the transform in world space.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <returns>
+        <para>The position of the transform in world space.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.GetRotation(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the rotation of the transform in world space.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <returns>
+        <para>The rotation of the transform in world space.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.IsValid(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Returns whether this is a valid handle.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <returns>
+        <para>Whether this is a valid handle.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.SetLocalPosition(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the position of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <param name="position">The position of the transform relative to the parent.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.SetLocalRotation(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Quaternion)">
+      <summary>
+        <para>Sets the rotation of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <param name="rotation">The rotation of the transform relative to the parent.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.SetLocalScale(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the scale of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <param name="scale">The scale of the transform relative to the parent.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.SetPosition(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the position of the transform in world space.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <param name="position">The position of the transform in world space.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformSceneHandle.SetRotation(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Quaternion)">
+      <summary>
+        <para>Sets the rotation of the transform in world space.</para>
+      </summary>
+      <param name="stream">The AnimationStream that manage this handle.</param>
+      <param name="rotation">The rotation of the transform in world space.</param>
+    </member>
+    <member name="T:UnityEngine.Experimental.Animations.TransformStreamHandle">
+      <summary>
+        <para>Position, rotation and scale of an object in the AnimationStream.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.GetLocalPosition(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the position of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <returns>
+        <para>The position of the transform relative to the parent.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.GetLocalRotation(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the rotation of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <returns>
+        <para>The rotation of the transform relative to the parent.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.GetLocalScale(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the scale of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <returns>
+        <para>The scale of the transform relative to the parent.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.GetPosition(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the position of the transform in world space.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <returns>
+        <para>The position of the transform in world space.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.GetRotation(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Gets the rotation of the transform in world space.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <returns>
+        <para>The rotation of the transform in world space.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.IsResolved(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Returns whether this handle is resolved.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <returns>
+        <para>Returns true if the handle is resolved, false otherwise.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.IsValid(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Returns whether this is a valid handle.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <returns>
+        <para>Whether this is a valid handle.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.Resolve(UnityEngine.Experimental.Animations.AnimationStream)">
+      <summary>
+        <para>Bind this handle with an animated values from the AnimationStream.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.SetLocalPosition(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the position of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <param name="position">The position of the transform relative to the parent.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.SetLocalRotation(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Quaternion)">
+      <summary>
+        <para>Sets the rotation of the transform relative to the parent.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <param name="rotation">The rotation of the transform relative to the parent.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.SetLocalScale(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the scale of the transform relative to the parent.</para>
+      </summary>
+      <param name="scale">The scale of the transform relative to the parent.</param>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.SetPosition(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Vector3)">
+      <summary>
+        <para>Sets the position of the transform in world space.</para>
+      </summary>
+      <param name="position">The position of the transform in world space.</param>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+    </member>
+    <member name="M:UnityEngine.Experimental.Animations.TransformStreamHandle.SetRotation(UnityEngine.Experimental.Animations.AnimationStream,UnityEngine.Quaternion)">
+      <summary>
+        <para>Sets the rotation of the transform in world space.</para>
+      </summary>
+      <param name="stream">The AnimationStream that hold the animated values.</param>
+      <param name="rotation">The rotation of the transform in world space.</param>
+    </member>
+    <member name="T:UnityEngine.FingerDof">
+      <summary>
+        <para>Enumeration of all the muscles in a finger.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.FingerDof.DistalCloseOpen">
+      <summary>
+        <para>The distal close-open muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.FingerDof.IntermediateCloseOpen">
+      <summary>
+        <para>The intermediate close-open muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.FingerDof.LastFingerDof">
+      <summary>
+        <para>The last value of the FingerDof enum.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.FingerDof.ProximalDownUp">
+      <summary>
+        <para>The proximal down-up muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.FingerDof.ProximalInOut">
+      <summary>
+        <para>The proximal in-out muscle.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.HeadDof">
+      <summary>
+        <para>Enumeration of all the muscles in the head.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.HeadFrontBack">
+      <summary>
+        <para>The head front-back muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.HeadLeftRight">
+      <summary>
+        <para>The head left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.HeadRollLeftRight">
+      <summary>
+        <para>The head roll left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.JawDownUp">
+      <summary>
+        <para>The jaw down-up muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.JawLeftRight">
+      <summary>
+        <para>The jaw left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.LastHeadDof">
+      <summary>
+        <para>The last value of the HeadDof enum.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.LeftEyeDownUp">
+      <summary>
+        <para>The left eye down-up muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.LeftEyeInOut">
+      <summary>
+        <para>The left eye in-out muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.NeckFrontBack">
+      <summary>
+        <para>The neck front-back muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.NeckLeftRight">
+      <summary>
+        <para>The neck left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.NeckRollLeftRight">
+      <summary>
+        <para>The neck roll left-right muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.RightEyeDownUp">
+      <summary>
+        <para>The right eye down-up muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HeadDof.RightEyeInOut">
+      <summary>
+        <para>The right eye in-out muscle.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.HumanBodyBones">
@@ -2513,7 +4488,7 @@
     </member>
     <member name="P:UnityEngine.HumanDescription.upperArmTwist">
       <summary>
-        <para>Defines how the lower arm's roll/twisting is distributed between the shoulder and elbow joints.</para>
+        <para>Defines how the upper arm's roll/twisting is distributed between the shoulder and elbow joints.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.HumanDescription.upperLegTwist">
@@ -2549,6 +4524,91 @@
     <member name="P:UnityEngine.HumanLimit.useDefaultValues">
       <summary>
         <para>Should this limit use the default values?</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.HumanPartDof">
+      <summary>
+        <para>Enumeration of all the parts in a human.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.Body">
+      <summary>
+        <para>The human body part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.Head">
+      <summary>
+        <para>The human head part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.LeftArm">
+      <summary>
+        <para>The human left arm part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.LeftIndex">
+      <summary>
+        <para>The human left index finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.LeftLeg">
+      <summary>
+        <para>The human left leg part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.LeftLittle">
+      <summary>
+        <para>The human left little finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.LeftMiddle">
+      <summary>
+        <para>The human left middle finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.LeftRing">
+      <summary>
+        <para>The human left ring finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.LeftThumb">
+      <summary>
+        <para>The human left thumb finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.RightArm">
+      <summary>
+        <para>The human right arm part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.RightIndex">
+      <summary>
+        <para>The human right index finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.RightLeg">
+      <summary>
+        <para>The human right leg part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.RightLittle">
+      <summary>
+        <para>The human right little finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.RightMiddle">
+      <summary>
+        <para>The human right middle finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.RightRing">
+      <summary>
+        <para>The human right ring finger part.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.HumanPartDof.RightThumb">
+      <summary>
+        <para>The human right thumb finger part.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.HumanPose">
@@ -2616,6 +4676,15 @@
         <para>Array of the names of all human bone types defined by Mecanim.</para>
       </summary>
     </member>
+    <member name="M:UnityEngine.HumanTrait.GetBoneDefaultHierarchyMass(System.Int32)">
+      <summary>
+        <para>Gets the bone hierarchy mass.</para>
+      </summary>
+      <param name="i">The humanoid bone index.</param>
+      <returns>
+        <para>The bone hierarchy mass.</para>
+      </returns>
+    </member>
     <member name="M:UnityEngine.HumanTrait.GetMuscleDefaultMax(System.Int32)">
       <summary>
         <para>Get the default maximum value of rotation for a muscle in degrees.</para>
@@ -2665,9 +4734,59 @@
         <para>The number of bone types that are required by Mecanim for any human model.</para>
       </summary>
     </member>
+    <member name="T:UnityEngine.LegDof">
+      <summary>
+        <para>Enumeration of all the muscles in a leg.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.FootCloseOpen">
+      <summary>
+        <para>The foot close-open muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.FootInOut">
+      <summary>
+        <para>The foot in-out muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.LastLegDof">
+      <summary>
+        <para>The last value of the LegDof enum.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.LegCloseOpen">
+      <summary>
+        <para>The leg close-open muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.LegRollInOut">
+      <summary>
+        <para>The leg roll in-out muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.ToesUpDown">
+      <summary>
+        <para>The toes up-down muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.UpperLegFrontBack">
+      <summary>
+        <para>The upper leg front-back muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.UpperLegInOut">
+      <summary>
+        <para>The upper leg in-out muscle.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.LegDof.UpperLegRollInOut">
+      <summary>
+        <para>The upper leg roll in-out muscle.</para>
+      </summary>
+    </member>
     <member name="T:UnityEngine.MatchTargetWeightMask">
       <summary>
-        <para>To specify position and rotation weight mask for Animator::MatchTarget.</para>
+        <para>Use this struct to specify the position and rotation weight mask for Animator.MatchTarget.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.MatchTargetWeightMask.positionXYZWeight">
@@ -2781,7 +4900,7 @@
     </member>
     <member name="T:UnityEngine.RuntimeAnimatorController">
       <summary>
-        <para>Runtime representation of the AnimatorController. It can be used to change the Animator's controller during runtime.</para>
+        <para>The runtime representation of the AnimatorController. Use this representation to change the Animator Controller during runtime.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.RuntimeAnimatorController.animationClips">
@@ -2861,6 +4980,11 @@
     <member name="M:UnityEngine.StateMachineBehaviour.OnStateUpdate">
       <summary>
         <para>Called at each Update frame except for the first and last frame.</para>
+      </summary>
+    </member>
+    <member name="A:UnityEngine.AnimationModule">
+      <summary>
+        <para>The Animation module implements Unity's animation system.</para>
       </summary>
     </member>
   </members>

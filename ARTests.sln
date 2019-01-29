@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARTests", "ARTests.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARTests.Editor", "ARTests.Editor.csproj", "{146F9A53-63BA-4A27-4F80-69A64B53C875}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARTests.Editor", "ARTests.Editor.csproj", "{146F9A53-63BA-4A27-4F80-69A64B53C875}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D9B9D758-A951-E981-C008-49A6CC29650C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9B9D758-A951-E981-C008-49A6CC29650C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9B9D758-A951-E981-C008-49A6CC29650C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146F9A53-63BA-4A27-4F80-69A64B53C875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146F9A53-63BA-4A27-4F80-69A64B53C875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146F9A53-63BA-4A27-4F80-69A64B53C875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146F9A53-63BA-4A27-4F80-69A64B53C875}.Release|Any CPU.Build.0 = Release|Any CPU
 		{146F9A53-63BA-4A27-4F80-69A64B53C875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{146F9A53-63BA-4A27-4F80-69A64B53C875}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{146F9A53-63BA-4A27-4F80-69A64B53C875}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -190,6 +190,21 @@
         <para>Types of UnityGUI input and processing events.</para>
       </summary>
     </member>
+    <member name="F:UnityEngine.EventType.mouseDown">
+      <summary>
+        <para>An event that is called when the mouse is clicked.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.EventType.mouseDrag">
+      <summary>
+        <para>An event that is called when the mouse is clicked and dragged.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.EventType.mouseUp">
+      <summary>
+        <para>An event that is called when the mouse is no longer being clicked.</para>
+      </summary>
+    </member>
     <member name="F:UnityEngine.EventType.ContextClick">
       <summary>
         <para>User has right-clicked (or control-clicked on the mac).</para>
@@ -283,6 +298,11 @@
     <member name="F:UnityEngine.EventType.ValidateCommand">
       <summary>
         <para>Validates a special command (e.g. copy &amp; paste).</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.ExitGUIException">
+      <summary>
+        <para>An exception that will prevent all subsequent immediate mode GUI functions from evaluating for the remainder of the GUI loop.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.FocusType">
@@ -4321,7 +4341,7 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
       <param name="position"></param>
       <param name="content"></param>
       <param name="controlID"></param>
-      <param name="Character"></param>
+      <param name="character"></param>
     </member>
     <member name="M:UnityEngine.GUIStyle.DrawWithTextSelection(UnityEngine.Rect,UnityEngine.GUIContent,System.Int32,System.Int32,System.Int32)">
       <summary>
@@ -4434,7 +4454,36 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
     </member>
     <member name="P:UnityEngine.GUIUtility.systemCopyBuffer">
       <summary>
-        <para>Get access to the system-wide pasteboard.</para>
+        <para>Get access to the system-wide clipboard.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.GUIUtility.AlignRectToDevice(UnityEngine.Rect)">
+      <summary>
+        <para>Align a local space rectangle to the pixel grid.</para>
+      </summary>
+      <param name="local">The local space rectangle that needs to be processed.</param>
+      <param name="widthInPixels">Width, in pixel units, of the axis-aligned bounding box that encompasses the aligned points.</param>
+      <param name="heightInPixels">Height, in pixel units, of the axis-aligned bounding box that encompasses the aligned points.</param>
+      <param name="rect"></param>
+      <returns>
+        <para>The aligned rectangle in local space.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.GUIUtility.AlignRectToDevice(UnityEngine.Rect,System.Int32&amp;,System.Int32&amp;)">
+      <summary>
+        <para>Align a local space rectangle to the pixel grid.</para>
+      </summary>
+      <param name="local">The local space rectangle that needs to be processed.</param>
+      <param name="widthInPixels">Width, in pixel units, of the axis-aligned bounding box that encompasses the aligned points.</param>
+      <param name="heightInPixels">Height, in pixel units, of the axis-aligned bounding box that encompasses the aligned points.</param>
+      <param name="rect"></param>
+      <returns>
+        <para>The aligned rectangle in local space.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.GUIUtility.ExitGUI">
+      <summary>
+        <para>Puts the GUI in a state that will prevent all subsequent immediate mode GUI functions from evaluating for the remainder of the GUI loop by throwing an ExitGUIException.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.GUIUtility.GetControlID(UnityEngine.FocusType)">
@@ -4457,7 +4506,8 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
       </summary>
       <param name="hint"></param>
       <param name="focus"></param>
-      <param name="position"></param>
+      <param name="focusType"></param>
+      <param name="rect"></param>
     </member>
     <member name="M:UnityEngine.GUIUtility.GetControlID(System.Int32,UnityEngine.FocusType,UnityEngine.Rect)">
       <summary>
@@ -4465,7 +4515,8 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
       </summary>
       <param name="hint"></param>
       <param name="focus"></param>
-      <param name="position"></param>
+      <param name="focusType"></param>
+      <param name="rect"></param>
     </member>
     <member name="M:UnityEngine.GUIUtility.GetControlID(UnityEngine.GUIContent,UnityEngine.FocusType)">
       <summary>
@@ -4581,6 +4632,11 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
     <member name="F:UnityEngine.TextClipping.Overflow">
       <summary>
         <para>Text flows freely outside the element.</para>
+      </summary>
+    </member>
+    <member name="A:UnityEngine.IMGUIModule">
+      <summary>
+        <para>The IMGUI module provides Unity's immediate mode GUI solution for creating in-game and editor user interfaces.</para>
       </summary>
     </member>
   </members>
