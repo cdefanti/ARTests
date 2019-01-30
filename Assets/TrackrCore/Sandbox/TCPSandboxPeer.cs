@@ -331,6 +331,41 @@ public class TCPSandboxPeer : MonoBehaviour
                     }
                     */
                 }
+                else if (root["type"] == "POSE_SELF")
+                {
+                    Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
+                                                 root["info"]["rot"]["y"].AsFloat,
+                                                 root["info"]["rot"]["z"].AsFloat,
+                                                 root["info"]["rot"]["w"].AsFloat);
+                    Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
+                                              root["info"]["pos"]["y"].AsFloat,
+                                              root["info"]["pos"]["z"].AsFloat);
+                    peerClients[id].SetRot(rot);
+                    peerClients[id].SetPos(pos);
+                }
+                else if (root["type"] == "POSE_OTHER")
+                {
+                    Vector3 relpos = new Vector3(root["info"]["diff"]["x"].AsFloat,
+                                                 root["info"]["diff"]["y"].AsFloat,
+                                                 root["info"]["diff"]["z"].AsFloat);
+                    peerClients[id].SetRelPos(relpos);
+                }
+                else if (root["type"] == "POSE_OBJECT")
+                {
+                    byte objId = (byte)root["info"]["id"].AsInt;
+                    Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
+                                                 root["info"]["rot"]["y"].AsFloat,
+                                                 root["info"]["rot"]["z"].AsFloat,
+                                                 root["info"]["rot"]["w"].AsFloat);
+                    Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
+                                              root["info"]["pos"]["y"].AsFloat,
+                                              root["info"]["pos"]["z"].AsFloat);
+                    Pose p = new Pose();
+                    p.pos = pos;
+                    p.rot = rot;
+                    peerClients[id].objects[objId] = p;
+
+                }
 
                 Debug.Log(id + ":client message received as: " + clientMessage);
                 //stream = client.GetStream();

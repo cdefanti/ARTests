@@ -14,7 +14,7 @@ public class VRClient {
 
     public UdpClient client;
 
-    public Dictionary<int, Pose> objects;
+    public Dictionary<byte, Pose> objects;
 
     public int lastPacketID = 0;
 
