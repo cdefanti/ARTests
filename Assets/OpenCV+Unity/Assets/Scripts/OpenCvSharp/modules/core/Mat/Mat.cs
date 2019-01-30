@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using OpenCvSharp.Util;
 
 namespace OpenCvSharp
@@ -559,7 +560,7 @@ namespace OpenCvSharp
         /// <param name="mode"></param>
         /// <returns></returns>
 #endif
-        public static Mat FromStream(Stream stream, ImreadModes mode)
+        public static Mat FromStream(System.IO.Stream stream, ImreadModes mode)
         {
             if (stream == null)
                 throw new ArgumentNullException("nameof(stream)");
@@ -4394,7 +4395,7 @@ namespace OpenCvSharp
         /// <param name="ext"></param>
         /// <param name="prms"></param>
         /// <returns></returns>
-        public void WriteToStream(Stream stream, string ext = ".png", params ImageEncodingParam[] prms)
+        public void WriteToStream(System.IO.Stream stream, string ext = ".png", params ImageEncodingParam[] prms)
         {
             if (stream == null)
                 throw new ArgumentNullException("nameof(stream)");

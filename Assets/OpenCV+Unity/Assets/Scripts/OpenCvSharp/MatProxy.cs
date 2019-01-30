@@ -42,7 +42,7 @@ namespace OpenCvSharp
         /// ImageDataをストリームにして返す
         /// </summary>
         /// <returns></returns>
-        public Stream CreateBitmapStream()
+        public System.IO.Stream CreateBitmapStream()
         {
             if (ImageData == null)
                 throw new Exception("ImageData == null");

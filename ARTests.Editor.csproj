@@ -653,9 +653,6 @@
     <Reference Include="MathNet.Numerics">
       <HintPath>Assets\Plugins\MathNet.Numerics.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading">
-      <HintPath>Assets\Plugins\System.Threading.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ARTests.csproj">

@@ -50,6 +50,7 @@ public class TCPSandboxPeer : MonoBehaviour
     public ConcurrentDictionary<byte, string> peerAddresses;
     public ConcurrentDictionary<byte, TcpClient> peers;
     public ConcurrentDictionary<byte, ushort> peerPorts;
+    public ConcurrentDictionary<byte, VRClient> peerClients;
 
     //public ConcurrentDictionary<byte, NetworkStream> peerStreams;
     public ushort port = 8052;
@@ -501,6 +502,20 @@ public class TCPSandboxPeer : MonoBehaviour
 
     }
 
+    public void SendData(JSONNode data, string type, byte sendid)
+    {
+        JSONNode root = JSON.Parse("{}");
+        root["id"] = id;
+        root["type"] = type;
+        root["info"] = data;
+        // TODO: last packet id
+        //lastPacketID++;
+        //root["packetID"] = lastPacketID;
+        string message = root.ToString();
+        SendMessage(sendid, message);
+    }
+
+
     public void Broadcast(string message)
     {
 
@@ -545,6 +560,19 @@ public class TCPSandboxPeer : MonoBehaviour
 
         }
 
+    }
+
+    public void BroadcastData(JSONNode data, string type)
+    {
+        JSONNode root = JSON.Parse("{}");
+        root["id"] = id;
+        root["type"] = type;
+        root["info"] = data;
+        // TODO: last packet id
+        //lastPacketID++;
+        //root["packetID"] = lastPacketID;
+        string message = root.ToString();
+        Broadcast(message);
     }
 
     byte FindClosestPeer()

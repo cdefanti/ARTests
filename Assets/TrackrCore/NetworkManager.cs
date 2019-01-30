@@ -9,7 +9,7 @@ using System;
 using SimpleJSON;
 
 public class NetworkManager : MonoBehaviour {
-
+    /*
     public int myId;
 
     public int[] KnownIds;
@@ -262,4 +262,5 @@ public class NetworkManager : MonoBehaviour {
         UdpState state = new UdpState(e, c);
         c.BeginReceive(new AsyncCallback(ReceiveCallback), state);
     }
+    */
 }

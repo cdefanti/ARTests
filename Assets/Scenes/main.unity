@@ -2875,6 +2875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7474906de5bb854ba25aa0d4b4de1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Surface: {fileID: 0}
 --- !u!4 &755561737
 Transform:
   m_ObjectHideFlags: 0
@@ -3557,13 +3558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c9c14af216341548b82f784e5db9d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myId: 2
-  KnownIds: 0100000002000000
-  KnownIps:
-  - 192.168.49.200
-  - 192.168.49.1
-  PORT: 20000
-  lastPacketID: 0
 --- !u!4 &941469195
 Transform:
   m_ObjectHideFlags: 0
@@ -3797,10 +3791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a384021d9d56cf8409e6a290b4c2f762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  network: {fileID: 0}
-  id: 0
-  gt: {fileID: 0}
-  cam: {fileID: 0}
 --- !u!1 &1002363842
 GameObject:
   m_ObjectHideFlags: 0
@@ -3945,7 +3935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1007966847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6526,7 +6516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8470a00ce490f4a8664b38e6ea34f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  network: {fileID: 941469194}
+  peer: {fileID: 0}
   ownerId: 5
   objId: 1
 --- !u!114 &1821321732
@@ -6637,7 +6627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8470a00ce490f4a8664b38e6ea34f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  network: {fileID: 941469194}
+  peer: {fileID: 0}
   ownerId: 23
   objId: 1
 --- !u!23 &1871021744
@@ -7321,10 +7311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a384021d9d56cf8409e6a290b4c2f762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  network: {fileID: 941469194}
-  id: 2
-  gt: {fileID: 1308478205}
-  cam: {fileID: 1007215181}
 --- !u!4 &2058327480
 Transform:
   m_ObjectHideFlags: 0
@@ -7418,10 +7404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a384021d9d56cf8409e6a290b4c2f762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  network: {fileID: 941469194}
-  id: 1
-  gt: {fileID: 2132962450}
-  cam: {fileID: 1007215181}
 --- !u!4 &2073789924
 Transform:
   m_ObjectHideFlags: 0
