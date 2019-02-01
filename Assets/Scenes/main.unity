@@ -437,13 +437,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 939
+  id: 171
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.05, y: 0.05}
   cam: {fileID: 1007215181}
   realPos: {x: 0.075, y: 0, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &114214312
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,13 +499,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 976
+  id: 208
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: -0.02, y: 0.015, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 60153375}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &137498145
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,13 +647,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 883
+  id: 115
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: 0.06, y: 0, z: 0.015}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &149532743
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,13 +685,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 468
+  id: 212
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: -0.05, y: 0.015, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1270673138}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!4 &149532745
 Transform:
   m_ObjectHideFlags: 0
@@ -833,7 +841,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 252889046}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -850,13 +858,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 274
+  id: 18
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.0635, y: 0.0635}
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: -0.147}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1002363842}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &266159956
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &266159957
 Transform:
   m_ObjectHideFlags: 0
@@ -889,7 +899,7 @@ Transform:
   - {fileID: 252889047}
   - {fileID: 1820387747}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &270055761
 GameObject:
@@ -1014,13 +1024,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 377
+  id: 121
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.05, y: 0.05}
   cam: {fileID: 1007215181}
   realPos: {x: -0.075, y: 0, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &342705852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,13 +1062,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 960
+  id: 192
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.05, y: 0.05}
   cam: {fileID: 1007215181}
   realPos: {x: -0.075, y: 0, z: 0.075}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!114 &342705854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1461,13 +1475,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 451
+  id: 195
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: 0.06, y: 0, z: -0.015}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &441110043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,13 +1690,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 570
+  id: 58
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: -0.05, y: -0.015, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 60153375}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &500568667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,7 +1884,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 570609010}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -2150,7 +2168,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 611324657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -2167,13 +2185,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 772
+  id: 4
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.0635, y: 0.0635}
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: -0.0735}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1863380854}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &613286234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,7 +2487,9 @@ MonoBehaviour:
   cam: {fileID: 1007215181}
   realPos: {x: -0.03, y: 0, z: -0.015}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!114 &658941090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2717,13 +2739,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 724
+  id: 212
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.05, y: 0.05}
   cam: {fileID: 1007215181}
   realPos: {x: 0.075, y: 0, z: 0.075}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &695964040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2759,7 +2783,9 @@ MonoBehaviour:
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: 0.015}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!114 &695964042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2795,19 +2821,19 @@ GameObject:
   - component: {fileID: 732152217}
   - component: {fileID: 732152216}
   m_Layer: 0
-  m_Name: Tracker23
+  m_Name: Tracker99
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &732152216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 732152215}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -2824,13 +2850,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 23
+  id: 99
   center: {x: 0, y: 0, z: 0}
-  size: {x: 0.0889, y: 0.0889}
+  size: {x: 0.05, y: 0.05}
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1754316266}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!4 &732152218
 Transform:
   m_ObjectHideFlags: 0
@@ -2847,47 +2875,6 @@ Transform:
   - {fileID: 1754316270}
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &755561735
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 755561737}
-  - component: {fileID: 755561736}
-  m_Layer: 0
-  m_Name: GoodPointsTest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &755561736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 755561735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7474906de5bb854ba25aa0d4b4de1d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Surface: {fileID: 0}
---- !u!4 &755561737
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 755561735}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &782065923
 GameObject:
@@ -2942,13 +2929,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 913
+  id: 145
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: -0.02, y: -0.015, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 60153375}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &784679479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,7 +3129,9 @@ MonoBehaviour:
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &820081875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,7 +3323,9 @@ MonoBehaviour:
   cam: {fileID: 1007215181}
   realPos: {x: -0.02, y: -0.015, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1270673138}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!4 &872447232
 Transform:
   m_ObjectHideFlags: 0
@@ -3541,7 +3534,7 @@ GameObject:
   - component: {fileID: 941469195}
   - component: {fileID: 941469194}
   m_Layer: 0
-  m_Name: NetworkManager
+  m_Name: Network
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3555,9 +3548,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 941469193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c9c14af216341548b82f784e5db9d0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2181c6a44c7800c4abb9955edc434305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 55
+  KnownIDs: 3763
+  KnownHosts:
+  - 192.168.49.200
+  - 192.168.49.1
+  KnownPorts: 9c1f9d1f
 --- !u!4 &941469195
 Transform:
   m_ObjectHideFlags: 0
@@ -3569,7 +3568,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &995416583
 GameObject:
@@ -3684,13 +3683,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 1003
+  id: 235
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: -0.02, y: 0.015, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1270673138}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!4 &998517640
 Transform:
   m_ObjectHideFlags: 0
@@ -3725,14 +3726,13 @@ GameObject:
   - component: {fileID: 1000618614}
   - component: {fileID: 1000618615}
   - component: {fileID: 1000618616}
-  - component: {fileID: 1000618617}
   m_Layer: 0
-  m_Name: Tracker5
+  m_Name: Tracker55
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1000618614
 Transform:
   m_ObjectHideFlags: 0
@@ -3762,33 +3762,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 5
+  id: 55
   center: {x: 0, y: 0, z: 0}
-  size: {x: 0.0889, y: 0.0889}
+  size: {x: 0.05, y: 0.05}
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1322396979}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!114 &1000618616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1000618613}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1000618617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1000618613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a384021d9d56cf8409e6a290b4c2f762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1002363842
@@ -3959,8 +3950,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1007966846}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.3138399, y: -1.4957056, z: -0.44409752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1122090509}
@@ -3973,8 +3964,8 @@ Transform:
   - {fileID: 1063298590}
   - {fileID: 1604082864}
   - {fileID: 1200474060}
-  m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_Father: {fileID: 1739764884}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1019692942
 GameObject:
@@ -4099,7 +4090,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1049206841}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -4116,13 +4107,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 1017
+  id: 249
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.0635, y: 0.0635}
   cam: {fileID: 1007215181}
   realPos: {x: 0.0735, y: 0, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 453777834}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &1053611294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4262,13 +4255,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 459
+  id: 203
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.05, y: 0.05}
   cam: {fileID: 1007215181}
   realPos: {x: -0.075, y: 0, z: -0.075}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &1108176082
 GameObject:
   m_ObjectHideFlags: 0
@@ -4739,7 +4734,9 @@ MonoBehaviour:
   cam: {fileID: 1007215181}
   realPos: {x: 0.075, y: 0, z: -0.075}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &1233569785
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,7 +4774,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1233569785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -4800,7 +4797,9 @@ MonoBehaviour:
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 48856390}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &1234526618
 GameObject:
   m_ObjectHideFlags: 0
@@ -4854,13 +4853,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 868
+  id: 100
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.05, y: 0.05}
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: 0.075}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &1258877802
 GameObject:
   m_ObjectHideFlags: 0
@@ -4890,13 +4891,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 690
+  id: 178
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: -0.05, y: -0.015, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1270673138}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!4 &1258877804
 Transform:
   m_ObjectHideFlags: 0
@@ -5003,7 +5006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1308478205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5027,8 +5030,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1308478204}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.3138399, y: -1.4957056, z: -0.44409752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1270673140}
@@ -5036,8 +5039,8 @@ Transform:
   - {fileID: 998517640}
   - {fileID: 1258877804}
   - {fileID: 872447232}
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_Father: {fileID: 1739764884}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1322396979
 GameObject:
@@ -5085,7 +5088,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 2b21b44255db08e4bb3775353c33aeb9, type: 2}
+  - {fileID: 2100000, guid: def5da9c7b90d9640aec790d521d330c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5432,13 +5435,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 998
+  id: 230
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: -0.05, y: 0.015, z: 0}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 60153375}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1001 &1525622752
 Prefab:
   m_ObjectHideFlags: 0
@@ -5697,7 +5702,9 @@ MonoBehaviour:
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: -0.075}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!1 &1618969518
 GameObject:
   m_ObjectHideFlags: 0
@@ -6111,6 +6118,41 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699844252}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1739764883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739764884}
+  m_Layer: 0
+  m_Name: Archive
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1739764884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1739764883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3138399, y: 1.4957056, z: 0.44409752}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2132962449}
+  - {fileID: 2073789924}
+  - {fileID: 1308478206}
+  - {fileID: 2058327480}
+  - {fileID: 2062888348}
+  - {fileID: 1007966848}
+  - {fileID: 1871021746}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1749719237
 GameObject:
   m_ObjectHideFlags: 0
@@ -6316,7 +6358,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 127cab2f2d3d1fd45b8c8b7c0fd427b2, type: 2}
+  - {fileID: 2100000, guid: def5da9c7b90d9640aec790d521d330c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6407,7 +6449,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1820387746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -6424,13 +6466,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 713
+  id: 201
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.0635, y: 0.0635}
   cam: {fileID: 1007215181}
   realPos: {x: 0.0735, y: 0, z: -0.147}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1538653101}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &1821321727
 GameObject:
   m_ObjectHideFlags: 0
@@ -6498,12 +6542,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1821321727}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1821321731
 MonoBehaviour:
@@ -6516,8 +6560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8470a00ce490f4a8664b38e6ea34f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peer: {fileID: 0}
-  ownerId: 5
+  peer: {fileID: 941469194}
+  ownerId: 0
   objId: 1
 --- !u!114 &1821321732
 MonoBehaviour:
@@ -6525,7 +6569,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1821321727}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -6678,12 +6722,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871021742}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.3138399, y: -1.4957056, z: -0.44409752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 1739764884}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1871021747
 MonoBehaviour:
@@ -6730,7 +6774,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1879487482}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -7167,13 +7211,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 490
+  id: 234
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: -0.03, y: 0, z: 0.015}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!114 &2050089154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7299,7 +7345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2058327479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7317,12 +7363,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2058327478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.3138399, y: -1.4957056, z: -0.44409752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 1739764884}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2062888346
 GameObject:
@@ -7363,8 +7409,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2062888346}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.3138399, y: -1.4957056, z: -0.44409752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 343751141}
@@ -7374,8 +7420,8 @@ Transform:
   - {fileID: 658941091}
   - {fileID: 2090043445}
   - {fileID: 436413869}
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_Father: {fileID: 1739764884}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2073789922
 GameObject:
@@ -7392,7 +7438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2073789923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7401,7 +7447,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2073789922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a384021d9d56cf8409e6a290b4c2f762, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2073789924
@@ -7410,12 +7456,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2073789922}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.3138399, y: -1.4957056, z: -0.44409752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_Father: {fileID: 1739764884}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2086979479
 GameObject:
@@ -7454,7 +7500,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2086979479}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d804fe28a7d1f534bb7d33df113f0292, type: 3}
   m_Name: 
@@ -7477,7 +7523,9 @@ MonoBehaviour:
   cam: {fileID: 1007215181}
   realPos: {x: 0.0735, y: 0, z: -0.0735}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 1618969518}
   tracked: 0
+  peer: {fileID: 941469194}
 --- !u!1 &2090043442
 GameObject:
   m_ObjectHideFlags: 0
@@ -7507,13 +7555,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 1879487483}
-  id: 660
+  id: 148
   center: {x: 0, y: 0, z: 0}
   size: {x: 0.02, y: 0.02}
   cam: {fileID: 1007215181}
   realPos: {x: 0, y: 0, z: -0.015}
   calib: {fileID: 30976939}
+  TrackerMesh: {fileID: 0}
   tracked: 0
+  peer: {fileID: 0}
 --- !u!114 &2090043444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7725,15 +7775,15 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2132962449
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2132962448}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.3138399, y: -1.4957056, z: -0.44409752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 60153376}
@@ -7741,8 +7791,8 @@ Transform:
   - {fileID: 114214313}
   - {fileID: 488237288}
   - {fileID: 782065924}
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1739764884}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2132962450
 MonoBehaviour:

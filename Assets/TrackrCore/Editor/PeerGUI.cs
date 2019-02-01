@@ -12,7 +12,7 @@ public class PeerGUI : Editor {
     //string peerID = "0";
     int selectedGridIndex = 0;
 
-    string[] peerIDs = { "0", "1", "2" };
+    string[] peerIDs = { "55", "99" };
     string notificationField = "notify";
 
     public override void OnInspectorGUI()
@@ -116,7 +116,7 @@ public class PeerGUI : Editor {
 
         if (Application.isPlaying)
         {
-            foreach (byte u in node.peers.Keys)
+            foreach (byte u in node.peerClients.Keys)
             {
                 GUILayout.Label(Convert.ToString(u));
             }

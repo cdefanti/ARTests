@@ -46,17 +46,24 @@ public class TCPSandboxPeer : MonoBehaviour
 
     #endregion
     public Heartbeat heartbeat;
-    public ConcurrentDictionary<byte, long> peerLatencies;
-    public ConcurrentDictionary<byte, string> peerAddresses;
-    public ConcurrentDictionary<byte, TcpClient> peers;
-    public ConcurrentDictionary<byte, ushort> peerPorts;
+    //public ConcurrentDictionary<byte, long> peerLatencies;
+    //public ConcurrentDictionary<byte, string> peerAddresses;
+    //public ConcurrentDictionary<byte, TcpClient> peers;
+    //public ConcurrentDictionary<byte, ushort> peerPorts;
     public ConcurrentDictionary<byte, VRClient> peerClients;
 
     //public ConcurrentDictionary<byte, NetworkStream> peerStreams;
-    public ushort port = 8052;
+    //public ushort port = 0;
     //public ushort clientPort = 8053;
     public byte id = 0;
     public ConcurrentQueue<KeyValuePair<byte, string>> messageQueue;
+
+    // TODO: probably a better way to sync these up
+    public byte[] KnownIDs;
+    public string[] KnownHosts;
+    public ushort[] KnownPorts;
+    // maybe this should be a map to a custom struct instead of a tuple, makes it more readable later
+    public Dictionary<byte, Tuple<string, ushort>> NetworkConfiguration;
 
     //public int heartbeatPeriod = 10000;
 
@@ -126,8 +133,24 @@ public class TCPSandboxPeer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        peers = new ConcurrentDictionary<byte, TcpClient>();
-        peerPorts = new ConcurrentDictionary<byte, ushort>();
+        // Unnecessary to run the code, but useful for getting host IP
+        // on Android, where we can't run ipconfig
+        string hostName = Dns.GetHostName();
+        foreach (IPAddress addr in Dns.GetHostEntry(hostName).AddressList)
+        {
+            Debug.Log("UNITY: IP Address: " + addr.ToString());
+        }
+
+        NetworkConfiguration = new Dictionary<byte, Tuple<string, ushort>>();
+        // TODO: check for KnownX length mismatch.
+        for (int i = 0; i < KnownIDs.Length; i++)
+        {
+            NetworkConfiguration[KnownIDs[i]] = new Tuple<string, ushort>(KnownHosts[i], KnownPorts[i]);
+        }
+
+        //peers = new ConcurrentDictionary<byte, TcpClient>();
+        //peerPorts = new ConcurrentDictionary<byte, ushort>();
+        peerClients = new ConcurrentDictionary<byte, VRClient>();
         messageQueue = new ConcurrentQueue<KeyValuePair<byte, string>>();
 
         connectionPublisher = new Publisher<JSONNode>();
@@ -147,25 +170,14 @@ public class TCPSandboxPeer : MonoBehaviour
         tcpListenerThread = new Thread(new ThreadStart(ListenForIncomingRequests));
         tcpListenerThread.IsBackground = true;
 
-
         tcpListenerThread.Start();
-
-        if (id == 0)
+        foreach (byte _id in NetworkConfiguration.Keys)
         {
-            ConnectToTcpServer(8053);
-            ConnectToTcpServer(8054);
+            if (_id != id)
+            {
+                ConnectToTcpServer(_id);
+            }
         }
-        else if (id == 1)
-        {
-            ConnectToTcpServer(8052);
-            ConnectToTcpServer(8054);
-        }
-        else if (id == 2)
-        {
-            ConnectToTcpServer(8052);
-            ConnectToTcpServer(8053);
-        }
-
 
         //peerListenerThread = new Thread(new ThreadStart(ListenForPeerMessages));
         //peerListenerThread.IsBackground = true;
@@ -208,15 +220,17 @@ public class TCPSandboxPeer : MonoBehaviour
     public void Connect(byte id, TcpClient client)
     {
         Debug.Log("connecting to " + id);
-        peers[id] = client;
+        peerClients[id].client = client;
     }
 
     public void Disconnect(byte id)
     {
         Debug.Log("disconnect " + id);
-        peers[id].Close();
-        TcpClient tmp;
-        if (!peers.TryRemove(id, out tmp))
+        peerClients[id].client.Close();
+
+        // TODO: check - is this still right?
+        VRClient tmp;
+        if (!peerClients.TryRemove(id, out tmp))
         {
             Debug.Log("failed to disconnect");
         }
@@ -315,7 +329,7 @@ public class TCPSandboxPeer : MonoBehaviour
                     var id = root["id"];
                     var p = root["info"]["parent"];
 
-                    var d = peerLatencies[FindClosestPeer()];
+                    var d = peerClients[FindClosestPeer()].latency;
                     //var d = min(n) + 1;
                     //d = min(n) + 1;
 
@@ -367,7 +381,7 @@ public class TCPSandboxPeer : MonoBehaviour
 
                 }
 
-                Debug.Log(id + ":client message received as: " + clientMessage);
+                Debug.Log("UNITY: " + id + ":client message received as: " + clientMessage);
                 //stream = client.GetStream();
             }
 
@@ -387,19 +401,18 @@ public class TCPSandboxPeer : MonoBehaviour
         try
         {
             // Create listener on localhost port 8052. 			
-            tcpListener = new TcpListener(IPAddress.Any, port);
+            tcpListener = new TcpListener(IPAddress.Parse(NetworkConfiguration[id].Item1), NetworkConfiguration[id].Item2);
             tcpListener.Server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-
             tcpListener.Start();
 
-            Debug.Log(id + "Server is listening");
+            Debug.Log("UNITY: " + id + "Server is listening");
 
             while (true)
             {
                 TcpClient connectedTcpClient = tcpListener.AcceptTcpClient();//)
                                                                              //{
 
-                Debug.Log(id + "Accepted new client");
+                Debug.Log("UNITY: " + id + " Accepted new client");
                 //new Thread(new ThreadStart(ThreadProc));
                 var thread = new Thread(() => ThreadProc(connectedTcpClient));
                 thread.IsBackground = false;
@@ -416,18 +429,18 @@ public class TCPSandboxPeer : MonoBehaviour
         }
         catch (SocketException socketException)
         {
-            Debug.Log("SocketException " + socketException.ToString());
+            Debug.Log("UNITY: SocketException " + socketException.ToString());
         }
     }
 
     /// <summary> 	
     /// Setup socket connection. 	
     /// </summary> 	
-    private void ConnectToTcpServer(ushort peerPort)
+    private void ConnectToTcpServer(byte id)
     {
         try
         {
-            clientReceiveThread = new Thread((() => ListenForData(peerPort)));
+            clientReceiveThread = new Thread((() => ListenForData(id)));
             clientReceiveThread.IsBackground = true;
             clientReceiveThread.Start();
         }
@@ -439,28 +452,15 @@ public class TCPSandboxPeer : MonoBehaviour
     /// <summary> 	
     /// Runs in background clientReceiveThread; Listens for incomming data. 	
     /// </summary>     
-    private void ListenForData(ushort peerPort)
+    private void ListenForData(byte _id)
     {
         try
         {
-            if (peerPort == 8052)
-            {
-                socketConnection = peers[0] = new TcpClient("localhost", peerPort);
-                peerPorts[0] = 8052;
-                peerAddresses[0] = "localhost";
-            }
-            else if (peerPort == 8053)
-            {
-                socketConnection = peers[1] = new TcpClient("localhost", peerPort);
-                peerPorts[1] = 8053;
-                peerAddresses[1] = "localhost";
-            }
-            else if (peerPort == 8054)
-            {
-                socketConnection = peers[2] = new TcpClient("localhost", peerPort);
-                peerPorts[2] = 8054;
-                peerAddresses[2] = "localhost";
-            }
+            VRClient c = new VRClient();
+            socketConnection = c.client = new TcpClient(NetworkConfiguration[_id].Item1, NetworkConfiguration[_id].Item2);
+            c.port = NetworkConfiguration[_id].Item2;
+            c.IP = NetworkConfiguration[_id].Item1;
+            peerClients[_id] = c;
 
             Byte[] bytes = new Byte[4096];
 
@@ -477,7 +477,7 @@ public class TCPSandboxPeer : MonoBehaviour
                     Array.Copy(bytes, 0, incomingData, 0, length);
                     // Convert byte array to string message.		
                     string serverMessage = Encoding.ASCII.GetString(incomingData);
-                    Debug.Log(System.DateTime.UtcNow + ":server message received as: " + serverMessage);
+                    Debug.Log("UNITY: " + System.DateTime.UtcNow + ":server message received as: " + serverMessage);
                 }
                 Debug.Log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             }
@@ -500,9 +500,9 @@ public class TCPSandboxPeer : MonoBehaviour
 
         try
         {
-            //Debug.Log("talk to " + peerID);
+            Debug.Log("UNITY: talk to " + peerID);
             // Get a stream object for writing.
-            NetworkStream stream = peers[peerID].GetStream();
+            NetworkStream stream = peerClients[peerID].client.GetStream();
 
             if (stream.CanWrite)
             {
@@ -554,13 +554,13 @@ public class TCPSandboxPeer : MonoBehaviour
     public void Broadcast(string message)
     {
 
-        foreach (byte peerID in peers.Keys)
+        foreach (byte peerID in peerClients.Keys)
         {
             try
             {
                 //Debug.Log("talk to " + peerID);
                 // Get a stream object for writing.
-                NetworkStream stream = peers[peerID].GetStream();
+                NetworkStream stream = peerClients[peerID].client.GetStream();
 
                 if (stream.CanWrite)
                 {
@@ -616,12 +616,12 @@ public class TCPSandboxPeer : MonoBehaviour
         byte minPeer = 0xFF;
         long minDistance = long.MaxValue;
 
-        foreach (byte peerID in peers.Keys)
+        foreach (byte peerID in peerClients.Keys)
         {
-            if (peerLatencies[peerID] < minDistance)
+            if (peerClients[peerID].latency < minDistance)
             {
                 minPeer = peerID;
-                minDistance = peerLatencies[peerID];
+                minDistance = peerClients[peerID].latency;
             }
         }
 
@@ -671,7 +671,7 @@ public class TCPSandboxPeer : MonoBehaviour
 
         try {
 
-            peerLatencies[peerID] = PingHost(peerAddresses[peerID]);
+            peerClients[peerID].latency = PingHost(peerClients[peerID].IP);
 
         } catch (Exception ex) {
             if (ex is SocketException) {
@@ -688,7 +688,7 @@ public class TCPSandboxPeer : MonoBehaviour
 
     void PingAll() {
 
-        foreach (byte peerID in peers.Keys) {
+        foreach (byte peerID in peerClients.Keys) {
             try {
 
                 Ping(peerID);
@@ -723,7 +723,7 @@ public class TCPSandboxPeer : MonoBehaviour
 
     void MST()
     {
-        foreach (byte peerID in peers.Keys)
+        foreach (byte peerID in peerClients.Keys)
         {
 
         }

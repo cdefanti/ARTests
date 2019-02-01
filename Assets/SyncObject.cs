@@ -35,11 +35,14 @@ public class SyncObject : MonoBehaviour {
             peer.BroadcastData(info, "POSE_OBJECT");
         } else
         {
-            Pose p = peer.peerClients[ownerId].objects[objId];
-            transform.rotation = Quaternion.identity;
-            transform.Rotate(Vector3.up, peer.peerClients[ownerId].rot_diff);
-            transform.position = transform.rotation * (peer.peerClients[ownerId].pos_diff + p.pos);
-            transform.rotation = transform.rotation * p.rot;
+            if (peer.peerClients.ContainsKey(ownerId))
+            {
+                Pose p = peer.peerClients[ownerId].objects[objId];
+                transform.rotation = Quaternion.identity;
+                transform.Rotate(Vector3.up, peer.peerClients[ownerId].rot_diff);
+                transform.position = transform.rotation * (peer.peerClients[ownerId].pos_diff + p.pos);
+                transform.rotation = transform.rotation * p.rot;
+            }
         }
 	}
 }

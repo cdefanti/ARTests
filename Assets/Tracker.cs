@@ -69,8 +69,8 @@ public class Tracker : MonoBehaviour
                 {
                     // hit
                     // TODO: establish client to connect, store in peerClient
-                    TcpClient c = new TcpClient();
-                    peer.Connect(id, c);
+                    //TcpClient c = new TcpClient();
+                    //peer.Connect(id, c);
                 }
             }
         }
@@ -82,6 +82,7 @@ public class Tracker : MonoBehaviour
         tracked = false;
         if (!detector.GetTrackerCorners(id, out corners))
         {
+            //Debug.Log("UNITY: tracker " + id + " not found");
             diff_alpha = 1f;
             return;
         }
@@ -130,7 +131,6 @@ public class Tracker : MonoBehaviour
         info["diff"]["x"] = rawpos.x;
         info["diff"]["y"] = rawpos.y;
         info["diff"]["z"] = rawpos.z;
-        // TODO: add sendData function to TCPSandboxPeer
         peer.SendData(info, "POSE_OTHER", id);
 
         // if we receive data from them, we can now figure out the positional and rotational difference

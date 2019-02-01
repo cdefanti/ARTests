@@ -1132,7 +1132,6 @@
     <Compile Include="Assets\TrackrCore\NetworkManager.cs" />
     <Compile Include="Assets\TrackrCore\ObjectPool.cs" />
     <Compile Include="Assets\TrackrCore\Peer.cs" />
-    <Compile Include="Assets\TrackrCore\PeerGUI.cs" />
     <Compile Include="Assets\TrackrCore\PeerManager.cs" />
     <Compile Include="Assets\TrackrCore\PeerMeta.cs" />
     <Compile Include="Assets\TrackrCore\Pose.cs" />

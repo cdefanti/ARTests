@@ -7,14 +7,17 @@ using System.Net.NetworkInformation;
 
 public class VRClient {
 
-    public int TrackerID;
+    public byte id;
     public string IP;
+    public ushort port;
     public bool visible;
-    public bool connected;
+    public bool connected = true;
+    public long latency = 0;
 
-    public UdpClient client;
+    //public UdpClient client;
+    public TcpClient client;
 
-    public Dictionary<byte, Pose> objects;
+    public Dictionary<byte, Pose> objects = new Dictionary<byte, Pose>();
 
     public int lastPacketID = 0;
 
