@@ -4,19 +4,48 @@
 // using UnityEditor;
 // using UnityEngine;
 
-// [CustomEditor(typeof(TCPSandboxPeer))]
-// public class PeerGUI : Editor {
+// [CustomEditor(typeof(UDPSandboxPeer))]
+// public class UDPSandboxPeerGUI : Editor {
 
 //     int heartbeat = 2000;
 //     int keepalive = 10000;
 //     //string peerID = "0";
 //     int selectedGridIndex = 0;
 
-//     string[] peerIDs = { "55", "99" };
+//     string[] peerIDs;
 //     string notificationField = "notify";
+
+//     public class StringAsIntComparer : IComparer
+//     {
+//         public int Compare(object l, object r)
+//         {
+//             int left = Int32.Parse((string)l);
+//             int right = Int32.Parse((string)r);
+//             return left.CompareTo(right);
+//         }
+//     }
 
 //     public override void OnInspectorGUI()
 //     {
+//         UDPSandboxPeer node = (UDPSandboxPeer)target;
+
+//         UDPSandboxPeer []objs = GameObject.FindObjectsOfType(typeof(UDPSandboxPeer)) as UDPSandboxPeer[];
+
+//         peerIDs = new string[objs.Length];
+
+        
+//         int i = 0;
+//         foreach (UDPSandboxPeer peer in objs)
+//         {
+//             //if (node.id == peer.id)
+//             //{
+//             //    continue;
+//             //}
+//             peerIDs[i++] = peer.id.ToString();
+//         }
+
+//         Array.Sort(peerIDs, new StringAsIntComparer());
+
 //         //DrawDefaultInspector();
 //         GUI.skin.label.alignment = TextAnchor.MiddleLeft;
 //         GUI.skin.button.alignment = TextAnchor.MiddleLeft;
@@ -27,7 +56,7 @@
 //         selectedGridIndex = GUILayout.SelectionGrid(selectedGridIndex, peerIDs, 3);
 //         GUILayout.EndHorizontal();
 
-//         TCPSandboxPeer node = (TCPSandboxPeer)target;
+        
 
 //         if (GUILayout.Button("Connect"))
 //         {

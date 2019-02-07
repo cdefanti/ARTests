@@ -14,8 +14,8 @@ public class VRClient {
     public bool connected = true;
     public long latency = 0;
 
-    //public UdpClient client;
-    public TcpClient client;
+    public UdpClient client;
+    //public TcpClient client;
 
     public Dictionary<byte, Pose> objects = new Dictionary<byte, Pose>();
 

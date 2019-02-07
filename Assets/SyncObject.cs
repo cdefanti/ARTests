@@ -6,7 +6,7 @@ using SimpleJSON;
 public class SyncObject : MonoBehaviour {
 
     //public NetworkManager network;
-    public TCPSandboxPeer peer;
+    public UDPSandboxPeer peer;
     public byte ownerId;
     public byte objId;
 

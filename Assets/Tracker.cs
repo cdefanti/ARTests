@@ -20,7 +20,7 @@ public class Tracker : MonoBehaviour
 
     public bool tracked;
 
-    public TCPSandboxPeer peer;
+    public UDPSandboxPeer peer;
 
     // physical screen size in meters
     private float screenW = 0.15f;
@@ -35,6 +35,7 @@ public class Tracker : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
     }
 
     // Update is called once per frame

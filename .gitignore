@@ -1,2 +1,5 @@
 Library/
 *.apk
+Temp/
+.vs
+obj/
