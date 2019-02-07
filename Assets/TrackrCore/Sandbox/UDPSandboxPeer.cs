@@ -70,7 +70,7 @@ public class UDPSandboxPeer : MonoBehaviour
     //public int heartbeatPeriod = 10000;
 
     // Use this for initialization
-    void Start()
+    public void Start()
     {
         // Unnecessary to run the code, but useful for getting host IP
         // on Android, where we can't run ipconfig
@@ -138,7 +138,7 @@ public class UDPSandboxPeer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
 
         if (!messageQueue.IsEmpty)
