@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Tracker))]
+[CustomEditor(typeof(UDPSandboxPeer))]
 public class UDPSandboxPeerGUI : Editor {
 
     int heartbeat = 2000;
@@ -27,15 +27,15 @@ public class UDPSandboxPeerGUI : Editor {
 
     public override void OnInspectorGUI()
     {
-        Tracker node = (Tracker)target;
+        UDPSandboxPeer node = (UDPSandboxPeer)target;
 
-        Tracker[]objs = GameObject.FindObjectsOfType(typeof(Tracker)) as Tracker[];
+        UDPSandboxPeer[]objs = GameObject.FindObjectsOfType(typeof(UDPSandboxPeer)) as UDPSandboxPeer[];
 
         peerIDs = new string[objs.Length];
 
         
         int i = 0;
-        foreach (Tracker peer in objs)
+        foreach (UDPSandboxPeer peer in objs)
         {
             //if (node.id == peer.id)
             //{
