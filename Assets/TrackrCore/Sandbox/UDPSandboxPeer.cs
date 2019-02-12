@@ -25,7 +25,7 @@ public class UDPSandboxPeer : Tracker
     /// requests. 	
     /// </summary> 	
     //private TcpListener tcpListener;
-    private UdpClient udpListener;
+    //private UdpClient udpListener;
     /// <summary> 
     /// Background thread for TcpServer workload. 	
     /// </summary> 	
@@ -45,7 +45,6 @@ public class UDPSandboxPeer : Tracker
     private IPublisher<ElapsedEventArgs> heartbeatPublisher;
     private Subscriber<ElapsedEventArgs> heartbeatSubscriber;
 
-    IPEndPoint ep;
     bool active = false;
 
     private float rot_diff = 0f;
@@ -58,7 +57,7 @@ public class UDPSandboxPeer : Tracker
     //public ConcurrentDictionary<byte, string> peerAddresses;
     //public ConcurrentDictionary<byte, TcpClient> peers;
     //public ConcurrentDictionary<byte, ushort> peerPorts;
-    public ConcurrentDictionary<byte, VRClient> peerClients;
+    public VRClient peerClient;
 
     //public ConcurrentDictionary<byte, NetworkStream> peerStreams;
     //public ushort port = 0;
@@ -71,22 +70,21 @@ public class UDPSandboxPeer : Tracker
 
     // Use this for initialization
     public new void Start()
-    {
+    {        
         if (network.NetworkConfiguration == null)
         {
             network.Start();
         }
-        // Unnecessary to run the code, but useful for getting host IP
-        // on Android, where we can't run ipconfig
-        string hostName = Dns.GetHostName();
-        foreach (IPAddress addr in Dns.GetHostEntry(hostName).AddressList)
+
+        if (id == network.id)
         {
-            Debug.Log("UNITY: IP Address: " + addr.ToString());
+            enabled = false;
+            return;
         }
 
         //peers = new ConcurrentDictionary<byte, TcpClient>();
         //peerPorts = new ConcurrentDictionary<byte, ushort>();
-        peerClients = new ConcurrentDictionary<byte, VRClient>();
+        peerClient = new VRClient();
         messageQueue = new ConcurrentQueue<KeyValuePair<byte, string>>();
 
         connectionPublisher = new Publisher<JSONNode>();
@@ -101,37 +99,15 @@ public class UDPSandboxPeer : Tracker
         //heartbeat.DataPublisher += OnHeartbeat;
         //heartbeat.resetTimer();
         //heartbeat.aTimer.Elapsed += OnHeartbeat;
-
-        ConnectToUdpServer(id);
-
-        // these are used to maintain asynchronous data receiving
         active = true;
-
-        ep = new IPEndPoint(IPAddress.Parse(network.GetHostname()), network.GetPort());
-        udpListener = new UdpClient();
-        udpListener.ExclusiveAddressUse = false;
-        udpListener.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-        Debug.Log("opening connection...");
-        Debug.Log(ep.Address.ToString() + ", " + ep.Port);
-        udpListener.Client.Bind(ep);
-
-
-        // start async receive
-        udpListenerThread = new Thread(new ThreadStart(DataListen));
-        udpListenerThread.IsBackground = true;
-        udpListenerThread.Start();
-
-        //peerListenerThread = new Thread(new ThreadStart(ListenForPeerMessages));
-        //peerListenerThread.IsBackground = true;
-        //peerListenerThread.Start();
-
+        ConnectToUdpServer();
     }
 
     // Update is called once per frame
     public new void Update()
     {
         base.Update();
-        if (peerClients.ContainsKey(id) && peerClients[id].connected)
+        if (peerClient.connected)
         {
             TrackerMesh.GetComponent<Renderer>().material.color = Color.green;
         }
@@ -139,7 +115,7 @@ public class UDPSandboxPeer : Tracker
         {
             TrackerMesh.GetComponent<Renderer>().material.color = Color.white;
         }
-        if (!peerClients.ContainsKey(id) || !tracked)
+        if (peerClient == null || !tracked)
         {
             return;
         }
@@ -150,24 +126,23 @@ public class UDPSandboxPeer : Tracker
         info["diff"]["x"] = rawPos.x;
         info["diff"]["y"] = rawPos.y;
         info["diff"]["z"] = rawPos.z;
-        Debug.Log("UNITY: sending tracker data");
-        SendData(info, "POSE_OTHER", id);
+        SendData(info, "POSE_OTHER");
 
         // if we receive data from them, we can now figure out the positional and rotational difference
-        if (peerClients[id].connected)
+        if (peerClient.connected)
         {
             // p12 is the vector from client 1 (us) to client 2 (them) in our local frame
             // p21 is the vector from client 2 to client 1 in their local frame
             // p1, p2, and q2 is the local pose data of each client in their own frame
             // Note: most of these project onto the xz plane because y/up-angle is the only angle that drifts
             Vector3 p12 = rawPos;
-            Vector3 p21 = peerClients[id].relPos;
-            Quaternion q2 = peerClients[id].rot;
+            Vector3 p21 = peerClient.relPos;
+            Quaternion q2 = peerClient.rot;
             Vector3 p1 = Frame.Pose.position;
-            Vector3 p2 = peerClients[id].pos;
+            Vector3 p2 = peerClient.pos;
             p12 = Vector3.Normalize(Vector3.ProjectOnPlane(p12, Vector3.up));
             p21 = Vector3.Normalize(Vector3.ProjectOnPlane(p21, Vector3.up));
-            // forward vectors of 
+            // forward vectors
             Vector3 f1 = Vector3.ProjectOnPlane(Frame.Pose.forward, Vector3.up);
             Vector3 f2 = Vector3.ProjectOnPlane(q2 * Vector3.forward, Vector3.up);
             // a1, a2 are the angles between the forward vector of a client and the vector from the client to the other client
@@ -185,7 +160,7 @@ public class UDPSandboxPeer : Tracker
             rot_diff = Mathf.LerpAngle(rot_diff, a, diff_alpha);
             Vector3 p = transform.position - (Quaternion.Euler(0f, rot_diff, 0f) * p2);
             pos_diff = Vector3.Lerp(pos_diff, p, diff_alpha);
-            diff_alpha = Mathf.Max(diff_alpha - 0.05f, 0.1f);
+            diff_alpha = 1f;// Mathf.Max(diff_alpha - 0.05f, 0.1f);
 
             // apply final result to virtual tracker
             transform.rotation = Quaternion.identity;
@@ -194,10 +169,10 @@ public class UDPSandboxPeer : Tracker
 
 
             // update the network manager so that other objects in scene can reference it
-            peerClients[id].rot_diff = rot_diff;
-            peerClients[id].pos_diff = pos_diff;
+            peerClient.rot_diff = rot_diff;
+            peerClient.pos_diff = pos_diff;
 
-            //Debug.Log(string.Format("UNITY: a1: {0}, a2: {1}, a: {2}", a1, a2, a));
+            //Debug.Log(string.Format("UNITY: a1: {0}, a2: {1}, a: {2}, alpha: {3}", a1, a2, a, diff_alpha));
         }
 
         if (!messageQueue.IsEmpty)
@@ -205,7 +180,7 @@ public class UDPSandboxPeer : Tracker
             foreach (KeyValuePair<byte, string> kv in messageQueue)
             {
 
-                SendMessage(kv.Key, kv.Value);
+                SendMessage(kv.Value);
                 KeyValuePair<byte, string> result;
                 if (!messageQueue.TryDequeue(out result))
                 {
@@ -261,7 +236,9 @@ public class UDPSandboxPeer : Tracker
     void OnHeartbeat(object sender, ElapsedEventArgs e)
     {
 
-        Broadcast(Visible_M.ToString(id));
+        // TODO: move to global manager
+
+        //Broadcast(Visible_M.ToString(id));
 
         //messageQueue.Enqueue(new KeyValuePair<byte, string>(peerID, Connect_ACK_M.ToString(peerID)));
 
@@ -295,11 +272,8 @@ public class UDPSandboxPeer : Tracker
     void OnMessage(string message)
     {
         var root = JSON.Parse(message);
-        byte peerID = (byte)root["id"].AsInt;
 
-        Debug.Log(message);
-
-        if (root["type"] == "CONNECT")
+        if (root["type"].Value == "CONNECT")
         {
             //Connect(peerID, client);
             //Debug.Log("connecting to " + id);
@@ -310,25 +284,26 @@ public class UDPSandboxPeer : Tracker
             //Broadcast(Connect_ACK_M.ToString(id));
 
         }
-        else if (root["type"] == "CONNECT_ACK")
+        else if (root["type"].Value == "CONNECT_ACK")
         {
 
             connectionAckPublisher.PublishData(root);
 
         }
-        else if (root["type"] == "DISCONNECT")
+        else if (root["type"].Value == "DISCONNECT")
         {
 
-            Disconnect(peerID);
+            Disconnect(id);
 
         }
-        else if (root["type"] == "SPANNINGTREE")
+        else if (root["type"].Value == "SPANNINGTREE")
         {
             //n[i], parent = recv(nbr i)
-            var id = root["id"];
-            var p = root["info"]["parent"];
+            //var id = root["id"];
+            //var p = root["info"]["parent"];
 
-            var d = peerClients[FindClosestPeer()].latency;
+            // TODO: move to global manager
+            //var d = peerClients[FindClosestPeer()].latency;
             //var d = min(n) + 1;
             //d = min(n) + 1;
 
@@ -344,153 +319,65 @@ public class UDPSandboxPeer : Tracker
             }
             */
         }
+        else if (root["type"].Value == "POSE_SELF")
+        {
+            Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
+                                         root["info"]["rot"]["y"].AsFloat,
+                                         root["info"]["rot"]["z"].AsFloat,
+                                         root["info"]["rot"]["w"].AsFloat);
+            Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
+                                      root["info"]["pos"]["y"].AsFloat,
+                                      root["info"]["pos"]["z"].AsFloat);
+            peerClient.SetRot(rot);
+            peerClient.SetPos(pos);
+        }
+        else if (root["type"].Value == "POSE_OTHER")
+        {
+            Vector3 relpos = new Vector3(root["info"]["diff"]["x"].AsFloat,
+                                         root["info"]["diff"]["y"].AsFloat,
+                                         root["info"]["diff"]["z"].AsFloat);
+            peerClient.SetRelPos(relpos);
+        }
+        else if (root["type"].Value == "POSE_OBJECT")
+        {
+            byte objId = (byte)root["info"]["id"].AsInt;
+            Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
+                                         root["info"]["rot"]["y"].AsFloat,
+                                         root["info"]["rot"]["z"].AsFloat,
+                                         root["info"]["rot"]["w"].AsFloat);
+            Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
+                                      root["info"]["pos"]["y"].AsFloat,
+                                      root["info"]["pos"]["z"].AsFloat);
+            Pose p = new Pose
+            {
+                pos = pos,
+                rot = rot
+            };
+            peerClient.objects[objId] = p;
+
+        }
     }
 
     public void Connect(byte id, UdpClient client)
     {
         Debug.Log("connecting to " + id);
-        peerClients[id].client = client;
+        peerClient.client = client;
     }
 
     public void Disconnect(byte id)
     {
         Debug.Log("disconnect " + id);
-        peerClients[id].client.Close();
-
-        // TODO: check - is this still right?
-        VRClient tmp;
-        if (!peerClients.TryRemove(id, out tmp))
-        {
-            Debug.Log("failed to disconnect");
-        }
-    }
-
-    private void ThreadProc(TcpClient client)
-    {
-        //var client = (TcpClient)obj;
-        // var childSocketThread = new Thread(() =>
-        // {
-        // Get a stream object for reading 					
-        NetworkStream stream = client.GetStream();
-
-        // Read incomming stream into byte arrary. 						
-        while (true)
-        {
-
-            //{
-            Byte[] bytes = new Byte[1024];
-            int length;
-
-            if ((length = stream.Read(bytes, 0, bytes.Length)) != 0) {
-                var incomingData = new byte[length];
-                Array.Copy(bytes, 0, incomingData, 0, length);
-                // Convert byte array to string message. 							
-                string clientMessage = Encoding.ASCII.GetString(bytes);
-
-                var root = JSON.Parse(clientMessage);
-                byte peerID = (byte)root["id"].AsInt;
-                if (root["type"] == "CONNECT")
-                {
-                    //Connect(peerID, client);
-                    //Debug.Log("connecting to " + id);
-                    //peers[id] = client;
-
-                    connectionPublisher.PublishData(root);
-
-                    //Broadcast(Connect_ACK_M.ToString(id));
-
-                }
-                else if (root["type"] == "CONNECT_ACK")
-                {
-
-                    connectionAckPublisher.PublishData(root);
-
-                }
-                else if (root["type"] == "DISCONNECT")
-                {
-
-                    Disconnect(peerID);
-
-                }
-                else if (root["type"] == "SPANNINGTREE")
-                {
-                    //n[i], parent = recv(nbr i)
-                    var id = root["id"];
-                    var p = root["info"]["parent"];
-
-                    var d = peerClients[FindClosestPeer()].latency;
-                    //var d = min(n) + 1;
-                    //d = min(n) + 1;
-
-                    /*
-                    parent = find(i s.t.n[i] = d - 1);
-
-                    send(parent, < d = d, parent = true >);
-                    
-                    for n in nbr {
-                        if n != parent {
-                            send(n, < d = d, parent = false >)
-                        }
-                    }
-                    */
-                }
-                else if (root["type"] == "POSE_SELF")
-                {
-                    Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
-                                                 root["info"]["rot"]["y"].AsFloat,
-                                                 root["info"]["rot"]["z"].AsFloat,
-                                                 root["info"]["rot"]["w"].AsFloat);
-                    Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
-                                              root["info"]["pos"]["y"].AsFloat,
-                                              root["info"]["pos"]["z"].AsFloat);
-                    peerClients[id].SetRot(rot);
-                    peerClients[id].SetPos(pos);
-                }
-                else if (root["type"] == "POSE_OTHER")
-                {
-                    Vector3 relpos = new Vector3(root["info"]["diff"]["x"].AsFloat,
-                                                 root["info"]["diff"]["y"].AsFloat,
-                                                 root["info"]["diff"]["z"].AsFloat);
-                    peerClients[id].SetRelPos(relpos);
-                }
-                else if (root["type"] == "POSE_OBJECT")
-                {
-                    byte objId = (byte)root["info"]["id"].AsInt;
-                    Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
-                                                 root["info"]["rot"]["y"].AsFloat,
-                                                 root["info"]["rot"]["z"].AsFloat,
-                                                 root["info"]["rot"]["w"].AsFloat);
-                    Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
-                                              root["info"]["pos"]["y"].AsFloat,
-                                              root["info"]["pos"]["z"].AsFloat);
-                    Pose p = new Pose();
-                    p.pos = pos;
-                    p.rot = rot;
-                    peerClients[id].objects[objId] = p;
-
-                }
-
-                Debug.Log("UNITY: " + id + ":client message received as: " + clientMessage);
-                //stream = client.GetStream();
-            }
-
-        }
-        //}
-
-
-        //});
-        //childSocketThread.IsBackground = true;
-        //childSocketThread.Start();
+        peerClient.client.Close();
     }
 
     /// <summary> 	
     /// Setup socket connection. 	
     /// </summary> 	
-    private void ConnectToUdpServer(byte _id)
+    private void ConnectToUdpServer()
     {
         try
         {
-            clientReceiveThread = new Thread((() => ListenForData(_id)));
+            clientReceiveThread = new Thread((() => ListenForData()));
             clientReceiveThread.IsBackground = true;
             clientReceiveThread.Start();
         }
@@ -502,16 +389,19 @@ public class UDPSandboxPeer : Tracker
     /// <summary> 	
     /// Runs in background clientReceiveThread; Listens for incoming data. 	
     /// </summary>     
-    private void ListenForData(byte _id)
+    private void ListenForData()
     {
         try
         {
-            VRClient c = new VRClient();
-            c.client = new UdpClient();
-            c.port = network.NetworkConfiguration[_id].port;
-            c.IP = network.NetworkConfiguration[_id].hostname;
-            c.connected = true;
-            peerClients[_id] = c;
+            peerClient.port = network.NetworkConfiguration[id].port;
+            peerClient.IP = network.NetworkConfiguration[id].hostname;
+            peerClient.client = new UdpClient();
+            peerClient.client.Client.ExclusiveAddressUse = false;
+            peerClient.client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(network.GetHostname()), peerClient.port);
+            peerClient.client.Client.Bind(ep);
+            peerClient.connected = true;
+            DataListen();
         }
         catch (SocketException socketException)
         {
@@ -522,36 +412,31 @@ public class UDPSandboxPeer : Tracker
     /// <summary> 	
     /// Send message to client using socket connection. 	
     /// </summary> 	
-    public void SendMessage(byte peerID, string message)
+    public void SendMessage(string message)
     {
-        Debug.Log("UNITY: sending client " + peerID + " message " + message);
         // obviously stupid to allow sending messages to yourself in this context
-        if (peerID == network.id)
+        if (id == network.id)
         {
             return;
         }
 
         try
         {
-            Debug.Log("UNITY: talk to " + peerID);
-
             Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
-            IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(peerClients[peerID].IP), peerClients[peerID].port);
-            peerClients[peerID].client.Send(sendbuf, sendbuf.Length);
-
-            //Debug.Log("Peer " + id + " sent: " + message);
+            IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(peerClient.IP), network.GetPort());
+            peerClient.client.Send(sendbuf, sendbuf.Length, sendEP);
 
         }
         catch (Exception ex)
         {
             if (ex is SocketException)
             {
-                Debug.Log("Socket exception " + id + "@" + peerID + ": " + ex);
+                Debug.Log("Socket exception " + id + "@" + id + ": " + ex);
                 return;
             }
             else if (ex is InvalidOperationException)
             {
-                Debug.Log("InvalidOperationException " + id + "@" + peerID + ": " + ex);
+                Debug.Log("InvalidOperationException " + id + "@" + id + ": " + ex);
                 return;
             }
 
@@ -561,59 +446,17 @@ public class UDPSandboxPeer : Tracker
 
     }
 
-    public void SendData(JSONNode data, string type, byte sendid)
+    public void SendData(JSONNode data, string type)
     {
         JSONNode root = JSON.Parse("{}");
-        root["id"] = id;
+        root["id"] = network.id;
         root["type"] = type;
         root["info"] = data;
         // TODO: last packet id
         //lastPacketID++;
         //root["packetID"] = lastPacketID;
         string message = root.ToString();
-        SendMessage(sendid, message);
-    }
-
-    public void Broadcast(string message)
-    {
-        Debug.Log("Peer " + id + " broadcasting: " + message);
-        foreach (byte peerID in peerClients.Keys)
-        {
-            SendMessage(peerID, message);
-        }
-
-    }
-
-    public void BroadcastData(JSONNode data, string type)
-    {
-        JSONNode root = JSON.Parse("{}");
-        root["id"] = id;
-        root["type"] = type;
-        root["info"] = data;
-        // TODO: last packet id
-        //lastPacketID++;
-        //root["packetID"] = lastPacketID;
-        string message = root.ToString();
-        Broadcast(message);
-    }
-
-    byte FindClosestPeer()
-    {
-
-        byte minPeer = 0xFF;
-        long minDistance = long.MaxValue;
-
-        foreach (byte peerID in peerClients.Keys)
-        {
-            if (peerClients[peerID].latency < minDistance)
-            {
-                minPeer = peerID;
-                minDistance = peerClients[peerID].latency;
-            }
-        }
-
-        return minPeer;
-
+        SendMessage(message);
     }
 
     // based on answer @ https://stackoverflow.com/questions/11800958/using-ping-in-c-sharp
@@ -658,7 +501,7 @@ public class UDPSandboxPeer : Tracker
 
         try {
 
-            peerClients[peerID].latency = PingHost(peerClients[peerID].IP);
+            peerClient.latency = PingHost(peerClient.IP);
 
         } catch (Exception ex) {
             if (ex is SocketException) {
@@ -671,6 +514,69 @@ public class UDPSandboxPeer : Tracker
 
             throw;
         }
+    }
+
+    // simple class for network status, passed in the async thread
+    class UdpState : System.Object
+    {
+        public UdpState(IPEndPoint e, UdpClient c) { this.e = e; this.c = c; }
+        public IPEndPoint e;
+        public UdpClient c;
+    }
+
+    // begins the async receive loop
+    void DataListen()
+    {
+        IPEndPoint ep = new IPEndPoint(IPAddress.Parse(network.GetHostname()), peerClient.port);
+        UdpState state = new UdpState(ep, peerClient.client);
+        peerClient.client.BeginReceive(new AsyncCallback(ReceiveCallback), state);
+        while (active)
+        {
+            Thread.Sleep(100);
+        }
+        // active is set to false when the application terminates, then this thread can cleanup
+        Debug.Log("closing connection...");
+        peerClient.client.Close();
+    }
+
+    // async callback method
+    void ReceiveCallback(IAsyncResult ar)
+    {
+        if (!active)
+        {
+            return;
+        }
+        UdpClient c = (UdpClient)((UdpState)(ar.AsyncState)).c;
+        IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
+        // get data
+        Byte[] recvbuf = c.EndReceive(ar, ref e);
+        // parse data
+        string clientMessage = System.Text.Encoding.UTF8.GetString(recvbuf);
+        OnMessage(clientMessage);
+        // loop the callback
+        UdpState state = new UdpState(e, c);
+        c.BeginReceive(new AsyncCallback(ReceiveCallback), state);
+    }
+
+
+    /* TODO: Move to global manager
+    byte FindClosestPeer()
+    {
+
+        byte minPeer = 0xFF;
+        long minDistance = long.MaxValue;
+
+        foreach (byte peerID in peerClients.Keys)
+        {
+            if (peerClients[peerID].latency < minDistance)
+            {
+                minPeer = peerID;
+                minDistance = peerClients[peerID].latency;
+            }
+        }
+
+        return minPeer;
+
     }
 
     void PingAll() {
@@ -693,6 +599,7 @@ public class UDPSandboxPeer : Tracker
             }
         }
     }
+    */
 
     /*
     void timesync()
@@ -703,10 +610,12 @@ public class UDPSandboxPeer : Tracker
     }
     */
 
+    /* TODO: Move to global manager
     void OnSpanningTree()
     {
 
     }
+    
 
     void MST()
     {
@@ -715,55 +624,124 @@ public class UDPSandboxPeer : Tracker
 
         }
     }
+    */
 
-    // simple class for network status, passed in the async thread
-    class UdpState : System.Object
-    {
-        public UdpState(IPEndPoint e, UdpClient c) { this.e = e; this.c = c; }
-        public IPEndPoint e;
-        public UdpClient c;
-    }
+    // TODO: I don't believe we're using this anymore, but I didn't want to delete it in case you needed code from here
+    //private void ThreadProc(TcpClient client)
+    //{
+    //    //var client = (TcpClient)obj;
+    //    // var childSocketThread = new Thread(() =>
+    //    // {
+    //    // Get a stream object for reading 					
+    //    NetworkStream stream = client.GetStream();
 
-    // begins the async receive loop
-    void DataListen()
-    {
+    //    // Read incomming stream into byte arrary. 						
+    //    while (true)
+    //    {
 
-        UdpState state = new UdpState(ep, udpListener);
-        udpListener.BeginReceive(new AsyncCallback(ReceiveCallback), state);
-        while (active)
-        {
-            Thread.Sleep(100);
-        }
-        // active is set to false when the application terminates, then this thread can cleanup
-        Debug.Log("closing connection...");
-        udpListener.Close();
-        //foreach (VRClient c in Clients.Values)
-        //{
-        //if (c.client != null)
-        //{
-        //c.client.Close();
-        //}
-        //}
-    }
+    //        //{
+    //        Byte[] bytes = new Byte[1024];
+    //        int length;
 
-    // async callback method
-    void ReceiveCallback(IAsyncResult ar)
-    {
-        if (!active)
-        {
-            return;
-        }
-        UdpClient c = (UdpClient)((UdpState)(ar.AsyncState)).c;
-        IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).e;
-        // get data
-        Byte[] recvbuf = c.EndReceive(ar, ref e);
-        // parse data
-        string clientMessage = System.Text.Encoding.UTF8.GetString(recvbuf);
+    //        if ((length = stream.Read(bytes, 0, bytes.Length)) != 0) {
+    //            var incomingData = new byte[length];
+    //            Array.Copy(bytes, 0, incomingData, 0, length);
+    //            // Convert byte array to string message. 							
+    //            string clientMessage = Encoding.ASCII.GetString(bytes);
 
-        OnMessage(clientMessage);
+    //            var root = JSON.Parse(clientMessage);
+    //            byte peerID = (byte)root["id"].AsInt;
+    //            if (root["type"] == "CONNECT")
+    //            {
+    //                //Connect(peerID, client);
+    //                //Debug.Log("connecting to " + id);
+    //                //peers[id] = client;
 
-        // loop the callback
-        UdpState state = new UdpState(e, c);
-        c.BeginReceive(new AsyncCallback(ReceiveCallback), state);
-    }
+    //                connectionPublisher.PublishData(root);
+
+    //                //Broadcast(Connect_ACK_M.ToString(id));
+
+    //            }
+    //            else if (root["type"] == "CONNECT_ACK")
+    //            {
+
+    //                connectionAckPublisher.PublishData(root);
+
+    //            }
+    //            else if (root["type"] == "DISCONNECT")
+    //            {
+
+    //                Disconnect(peerID);
+
+    //            }
+    //            else if (root["type"] == "SPANNINGTREE")
+    //            {
+    //                //n[i], parent = recv(nbr i)
+    //                var id = root["id"];
+    //                var p = root["info"]["parent"];
+
+    //                var d = peerClients[FindClosestPeer()].latency;
+    //                //var d = min(n) + 1;
+    //                //d = min(n) + 1;
+
+    //                /*
+    //                parent = find(i s.t.n[i] = d - 1);
+
+    //                send(parent, < d = d, parent = true >);
+
+    //                for n in nbr {
+    //                    if n != parent {
+    //                        send(n, < d = d, parent = false >)
+    //                    }
+    //                }
+    //                */
+    //            }
+    //            else if (root["type"] == "POSE_SELF")
+    //            {
+    //                Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
+    //                                             root["info"]["rot"]["y"].AsFloat,
+    //                                             root["info"]["rot"]["z"].AsFloat,
+    //                                             root["info"]["rot"]["w"].AsFloat);
+    //                Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
+    //                                          root["info"]["pos"]["y"].AsFloat,
+    //                                          root["info"]["pos"]["z"].AsFloat);
+    //                peerClients[id].SetRot(rot);
+    //                peerClients[id].SetPos(pos);
+    //            }
+    //            else if (root["type"] == "POSE_OTHER")
+    //            {
+    //                Vector3 relpos = new Vector3(root["info"]["diff"]["x"].AsFloat,
+    //                                             root["info"]["diff"]["y"].AsFloat,
+    //                                             root["info"]["diff"]["z"].AsFloat);
+    //                peerClients[id].SetRelPos(relpos);
+    //            }
+    //            else if (root["type"] == "POSE_OBJECT")
+    //            {
+    //                byte objId = (byte)root["info"]["id"].AsInt;
+    //                Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
+    //                                             root["info"]["rot"]["y"].AsFloat,
+    //                                             root["info"]["rot"]["z"].AsFloat,
+    //                                             root["info"]["rot"]["w"].AsFloat);
+    //                Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
+    //                                          root["info"]["pos"]["y"].AsFloat,
+    //                                          root["info"]["pos"]["z"].AsFloat);
+    //                Pose p = new Pose();
+    //                p.pos = pos;
+    //                p.rot = rot;
+    //                peerClients[id].objects[objId] = p;
+
+    //            }
+
+    //            Debug.Log("UNITY: " + id + ":client message received as: " + clientMessage);
+    //            //stream = client.GetStream();
+    //        }
+
+    //    }
+    //    //}
+
+
+    //    //});
+    //    //childSocketThread.IsBackground = true;
+    //    //childSocketThread.Start();
+    //}
 }

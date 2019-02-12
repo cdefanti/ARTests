@@ -53,7 +53,7 @@ public class UDPSandboxPeerGUI : Editor {
         GUILayout.Label("Peer ID");
 
         GUILayout.BeginHorizontal();
-        selectedGridIndex = GUILayout.SelectionGrid(selectedGridIndex, peerIDs, 3);
+        selectedGridIndex = GUILayout.SelectionGrid(selectedGridIndex, peerIDs, 2);
         GUILayout.EndHorizontal();
 
         
@@ -73,7 +73,7 @@ public class UDPSandboxPeerGUI : Editor {
         {
             // destination
             byte peerID = (byte)Convert.ToUInt16(peerIDs[selectedGridIndex]);
-            node.SendMessage(peerID, Disconnect_M.ToString(node.id));
+            node.SendMessage(Disconnect_M.ToString(node.id));
             //node.Disconnect(peerID);
         }
 
@@ -82,7 +82,7 @@ public class UDPSandboxPeerGUI : Editor {
             
             // destination
             byte peerID = (byte)Convert.ToUInt16(peerIDs[selectedGridIndex]);
-            node.SendMessage(peerID, Visible_M.ToString(node.id));
+            node.SendMessage(Visible_M.ToString(node.id));
 
         }
 
@@ -90,7 +90,7 @@ public class UDPSandboxPeerGUI : Editor {
         {
             // destination
             byte peerID = (byte)Convert.ToUInt16(peerIDs[selectedGridIndex]);
-            node.SendMessage(peerID, Nonvisible_M.ToString(node.id));
+            node.SendMessage(Nonvisible_M.ToString(node.id));
         }
 
         if (GUILayout.Button("Test Latency"))
@@ -135,17 +135,17 @@ public class UDPSandboxPeerGUI : Editor {
         if (GUILayout.Button("Send Notification"))
         {
             byte peerID = (byte)Convert.ToUInt16(peerIDs[selectedGridIndex]);
-            node.SendMessage(peerID, Notification_M.ToString(node.id, notificationField));
+            node.SendMessage(Notification_M.ToString(node.id, notificationField));
         }
 
         if (GUILayout.Button("Broadcast Notification"))
         {
-            node.Broadcast(Notification_M.ToString(node.id, notificationField));
+            node.network.Broadcast(Notification_M.ToString(node.id, notificationField));
         }
 
         if (Application.isPlaying)
         {
-            foreach (byte u in node.peerClients.Keys)
+            foreach (byte u in node.network.KnownIDs)
             {
                 GUILayout.Label(Convert.ToString(u));
             }

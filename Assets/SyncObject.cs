@@ -5,8 +5,7 @@ using SimpleJSON;
 
 public class SyncObject : MonoBehaviour {
 
-    //public NetworkManager network;
-    public UDPSandboxPeer peer;
+    public NetworkManager network;
     public byte ownerId;
     public byte objId;
 
@@ -17,7 +16,7 @@ public class SyncObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (peer.id == ownerId)
+		if (network.id == ownerId)
         {
             Vector3 pos = transform.position;
             Quaternion rot = transform.rotation;
@@ -32,15 +31,16 @@ public class SyncObject : MonoBehaviour {
             info["pos"]["x"] = pos.x;
             info["pos"]["y"] = pos.y;
             info["pos"]["z"] = pos.z;
-            peer.BroadcastData(info, "POSE_OBJECT");
+            network.BroadcastData(info, "POSE_OBJECT");
         } else
         {
-            if (peer.peerClients.ContainsKey(ownerId))
+            UDPSandboxPeer peer = network.GetPeer(ownerId);
+            if (peer.peerClient.connected)
             {
-                Pose p = peer.peerClients[ownerId].objects[objId];
+                Pose p = peer.peerClient.objects[objId];
                 transform.rotation = Quaternion.identity;
-                transform.Rotate(Vector3.up, peer.peerClients[ownerId].rot_diff);
-                transform.position = transform.rotation * (peer.peerClients[ownerId].pos_diff + p.pos);
+                transform.Rotate(Vector3.up, peer.peerClient.rot_diff);
+                transform.position = transform.rotation * (peer.peerClient.pos_diff + p.pos);
                 transform.rotation = transform.rotation * p.rot;
             }
         }

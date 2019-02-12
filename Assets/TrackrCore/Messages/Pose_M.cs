@@ -6,7 +6,7 @@ using UnityEngine;
 
 public struct Pose_M {
 
-    static string ToString(byte id) {
+    public static string ToString(byte id) {
 
         // broadcast our pose to everyone we're connected to
         Vector3 pos = GoogleARCore.Frame.Pose.position;
