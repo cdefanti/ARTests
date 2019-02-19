@@ -16,6 +16,7 @@ public class Tracker : MonoBehaviour
     public Camera cam;
     public Vector3 realPos;
     protected Vector3 rawPos;
+    protected Quaternion rawRot;
     public CameraCalibrationManager calib;
     public GameObject TrackerMesh;
 
@@ -99,11 +100,14 @@ public class Tracker : MonoBehaviour
         // transform tracker pos from camera coordinates to global coordinates
         Quaternion rot = Quaternion.identity;
         rawPos = new Vector3((float)tvec[0], (float)tvec[1], (float)tvec[2]);
+        rawRot = Quaternion.AngleAxis((float)rvec[0], new Vector3((float)rvec[1], (float)rvec[2], (float)rvec[3]));
         Vector3 pos = rawPos;
         rawPos = cam.transform.rotation * pos;
         pos = rawPos + cam.transform.position;
 
         transform.position = pos;
+        transform.rotation = cam.transform.rotation * rawRot;
+        
         tracked = true;
     }
 }

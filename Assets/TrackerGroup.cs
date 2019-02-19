@@ -6,15 +6,18 @@ using MathNet.Numerics.LinearAlgebra.Single;
 using MathNet.Numerics.LinearAlgebra.Factorization;
 
 
-// TODO: We should rename this class, it is more of a multi-tracker resolver
-public class GroundTruthCalibrator : MonoBehaviour {
+public class TrackerGroup : MonoBehaviour {
 
-    public Tracker[] trackers;
-    public bool tracked;
+    private Tracker[] trackers;
+    private bool tracked;
+
+    // position and rotation of the multitracker group that we observe
+    protected Vector3 relPos;
+    protected Quaternion relRot;
 
 	// Use this for initialization
 	void Start () {
-		
+        trackers = GetComponentsInChildren<Tracker>();
 	}
 	
 	// Update is called once per frame
@@ -29,8 +32,8 @@ public class GroundTruthCalibrator : MonoBehaviour {
 
         // First, we calculate the centroid
 
-        // number of visible trackers
-        int nTracked = 0;
+        // visible trackers
+        List<Tracker> visibleTrackers = new List<Tracker>();
         // real centroid
         Vector3 rc = Vector3.zero;
         // observed centroid
@@ -41,16 +44,35 @@ public class GroundTruthCalibrator : MonoBehaviour {
             {
                 rc += tracker.realPos;
                 oc += tracker.transform.position;
-                nTracked++;
+                visibleTrackers.Add(tracker);
             }
         }
-        // we need at least 3 points for this algorithm to work.
-        if (nTracked < 3)
+
+        int nTracked = visibleTrackers.Count;
+
+        // we need at least 3 points for SVD algorithm to work.
+        // if there are 1 or 2, we use the average
+        if (nTracked == 0)
         {
             return;
+        } else
+        {
+            rc /= nTracked;
+            oc /= nTracked;
         }
-        rc /= nTracked;
-        oc /= nTracked;
+        if (nTracked < 3)
+        {
+            relPos = oc;
+            if (nTracked == 1)
+            {
+                relRot = visibleTrackers[0].transform.rotation;
+            } else
+            {
+                relRot = Quaternion.Slerp(visibleTrackers[0].transform.rotation, visibleTrackers[1].transform.rotation, 0.5f);
+            }
+
+            return;
+        }
 
         // Next, we calculate H matrix
         Matrix<float> H = DenseMatrix.Create(3, 3, 0f);
