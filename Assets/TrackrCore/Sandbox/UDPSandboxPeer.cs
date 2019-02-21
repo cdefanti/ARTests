@@ -15,7 +15,7 @@ using SimpleJSON;
 using UnityEngine;
 using Ping = System.Net.NetworkInformation.Ping;
 
-public class UDPSandboxPeer : Tracker
+public class UDPSandboxPeer : TrackerGroup
 {
     #region private members
     private Thread clientReceiveThread;
@@ -70,7 +70,8 @@ public class UDPSandboxPeer : Tracker
 
     // Use this for initialization
     public new void Start()
-    {        
+    {
+        base.Start();
         if (network.NetworkConfiguration == null)
         {
             network.Start();
@@ -109,11 +110,13 @@ public class UDPSandboxPeer : Tracker
         base.Update();
         if (peerClient.connected)
         {
-            TrackerMesh.GetComponent<Renderer>().material.color = Color.green;
+            // TODO: implement color changing on connection
+            //TrackerMesh.GetComponent<Renderer>().material.color = Color.green;
         }
         else
         {
-            TrackerMesh.GetComponent<Renderer>().material.color = Color.white;
+            // TODO: implement color changing on connection
+            //TrackerMesh.GetComponent<Renderer>().material.color = Color.white;
         }
         if (peerClient == null || !tracked)
         {
@@ -123,9 +126,10 @@ public class UDPSandboxPeer : Tracker
         // this is the vector from our client to their client
         JSONNode info = JSON.Parse("{}");
         info["diff"] = JSON.Parse("{}");
-        info["diff"]["x"] = rawPos.x;
-        info["diff"]["y"] = rawPos.y;
-        info["diff"]["z"] = rawPos.z;
+        Vector3 framePos = obsPos - Frame.Pose.position;
+        info["diff"]["x"] = framePos.x;
+        info["diff"]["y"] = framePos.y;
+        info["diff"]["z"] = framePos.z;
         SendData(info, "POSE_OTHER");
 
         // if we receive data from them, we can now figure out the positional and rotational difference
@@ -135,7 +139,7 @@ public class UDPSandboxPeer : Tracker
             // p21 is the vector from client 2 to client 1 in their local frame
             // p1, p2, and q2 is the local pose data of each client in their own frame
             // Note: most of these project onto the xz plane because y/up-angle is the only angle that drifts
-            Vector3 p12 = rawPos;
+            Vector3 p12 = framePos;
             Vector3 p21 = peerClient.relPos;
             Quaternion q2 = peerClient.rot;
             Vector3 p1 = Frame.Pose.position;

@@ -18,7 +18,7 @@ public class NetworkManager : MonoBehaviour {
     // maybe this should be a map to a custom struct instead of a tuple, makes it more readable later
     public Dictionary<byte, NetworkConfig> NetworkConfiguration;
 
-    UDPSandboxPeer[] peers;
+   Dictionary<byte, UDPSandboxPeer> peers;
 
     // Use this for initialization
     public void Start() {
@@ -39,7 +39,12 @@ public class NetworkManager : MonoBehaviour {
             }
         }
 
-        peers = FindObjectsOfType<UDPSandboxPeer>();
+        peers = new Dictionary<byte, UDPSandboxPeer>();
+        UDPSandboxPeer[] peerlist = FindObjectsOfType<UDPSandboxPeer>();
+        foreach (UDPSandboxPeer peer in peerlist)
+        {
+            peers[peer.id] = peer;
+        }
         NetworkConfiguration = new Dictionary<byte, NetworkConfig>();
         // TODO: check for KnownX length mismatch.
         for (int i = 0; i < KnownIDs.Length; i++)
@@ -70,8 +75,7 @@ public class NetworkManager : MonoBehaviour {
 
     public void Broadcast(string message)
     {
-        Debug.Log("Peer " + id + " broadcasting: " + message);
-        foreach (UDPSandboxPeer peer in peers)
+        foreach (UDPSandboxPeer peer in peers.Values)
         {
             peer.SendMessage(message);
         }

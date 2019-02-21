@@ -9,16 +9,18 @@ using System.Net.Sockets;
 public class Tracker : MonoBehaviour
 {
 
-    public ARMarkerDetector detector;
+    
     public byte id;
     public Vector3 center;
     public Vector2 size;
-    public Camera cam;
-    public Vector3 realPos;
-    protected Vector3 rawPos;
-    protected Quaternion rawRot;
-    public CameraCalibrationManager calib;
+    
     public GameObject TrackerMesh;
+    public Vector3 realPos;
+    public Quaternion realRot = Quaternion.identity;
+    private CameraCalibrationManager calib;
+    private ARMarkerDetector detector;
+    private Camera cam;
+
 
     public bool tracked;
 
@@ -33,6 +35,9 @@ public class Tracker : MonoBehaviour
     // Use this for initialization
     public void Start()
     {
+        calib = FindObjectOfType<CameraCalibrationManager>();
+        detector = FindObjectOfType<ARMarkerDetector>();
+        cam = FindObjectOfType<Camera>();
     }
 
     // Update is called once per frame
@@ -99,14 +104,17 @@ public class Tracker : MonoBehaviour
 
         // transform tracker pos from camera coordinates to global coordinates
         Quaternion rot = Quaternion.identity;
-        rawPos = new Vector3((float)tvec[0], (float)tvec[1], (float)tvec[2]);
-        rawRot = Quaternion.AngleAxis((float)rvec[0], new Vector3((float)rvec[1], (float)rvec[2], (float)rvec[3]));
-        Vector3 pos = rawPos;
-        rawPos = cam.transform.rotation * pos;
-        pos = rawPos + cam.transform.position;
+        // position and rotation of tracker relative to our position
+        Vector3 relPos = new Vector3((float)tvec[0], (float)tvec[1], (float)tvec[2]);
+        float rnorm = Vector3.Magnitude(new Vector3((float)rvec[0], (float)rvec[1], (float)rvec[2]));
+        Quaternion relRot = Quaternion.AngleAxis(rnorm * 180f / Mathf.PI, 
+            new Vector3((float)rvec[0] / rnorm, (float)rvec[1] / rnorm, (float)rvec[2] / rnorm));
+        Vector3 pos = relPos;
+        relPos = cam.transform.rotation * pos;
+        pos = relPos + cam.transform.position;
 
         transform.position = pos;
-        transform.rotation = cam.transform.rotation * rawRot;
+        //transform.rotation = cam.transform.rotation * relRot;
         
         tracked = true;
     }
