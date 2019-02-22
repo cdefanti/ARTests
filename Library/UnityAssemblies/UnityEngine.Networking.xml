@@ -76,7 +76,7 @@
     </member>
     <member name="P:UnityEngine.Networking.ClientScene.prefabs">
       <summary>
-        <para>This is a dictionary of the prefabs that are registered on the client with ClientScene.RegisterPrefab().</para>
+        <para>This is a dictionary of the Prefabs that are registered on the client with ClientScene.RegisterPrefab().</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.ClientScene.ready">
@@ -96,7 +96,7 @@
     </member>
     <member name="P:UnityEngine.Networking.ClientScene.spawnableObjects">
       <summary>
-        <para>This is dictionary of the disabled NetworkIdentity objects in the scene that could be spawned by messages from the server.</para>
+        <para>This is dictionary of the disabled NetworkIdentity objects in the Scene that could be spawned by messages from the server.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.AddPlayer(UnityEngine.Networking.NetworkConnection,System.Int16,UnityEngine.Networking.MessageBase)">
@@ -134,7 +134,7 @@
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.ClearSpawners">
       <summary>
-        <para>This clears the registered spawn prefabs and spawn handler functions for this client.</para>
+        <para>This clears the registered spawn Prefabs and spawn handler functions for this client.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.ConnectLocalServer">
@@ -177,30 +177,30 @@
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject)">
       <summary>
-        <para>Registers a prefab with the UNET spawning system.</para>
+        <para>Registers a Prefab with the UNET spawning system.</para>
       </summary>
       <param name="prefab">A Prefab that will be spawned.</param>
       <param name="spawnHandler">A method to use as a custom spawnhandler on clients.</param>
       <param name="unspawnHandler">A method to use as a custom un-spawnhandler on clients.</param>
-      <param name="newAssetId">An assetId to be assigned to this prefab. This allows a dynamically created game object to be registered for an already known asset Id.</param>
+      <param name="newAssetId">An assetId to be assigned to this Prefab. This allows a dynamically created game object to be registered for an already known asset Id.</param>
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)">
       <summary>
-        <para>Registers a prefab with the UNET spawning system.</para>
+        <para>Registers a Prefab with the UNET spawning system.</para>
       </summary>
       <param name="prefab">A Prefab that will be spawned.</param>
       <param name="spawnHandler">A method to use as a custom spawnhandler on clients.</param>
       <param name="unspawnHandler">A method to use as a custom un-spawnhandler on clients.</param>
-      <param name="newAssetId">An assetId to be assigned to this prefab. This allows a dynamically created game object to be registered for an already known asset Id.</param>
+      <param name="newAssetId">An assetId to be assigned to this Prefab. This allows a dynamically created game object to be registered for an already known asset Id.</param>
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject,UnityEngine.Networking.NetworkHash128)">
       <summary>
-        <para>Registers a prefab with the UNET spawning system.</para>
+        <para>Registers a Prefab with the UNET spawning system.</para>
       </summary>
       <param name="prefab">A Prefab that will be spawned.</param>
       <param name="spawnHandler">A method to use as a custom spawnhandler on clients.</param>
       <param name="unspawnHandler">A method to use as a custom un-spawnhandler on clients.</param>
-      <param name="newAssetId">An assetId to be assigned to this prefab. This allows a dynamically created game object to be registered for an already known asset Id.</param>
+      <param name="newAssetId">An assetId to be assigned to this Prefab. This allows a dynamically created game object to be registered for an already known asset Id.</param>
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.RegisterSpawnHandler(UnityEngine.Networking.NetworkHash128,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)">
       <summary>
@@ -244,9 +244,9 @@
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.UnregisterPrefab(UnityEngine.GameObject)">
       <summary>
-        <para>Removes a registered spawn prefab that was setup with ClientScene.RegisterPrefab.</para>
+        <para>Removes a registered spawn Prefab that was setup with ClientScene.RegisterPrefab.</para>
       </summary>
-      <param name="prefab">The prefab to be removed from registration.</param>
+      <param name="prefab">The Prefab to be removed from registration.</param>
     </member>
     <member name="M:UnityEngine.Networking.ClientScene.UnregisterSpawnHandler(UnityEngine.Networking.NetworkHash128)">
       <summary>
@@ -262,6 +262,301 @@
     <member name="F:UnityEngine.Networking.CommandAttribute.channel">
       <summary>
         <para>The QoS channel to use to send this command on, see Networking.QosType.</para>
+      </summary>
+    </member>
+    <member name="?:UnityEngine.Networking.INetworkTransport">
+      <summary>
+        <para>The network transport interface that is required by Unity's high-level Multiplayer API.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.AddHost(UnityEngine.Networking.HostTopology,System.Int32,System.String)">
+      <summary>
+        <para>Creates a host based on Networking.HostTopology.</para>
+      </summary>
+      <param name="topology">The Networking.HostTopology associated with the host.</param>
+      <param name="port">Port to bind to. When set to 0, the operating system chooses a port at random.</param>
+      <param name="ip">IP address to bind to or null to bind to first available address.</param>
+      <returns>
+        <para>Returns the ID of the new host.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.AddHostWithSimulator(UnityEngine.Networking.HostTopology,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <para>Creates a host and configures it to simulate Internet latency (works on Editor and development builds only).</para>
+      </summary>
+      <param name="topology">The Networking.HostTopology associated with the host.</param>
+      <param name="minTimeout">Minimum simulated delay in milliseconds.</param>
+      <param name="maxTimeout">Maximum simulated delay in milliseconds.</param>
+      <param name="port">Port to bind to. When set to 0, the operating system chooses a port at random.</param>
+      <returns>
+        <para>Returns the ID of the new host.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.AddWebsocketHost(UnityEngine.Networking.HostTopology,System.Int32,System.String)">
+      <summary>
+        <para>Creates a web socket host.</para>
+      </summary>
+      <param name="topology">The Networking.HostTopology associated with the host.</param>
+      <param name="ip">IP address to bind to.</param>
+      <param name="port">Port to bind to.</param>
+      <returns>
+        <para>Web socket host id.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.Connect(System.Int32,System.String,System.Int32,System.Int32,System.Byte&amp;)">
+      <summary>
+        <para>Tries to establish a connection to another peer.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection (retrieved when calling Networking.NetworkTransport.AddHost).</param>
+      <param name="address">IPv4 address of the other peer.</param>
+      <param name="port">Port of the other peer.</param>
+      <param name="specialConnectionId">ID of a connection previously set up by calling Networking.HostTopology.AddSpecialConnectionConfig to be used to connect with.Set to 0 to use a default connection instead.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>A unique connection identifier on success (otherwise zero).</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.ConnectAsNetworkHost(System.Int32,System.String,System.Int32,UnityEngine.Networking.Types.NetworkID,UnityEngine.Networking.Types.SourceID,UnityEngine.Networking.Types.NodeID,System.Byte&amp;)">
+      <summary>
+        <para>Creates a dedicated connection to Relay server.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection. Retrieved when calling Networking.NetworkTransport.AddHost.</param>
+      <param name="address">IPv4 address of the relay.</param>
+      <param name="port">Port of the relay.</param>
+      <param name="network">GUID for the relay match, retrieved by calling Networking.Match.NetworkMatch.CreateMatch and using the Networking.Match.MatchInfo.networkId.</param>
+      <param name="source">GUID for the source, can be retrieved by calling Utility.GetSourceID.</param>
+      <param name="node">Slot ID for this user, retrieved by calling Networking.Match.NetworkMatch.CreateMatch and using the Networking.Match.MatchInfo.nodeId.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.ConnectEndPoint(System.Int32,System.Net.EndPoint,System.Int32,System.Byte&amp;)">
+      <summary>
+        <para>Tries to establish a connection to the peer specified by the given C# System.EndPoint.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection. Retrieved when calling Networking.NetworkTransport.AddHost.</param>
+      <param name="endPoint">The EndPoint object describing the other peer.</param>
+      <param name="specialConnectionId">ID of a connection previously set up by calling Networking.HostTopology.AddSpecialConnectionConfig to be used to connect with.Set to 0 to use a default connection instead.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>A unique connection identifier on success (otherwise zero).</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.ConnectToNetworkPeer(System.Int32,System.String,System.Int32,System.Int32,System.Int32,UnityEngine.Networking.Types.NetworkID,UnityEngine.Networking.Types.SourceID,UnityEngine.Networking.Types.NodeID,System.Byte&amp;)">
+      <summary>
+        <para>Creates a connection to another peer in the Relay group.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection. Retrieved when calling Networking.NetworkTransport.AddHost.</param>
+      <param name="address">IP address of the peer, retrieved by calling Networking.Match.NetworkMatch.JoinMatch and using the Networking.Match.MatchInfo.address.</param>
+      <param name="port">Port of the peer, retrieved by calling Networking.Match.NetworkMatch.JoinMatch and using the Networking.Match.MatchInfo.port.</param>
+      <param name="specialConnectionId">ID of a connection previously set up by calling Networking.HostTopology.AddSpecialConnectionConfig to be used to connect with.Set to 0 to use a default connection instead.</param>
+      <param name="relaySlotId">ID of the remote peer in relay.</param>
+      <param name="network">GUID for the relay match, retrieved by calling Networking.Match.NetworkMatch.JoinMatch and using the Networking.Match.MatchInfo.networkId.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <param name="source">GUID for the source, can be retrieved by calling Utility.GetSourceID.</param>
+      <param name="node">Slot ID reserved for the user, retrieved by calling Networking.Match.NetworkMatch.JoinMatch and using the Networking.Match.MatchInfo.nodeId.</param>
+      <returns>
+        <para>A unique connection identifier on success (otherwise zero).</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.ConnectWithSimulator(System.Int32,System.String,System.Int32,System.Int32,System.Byte&amp;,UnityEngine.Networking.ConnectionSimulatorConfig)">
+      <summary>
+        <para>Tries to establish a connection to another peer with added simulated latency.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection (Retrieved when calling Networking.NetworkTransport.AddHost).</param>
+      <param name="address">IPv4 address of the other peer.</param>
+      <param name="port">Port of the other peer.</param>
+      <param name="specialConnectionId">ID of a connection previously set up by calling Networking.HostTopology.AddSpecialConnectionConfig to be used to connect with.Set to 0 to use a default connection instead.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <param name="conf">A Networking.ConnectionSimulatorConfig defined for this connection.</param>
+      <returns>
+        <para>A unique connection identifier on success (otherwise zero).</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.Disconnect(System.Int32,System.Int32,System.Byte&amp;)">
+      <summary>
+        <para>Sends a disconnect signal to the connected peer and closes the connection.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection.</param>
+      <param name="connectionId">The connection ID of the connection you want to close.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>True if the disconnect packet was successfully queued for sending.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.DoesEndPointUsePlatformProtocols(System.Net.EndPoint)">
+      <summary>
+        <para>Checks whether the specified end point uses platform-specific protocols.</para>
+      </summary>
+      <param name="endPoint">End point object to check.</param>
+      <returns>
+        <para>True if platform-specific protocols are used.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.GetBroadcastConnectionInfo(System.Int32,System.String&amp;,System.Int32&amp;,System.Byte&amp;)">
+      <summary>
+        <para>After Networking.INetworkTransport.Receive() returns a Networking.NetworkEventType.BroadcastEvent, this function returns the connection information of the broadcast sender. This information can then be used for connecting to the broadcast sender.</para>
+      </summary>
+      <param name="hostId">ID of the broadcast receiver.</param>
+      <param name="address">IPv4 address of broadcast sender.</param>
+      <param name="port">Port of broadcast sender.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.GetBroadcastConnectionMessage(System.Int32,System.Byte[],System.Int32,System.Int32&amp;,System.Byte&amp;)">
+      <summary>
+        <para>After Networking.INetworkTransport.Receive() returns Networking.NetworkEventType.BroadcastEvent, this function returns a complimentary message from the broadcast sender.</para>
+      </summary>
+      <param name="hostId">ID of broadcast receiver.</param>
+      <param name="buffer">Message buffer provided by caller.</param>
+      <param name="bufferSize">Buffer size.</param>
+      <param name="receivedSize">Received size (if received size &gt; bufferSize, corresponding error will be set).</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.GetConnectionInfo(System.Int32,System.Int32,System.String&amp;,System.Int32&amp;,UnityEngine.Networking.Types.NetworkID&amp;,UnityEngine.Networking.Types.NodeID&amp;,System.Byte&amp;)">
+      <summary>
+        <para>Returns the connection parameters for the specified connectionId. These parameters can be sent to other users to establish a direct connection to this peer. If this peer is connected to the host via Relay, the Relay-related parameters are set.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection.</param>
+      <param name="connectionId">ID of this connection.</param>
+      <param name="address">The IP address of the specified connection.</param>
+      <param name="port">The port of the specified connection.</param>
+      <param name="network">Relay network GUID of the specified connection if any.</param>
+      <param name="dstNode">Destination slot ID of the specified connection.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.GetCurrentRTT(System.Int32,System.Int32,System.Byte&amp;)">
+      <summary>
+        <para>Return the round trip time for the given connectionId.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection.</param>
+      <param name="connectionId">ID of the connection.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>Current round trip time in milliseconds.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.Init">
+      <summary>
+        <para>Initializes the object implementing INetworkTransport. Must be called before doing any other operations on the object.</para>
+      </summary>
+      <param name="config">Global config object to use for initialization.</param>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.Init(UnityEngine.Networking.GlobalConfig)">
+      <summary>
+        <para>Initializes the object implementing INetworkTransport. Must be called before doing any other operations on the object.</para>
+      </summary>
+      <param name="config">Global config object to use for initialization.</param>
+    </member>
+    <member name="P:UnityEngine.Networking.INetworkTransport.IsStarted">
+      <summary>
+        <para>True if the object has been initialized and is ready to be used.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.Receive(System.Int32&amp;,System.Int32&amp;,System.Int32&amp;,System.Byte[],System.Int32,System.Int32&amp;,System.Byte&amp;)">
+      <summary>
+        <para>Polls the underlying system for events.</para>
+      </summary>
+      <param name="hostId">The host ID to check for events.</param>
+      <param name="connectionId">The connection ID that received the event.</param>
+      <param name="channelId">The channel ID associated with the event.</param>
+      <param name="buffer">The buffer that will hold the data received.</param>
+      <param name="bufferSize">Size of the buffer supplied.</param>
+      <param name="receivedSize">The actual receive size of the data.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>Type of event returned.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.ReceiveFromHost(System.Int32,System.Int32&amp;,System.Int32&amp;,System.Byte[],System.Int32,System.Int32&amp;,System.Byte&amp;)">
+      <summary>
+        <para>Similar to Networking.INetworkTransport.Receive but will only poll for the provided hostId.</para>
+      </summary>
+      <param name="hostId">The host ID to check for events.</param>
+      <param name="connectionId">The connection ID that received the event.</param>
+      <param name="channelId">The channel ID associated with the event.</param>
+      <param name="buffer">The buffer that will hold the data received.</param>
+      <param name="bufferSize">Size of the buffer supplied.</param>
+      <param name="receivedSize">The actual receive size of the data.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>Type of event returned.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.ReceiveRelayEventFromHost(System.Int32,System.Byte&amp;)">
+      <summary>
+        <para>Polls the host for the following events: Networking.NetworkEventType.ConnectEvent and Networking.NetworkEventType.DisconnectEvent.</para>
+      </summary>
+      <param name="hostId">The host ID to check for events.</param>
+      <param name="error">Error code(can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>Type of event returned.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.RemoveHost(System.Int32)">
+      <summary>
+        <para>Closes the opened transport pipe, and closes all connections belonging to that transport pipe.</para>
+      </summary>
+      <param name="hostId">Host ID to remove.</param>
+      <returns>
+        <para>True if the transport pipe to the host has been successfully closed.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.Send(System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32,System.Byte&amp;)">
+      <summary>
+        <para>Sends data to peer with the given connection ID.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this connection.</param>
+      <param name="connectionId">ID of the connection.</param>
+      <param name="channelId">The channel ID to send on.</param>
+      <param name="buffer">Buffer containing the data to send.</param>
+      <param name="size">Size of the buffer.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>True if data was successfully sent or queued for sending.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.SetBroadcastCredentials(System.Int32,System.Int32,System.Int32,System.Int32,System.Byte&amp;)">
+      <summary>
+        <para>Sets the credentials required for receiving broadcast messages. If the credentials of a received broadcast message do not match, that broadcast discovery message is dropped.</para>
+      </summary>
+      <param name="hostId">Host ID associated with this broadcast.</param>
+      <param name="key">Key part of the credentials associated with this broadcast.</param>
+      <param name="version">Version part of the credentials associated with this broadcast.</param>
+      <param name="subversion">Subversion part of the credentials associated with this broadcast.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.SetPacketStat(System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <para>Keeps track of network packet statistics.</para>
+      </summary>
+      <param name="direction">Whether the packet is outgoing (-1) or incoming (0).</param>
+      <param name="packetStatId">The ID of the message being reported.</param>
+      <param name="numMsgs">Number of messages being reported.</param>
+      <param name="numBytes">Number of bytes used by reported messages.</param>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.Shutdown">
+      <summary>
+        <para>Shuts down the transport object.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.StartBroadcastDiscovery(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Byte&amp;)">
+      <summary>
+        <para>Starts sending a broadcasting message across all local subnets.</para>
+      </summary>
+      <param name="hostId">Host ID which should be reported via broadcast (broadcast receivers will connect to this host).</param>
+      <param name="broadcastPort">Port used for the broadcast message.</param>
+      <param name="key">Key part of the credentials associated with this broadcast.</param>
+      <param name="version">Version part of the credentials associated with this broadcast.</param>
+      <param name="subversion">Subversion part of the credentials associated with this broadcast.</param>
+      <param name="buffer">Complimentary message. This message will delivered to the receiver with the broadcast event.</param>
+      <param name="size">Size of message.</param>
+      <param name="timeout">Specifies how often the broadcast message should be sent in milliseconds.</param>
+      <param name="error">Error code (can be cast to Networking.NetworkError for more information).</param>
+      <returns>
+        <para>Return true if broadcasting request has been submitted.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.INetworkTransport.StopBroadcastDiscovery">
+      <summary>
+        <para>Stops sending the broadcast discovery message across all local subnets.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.Networking.LogFilter">
@@ -453,12 +748,12 @@
     </member>
     <member name="F:UnityEngine.Networking.MsgType.LobbyReturnToLobby">
       <summary>
-        <para>Internal networking system messages used to return the game to the lobby scene.</para>
+        <para>Internal networking system messages used to return the game to the lobby Scene.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.MsgType.LobbySceneLoaded">
       <summary>
-        <para>Internal networking system message for communicating a lobby player has loaded the game scene.</para>
+        <para>Internal networking system message for communicating a lobby player has loaded the game Scene.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.MsgType.LocalChildTransform">
@@ -512,7 +807,7 @@
     </member>
     <member name="F:UnityEngine.Networking.MsgType.ObjectSpawnScene">
       <summary>
-        <para>Internal networking system message for spawning scene objects.</para>
+        <para>Internal networking system message for spawning Scene objects.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.MsgType.Owner">
@@ -547,12 +842,12 @@
     </member>
     <member name="F:UnityEngine.Networking.MsgType.Scene">
       <summary>
-        <para>Internal networking system message that tells clients which scene to load when they connect to a server.</para>
+        <para>Internal networking system message that tells clients which Scene to load when they connect to a server.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.MsgType.SpawnFinished">
       <summary>
-        <para>Internal networking system messages used to tell when the initial contents of a scene is being spawned.</para>
+        <para>Internal networking system messages used to tell when the initial contents of a Scene is being spawned.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.MsgType.SyncEvent">
@@ -827,7 +1122,7 @@
     </member>
     <member name="T:UnityEngine.Networking.NetworkClient">
       <summary>
-        <para>This is a network client class used by the networking system. It contains a NetworkConnection that is used to connection to a network server.</para>
+        <para>This is a network client class used by the networking system. It contains a NetworkConnection that is used to connect to a network server.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkClient.active">
@@ -1614,7 +1909,7 @@
     </member>
     <member name="P:UnityEngine.Networking.NetworkIdentity.sceneId">
       <summary>
-        <para>A unique identifier for NetworkIdentity objects within a scene.</para>
+        <para>A unique identifier for NetworkIdentity objects within a Scene.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkIdentity.serverOnly">
@@ -1641,9 +1936,9 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkIdentity.ForceSceneId(System.Int32)">
       <summary>
-        <para>Force the scene ID to a specific value.</para>
+        <para>Force the Scene ID to a specific value.</para>
       </summary>
-      <param name="sceneId">The new scene ID.</param>
+      <param name="sceneId">The new Scene ID.</param>
       <param name="newSceneId"></param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkIdentity.RebuildObservers(System.Boolean)">
@@ -1699,17 +1994,17 @@
     </member>
     <member name="P:UnityEngine.Networking.NetworkLobbyManager.gamePlayerPrefab">
       <summary>
-        <para>This is the prefab of the player to be created in the PlayScene.</para>
+        <para>This is the Prefab of the player to be created in the PlayScene.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkLobbyManager.lobbyPlayerPrefab">
       <summary>
-        <para>This is the prefab of the player to be created in the LobbyScene.</para>
+        <para>This is the Prefab of the player to be created in the LobbyScene.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkLobbyManager.lobbyScene">
       <summary>
-        <para>The scene to use for the lobby. This is similar to the offlineScene of the NetworkManager.</para>
+        <para>The Scene to use for the lobby. This is similar to the offlineScene of the NetworkManager.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.NetworkLobbyManager.lobbySlots">
@@ -1734,7 +2029,7 @@
     </member>
     <member name="P:UnityEngine.Networking.NetworkLobbyManager.playScene">
       <summary>
-        <para>The scene to use for the playing the game from the lobby. This is similar to the onlineScene of the NetworkManager.</para>
+        <para>The Scene to use for the playing the game from the lobby. This is similar to the onlineScene of the NetworkManager.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkLobbyManager.showLobbyGUI">
@@ -1776,9 +2071,9 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.OnLobbyClientSceneChanged(UnityEngine.Networking.NetworkConnection)">
       <summary>
-        <para>This is called on the client when the client is finished loading a new networked scene.</para>
+        <para>This is called on the client when the client is finished loading a new networked Scene.</para>
       </summary>
-      <param name="conn">The connection that finished loading a new networked scene.</param>
+      <param name="conn">The connection that finished loading a new networked Scene.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.OnLobbyServerConnect(UnityEngine.Networking.NetworkConnection)">
       <summary>
@@ -1826,13 +2121,13 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.OnLobbyServerSceneChanged(System.String)">
       <summary>
-        <para>This is called on the server when a networked scene finishes loading.</para>
+        <para>This is called on the server when a networked Scene finishes loading.</para>
       </summary>
-      <param name="sceneName">Name of the new scene.</param>
+      <param name="sceneName">Name of the new Scene.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.OnLobbyServerSceneLoadedForPlayer(UnityEngine.GameObject,UnityEngine.GameObject)">
       <summary>
-        <para>This is called on the server when it is told that a client has finished switching from the lobby scene to a game player scene.</para>
+        <para>This is called on the server when it is told that a client has finished switching from the lobby Scene to a game player Scene.</para>
       </summary>
       <param name="lobbyPlayer">The lobby player object.</param>
       <param name="gamePlayer">The game player object.</param>
@@ -1868,7 +2163,7 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.SendReturnToLobby">
       <summary>
-        <para>Sends a message to the server to make the game return to the lobby scene.</para>
+        <para>Sends a message to the server to make the game return to the lobby Scene.</para>
       </summary>
       <returns>
         <para>True if message was sent.</para>
@@ -1876,7 +2171,7 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.ServerReturnToLobby">
       <summary>
-        <para>Calling this causes the server to switch back to the lobby scene.</para>
+        <para>Calling this causes the server to switch back to the lobby Scene.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.TryToAddPlayer">
@@ -1945,9 +2240,14 @@
         <para>The NetworkManager is a convenience class for the HLAPI for managing networking systems.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Networking.NetworkManager.activeTransport">
+      <summary>
+        <para>The currently active instance of an INetworkTransport object that is being used by the high level API of Unity Multiplayer to send and receive data.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Networking.NetworkManager.autoCreatePlayer">
       <summary>
-        <para>A flag to control whether or not player objects are automatically created on connect, and on scene change.</para>
+        <para>A flag to control whether or not player objects are automatically created on connect, and on Scene change.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.channels">
@@ -1962,7 +2262,7 @@
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.clientLoadedScene">
       <summary>
-        <para>This is true if the client loaded a new scene when connecting to the server.</para>
+        <para>This is true if the client loaded a new Scene when connecting to the server.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.connectionConfig">
@@ -1975,9 +2275,14 @@
         <para>Flag to enable custom network configuration.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Networking.NetworkManager.defaultTransport">
+      <summary>
+        <para>The high level API's default network transport class.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Networking.NetworkManager.dontDestroyOnLoad">
       <summary>
-        <para>A flag to control whether the NetworkManager object is destroyed when the scene changes.</para>
+        <para>A flag to control whether the NetworkManager object is destroyed when the Scene changes.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.globalConfig">
@@ -2057,7 +2362,7 @@
     </member>
     <member name="F:UnityEngine.Networking.NetworkManager.networkSceneName">
       <summary>
-        <para>The name of the current network scene.</para>
+        <para>The name of the current network Scene.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.numPlayers">
@@ -2067,12 +2372,12 @@
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.offlineScene">
       <summary>
-        <para>The scene to switch to when offline.</para>
+        <para>The Scene to switch to when offline.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.onlineScene">
       <summary>
-        <para>The scene to switch to when online.</para>
+        <para>The Scene to switch to when online.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.packetLossPercentage">
@@ -2082,7 +2387,7 @@
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.playerPrefab">
       <summary>
-        <para>The default prefab to be used to create player objects on the server.</para>
+        <para>The default Prefab to be used to create player objects on the server.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.playerSpawnMethod">
@@ -2132,12 +2437,12 @@
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.spawnPrefabs">
       <summary>
-        <para>List of prefabs that will be registered with the spawning system.</para>
+        <para>List of Prefabs that will be registered with the spawning system.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.startPositions">
       <summary>
-        <para>The list of currently registered player start positions for the current scene.</para>
+        <para>The list of currently registered player start positions for the current Scene.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkManager.useSimulator">
@@ -2152,7 +2457,7 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkManager.GetStartPosition">
       <summary>
-        <para>This finds a spawn position based on NetworkStartPosition objects in the scene.</para>
+        <para>This finds a spawn position based on NetworkStartPosition objects in the Scene.</para>
       </summary>
       <returns>
         <para>Returns the transform to spawn a player at, or null.</para>
@@ -2193,9 +2498,9 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkManager.OnClientSceneChanged(UnityEngine.Networking.NetworkConnection)">
       <summary>
-        <para>Called on clients when a scene has completed loaded, when the scene load was initiated by the server.</para>
+        <para>Called on clients when a Scene has completed loaded, when the Scene load was initiated by the server.</para>
       </summary>
-      <param name="conn">The network connection that the scene change message arrived on.</param>
+      <param name="conn">The network connection that the Scene change message arrived on.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkManager.OnDestroyMatch(System.Boolean,System.String)">
       <summary>
@@ -2277,9 +2582,9 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkManager.OnServerSceneChanged(System.String)">
       <summary>
-        <para>Called on the server when a scene is completed loaded, when the scene load was initiated by the server with ServerChangeScene().</para>
+        <para>Called on the server when a Scene is completed loaded, when the Scene load was initiated by the server with ServerChangeScene().</para>
       </summary>
-      <param name="sceneName">The name of the new scene.</param>
+      <param name="sceneName">The name of the new Scene.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkManager.OnSetMatchAttributes(System.Boolean,System.String)">
       <summary>
@@ -2327,9 +2632,9 @@
     </member>
     <member name="M:UnityEngine.Networking.NetworkManager.ServerChangeScene(System.String)">
       <summary>
-        <para>This causes the server to switch scenes and sets the networkSceneName.</para>
+        <para>This causes the server to switch Scenes and sets the networkSceneName.</para>
       </summary>
-      <param name="newSceneName">The name of the scene to change to. The server will change scene immediately, and a message will be sent to connected clients to ask them to change scene also.</param>
+      <param name="newSceneName">The name of the Scene to change to. The server will change Scene immediately, and a message will be sent to connected clients to ask them to change Scene also.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkManager.SetMatchHost(System.String,System.Int32,System.Boolean)">
       <summary>
@@ -2496,7 +2801,7 @@
 
 The old host is able to rejoin the new game on the new host.
 
-The state of SyncVars and SyncLists on all objects with NetworkIdentities in the scene is maintained during a host migration. This also applies to custom serialized data for objects.
+The state of SyncVars and SyncLists on all objects with NetworkIdentities in the Scene is maintained during a host migration. This also applies to custom serialized data for objects.
 
 All of the player objects in the game are disabled when the host is lost. Then, when the other clients rejoin the new game on the new host, the corresponding players for those clients are re-enabled on the host, and respawned on the other clients. No player state data is lost during a host migration.</para>
       </summary>
@@ -2618,7 +2923,7 @@ All of the player objects in the game are disabled when the host is lost. Then, 
       </summary>
       <param name="conn">The connection of the client that was connected to the host.</param>
       <returns>
-        <para>True if the client should stay in the on-line scene.</para>
+        <para>True if the client should stay in the on-line Scene.</para>
       </returns>
     </member>
     <member name="M:UnityEngine.Networking.NetworkMigrationManager.LostHostOnHost">
@@ -2639,7 +2944,7 @@ All of the player objects in the game are disabled when the host is lost. Then, 
         <para>A virtual function that is called when the client is disconnected from the host.</para>
       </summary>
       <param name="conn">The connection to the old host.</param>
-      <param name="sceneChange">How to handle scene changes.</param>
+      <param name="sceneChange">How to handle Scene changes.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkMigrationManager.OnPeersUpdated(UnityEngine.Networking.NetworkSystem.PeerListMessage)">
       <summary>
@@ -2731,17 +3036,17 @@ All of the player objects in the game are disabled when the host is lost. Then, 
     </member>
     <member name="T:UnityEngine.Networking.NetworkMigrationManager.SceneChangeOption">
       <summary>
-        <para>An enumeration of how to handle scene changes when the connection to the host is lost.</para>
+        <para>An enumeration of how to handle Scene changes when the connection to the host is lost.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.NetworkMigrationManager.SceneChangeOption.StayInOnlineScene">
       <summary>
-        <para>The client should stay in the online scene.</para>
+        <para>The client should stay in the online Scene.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.NetworkMigrationManager.SceneChangeOption.SwitchToOfflineScene">
       <summary>
-        <para>The client should return to the offline scene.</para>
+        <para>The client should return to the offline Scene.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Networking.NetworkMigrationManager.SendPeerInfo">
@@ -3112,7 +3417,7 @@ All of the player objects in the game are disabled when the host is lost. Then, 
     </member>
     <member name="T:UnityEngine.Networking.NetworkSceneId">
       <summary>
-        <para>This is used to identify networked objects in a scene. These values are allocated in the editor and are persistent for the lifetime of the object in the scene.</para>
+        <para>This is used to identify networked objects in a Scene. These values are allocated in the editor and are persistent for the lifetime of the object in the Scene.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Networking.NetworkSceneId.IsEmpty">
@@ -3265,12 +3570,12 @@ All of the player objects in the game are disabled when the host is lost. Then, 
     </member>
     <member name="M:UnityEngine.Networking.NetworkServer.ClearLocalObjects">
       <summary>
-        <para>This clears all of the networked objects that the server is aware of. This can be required if a scene change deleted all of the objects without destroying them in the normal manner.</para>
+        <para>This clears all of the networked objects that the server is aware of. This can be required if a Scene change deleted all of the objects without destroying them in the normal manner.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Networking.NetworkServer.ClearSpawners">
       <summary>
-        <para>Clears all registered spawn prefab and spawn handler functions for this server.</para>
+        <para>Clears all registered spawn Prefab and spawn handler functions for this server.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Networking.NetworkServer.Configure(UnityEngine.Networking.ConnectionConfig,System.Int32)">
@@ -3578,7 +3883,7 @@ All of the player objects in the game are disabled when the host is lost. Then, 
     </member>
     <member name="M:UnityEngine.Networking.NetworkServer.SpawnObjects">
       <summary>
-        <para>This causes NetworkIdentity objects in a scene to be spawned on a server.</para>
+        <para>This causes NetworkIdentity objects in a Scene to be spawned on a server.</para>
       </summary>
       <returns>
         <para>Success if objects where spawned.</para>
@@ -4371,7 +4676,7 @@ All of the player objects in the game are disabled when the host is lost. Then, 
     </member>
     <member name="P:UnityEngine.Networking.NetworkTransformVisualizer.visualizerPrefab">
       <summary>
-        <para>The prefab to use for the visualization object.</para>
+        <para>The Prefab to use for the visualization object.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.Networking.NetworkWriter">
@@ -4760,7 +5065,7 @@ All of the player objects in the game are disabled when the host is lost. Then, 
     </member>
     <member name="M:UnityEngine.Networking.NetworkWriter.WriteBytesAndSize(System.Byte[],System.Int32)">
       <summary>
-        <para>This writes a 16-bit count and a array of bytes of that length to the stream.</para>
+        <para>This writes a 16-bit count and an array of bytes of that length to the stream.</para>
       </summary>
       <param name="buffer">Array of bytes to write.</param>
       <param name="count">Number of bytes from the array to write.</param>

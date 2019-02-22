@@ -79,6 +79,11 @@
         <para>A playable asset wrapper that represents a single AnimationClip clip in Timeline.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Timeline.AnimationPlayableAsset.applyFootIK">
+      <summary>
+        <para>Enable to apply foot IK to the AnimationClip when the target is humanoid.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Timeline.AnimationPlayableAsset.clip">
       <summary>
         <para>The animation clip.</para>
@@ -91,12 +96,17 @@
     </member>
     <member name="P:UnityEngine.Timeline.AnimationPlayableAsset.matchTargetFields">
       <summary>
-        <para>Specify which fields should be matched when aligning offsets.</para>
+        <para>Specifies which fields should be matched when aligning offsets.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Timeline.AnimationPlayableAsset.position">
       <summary>
         <para>The root motion position offset of the clip.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Timeline.AnimationPlayableAsset.removeStartOffset">
+      <summary>
+        <para>Whether to make the animation clip play relative to its first keyframe.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Timeline.AnimationPlayableAsset.rotation">
@@ -106,7 +116,7 @@
     </member>
     <member name="P:UnityEngine.Timeline.AnimationPlayableAsset.useTrackMatchFields">
       <summary>
-        <para>Specifies to use matching options as defined by the track.</para>
+        <para>Specifies that matching options are defined by the track.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Timeline.AnimationPlayableAsset.ResetOffsets">
@@ -174,6 +184,11 @@
         <para>The root motion rotation offset of the entire track.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Timeline.AnimationTrack.trackOffset">
+      <summary>
+        <para>Specifies what is used to set the starting position and orientation of an Animation Track.</para>
+      </summary>
+    </member>
     <member name="M:UnityEngine.Timeline.AnimationTrack.CreateClip(UnityEngine.AnimationClip)">
       <summary>
         <para>Creates a TimelineClip using an AnimationClip.</para>
@@ -200,6 +215,11 @@
     <member name="P:UnityEngine.Timeline.AudioPlayableAsset.clip">
       <summary>
         <para>The audio clip this asset will generate a player for.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Timeline.AudioPlayableAsset.loop">
+      <summary>
+        <para>Whether the audio clip loops.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.Timeline.AudioTrack">
@@ -288,7 +308,7 @@
     </member>
     <member name="F:UnityEngine.Timeline.ControlPlayableAsset.sourceGameObject">
       <summary>
-        <para>GameObject in the scene to control, or the parent of the instantiated prefab.</para>
+        <para>GameObject in the Scene to control, or the parent of the instantiated Prefab.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Timeline.ControlPlayableAsset.updateDirector">
@@ -344,6 +364,20 @@
       </summary>
       <param name="clip"></param>
       <param name="obj"></param>
+    </member>
+    <member name="M:UnityEngine.Timeline.IPropertyCollector.AddFromClips(System.Collections.Generic.IEnumerable`1&lt;UnityEngine.AnimationClip&gt;)">
+      <summary>
+        <para>Add property modifications specified by a list of animation clips.</para>
+      </summary>
+      <param name="clips">The list of animation clips used to determine which property modifications to apply.</param>
+      <param name="obj">The GameObject to animate.</param>
+    </member>
+    <member name="M:UnityEngine.Timeline.IPropertyCollector.AddFromClips(UnityEngine.GameObject,System.Collections.Generic.IEnumerable`1&lt;UnityEngine.AnimationClip&gt;)">
+      <summary>
+        <para>Add property modifications specified by a list of animation clips.</para>
+      </summary>
+      <param name="clips">The list of animation clips used to determine which property modifications to apply.</param>
+      <param name="obj">The GameObject to animate.</param>
     </member>
     <member name="M:UnityEngine.Timeline.IPropertyCollector.AddFromName(System.String)">
       <summary>
@@ -461,7 +495,7 @@
     </member>
     <member name="P:UnityEngine.Timeline.PrefabControlPlayable.prefabInstance">
       <summary>
-        <para>The instance of the prefab that has been generated for this playable.</para>
+        <para>The instance of the Prefab that has been generated for this playable.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.Timeline.TimelineAsset">
@@ -888,6 +922,26 @@
       <param name="r">Red value   [0-1].</param>
       <param name="g">Green value [0-1].</param>
       <param name="b">Blue value [0-1].</param>
+    </member>
+    <member name="T:UnityEngine.Timeline.TrackOffset">
+      <summary>
+        <para>Describes what is used to set the starting position and orientation of each Animation Track.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Timeline.TrackOffset.ApplySceneOffsets">
+      <summary>
+        <para>Use this setting to offset each Animation Track based on the current position and orientation in the Scene.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Timeline.TrackOffset.ApplyTransformOffsets">
+      <summary>
+        <para>Use this setting to offset each Animation Track based on a set position and orientation.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Timeline.TrackOffset.Auto">
+      <summary>
+        <para>Auto will offset root transforms based on the state of the animator.</para>
+      </summary>
     </member>
   </members>
 </doc>

@@ -4,6 +4,16 @@
     <assembly>
       <name>UnityEditor.TestRunner</name>
     </assembly>
+    <member name="T:UnityEngine.TestTools.EnterPlayMode">
+      <summary>
+        <para>Creates a yield instruction to enter Play Mode.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.TestTools.ExitPlayMode">
+      <summary>
+        <para>Creates a yield instruction to exit Play Mode.</para>
+      </summary>
+    </member>
     <member name="T:UnityEditor.TestTools.RequirePlatformSupportAttribute">
       <summary>
         <para>Mark a test or test fixture as requiring that particular platform support has been installed into Unity.</para>

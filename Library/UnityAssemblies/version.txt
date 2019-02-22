@@ -1,4 +1,4 @@
-2018.2.15f1:3.3.0.2
+2018.3.5f1:3.3.0.2
 Android
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll
@@ -9,11 +9,9 @@ C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AssetBundleMo
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AudioModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.BaselibModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ClothModule.dll
-C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.CloudWebServicesModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.CoreModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.CrashReportingModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.DirectorModule.dll
-C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.FacebookModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.FileSystemHttpModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.GameCenterModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.GridModule.dll
@@ -24,7 +22,6 @@ C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.InputModule.d
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.LocalizationModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll
-C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ParticlesLegacyModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.PhysicsModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.Physics2DModule.dll
@@ -40,6 +37,7 @@ C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.SubstanceModu
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.TLSModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.TerrainModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll
+C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.TextCoreModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.TextRenderingModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.TilemapModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.TimelineModule.dll
@@ -49,11 +47,13 @@ C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UNETModule.dl
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UmbraModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UnityConnectModule.dll
+C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UnityTestProtocolModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UnityWebRequestAssetBundleModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll
+C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.VFXModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.VRModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.VehiclesModule.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.VideoModule.dll
@@ -65,7 +65,6 @@ C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.U
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll
-C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll
 C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll
 C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.dll
@@ -75,6 +74,9 @@ C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Xm
 C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Xml.Linq.dll
 C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Numerics.dll
 C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Numerics.Vectors.dll
+C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Net.Http.dll
+C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Microsoft.CSharp.dll
+C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Data.dll
 C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\Microsoft.Win32.Primitives.dll
 C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\netstandard.dll
 C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Facades\System.AppContext.dll
@@ -186,10 +188,8 @@ C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ClusterInputM
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll
-C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll
-C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll
 C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll
 C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll

@@ -210,7 +210,7 @@
     </member>
     <member name="M:UnityEngine.EventSystems.BaseInputModule.HandlePointerExitAndEnter(UnityEngine.EventSystems.PointerEventData,UnityEngine.GameObject)">
       <summary>
-        <para>Handle sending enter and exit events when a new enter targer is found.</para>
+        <para>Handle sending enter and exit events when a new enter target is found.</para>
       </summary>
       <param name="currentPointerData"></param>
       <param name="newEnterTarget"></param>
@@ -289,7 +289,7 @@
     </member>
     <member name="M:UnityEngine.EventSystems.BaseRaycaster.Raycast(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List`1&lt;UnityEngine.EventSystems.RaycastResult&gt;)">
       <summary>
-        <para>Raycast against the scene.</para>
+        <para>Raycast against the Scene.</para>
       </summary>
       <param name="eventData">Current event data.</param>
       <param name="resultAppendList">List of hit Objects.</param>
@@ -341,7 +341,7 @@
     </member>
     <member name="P:UnityEngine.EventSystems.EventSystem.isFocused">
       <summary>
-        <para>Flag to say weather the EventSystem thinks it should be paused or not based upon focused state.</para>
+        <para>Flag to say whether the EventSystem thinks it should be paused or not based upon focused state.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.EventSystems.EventSystem.pixelDragThreshold">
@@ -373,7 +373,7 @@
     </member>
     <member name="M:UnityEngine.EventSystems.EventSystem.RaycastAll(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List`1&lt;UnityEngine.EventSystems.RaycastResult&gt;)">
       <summary>
-        <para>Raycast into the scene using all configured BaseRaycasters.</para>
+        <para>Raycast into the Scene using all configured BaseRaycasters.</para>
       </summary>
       <param name="eventData">Current pointer data.</param>
       <param name="raycastResults">List of 'hits' to populate.</param>
@@ -1104,7 +1104,7 @@
     </member>
     <member name="P:UnityEngine.EventSystems.PointerEventData.pointerId">
       <summary>
-        <para>Id of the pointer (touch id).</para>
+        <para>Identification of the pointer.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.EventSystems.PointerEventData.pointerPress">
@@ -1129,7 +1129,7 @@
     </member>
     <member name="P:UnityEngine.EventSystems.PointerEventData.pressPosition">
       <summary>
-        <para>Position of the press.</para>
+        <para>The screen space coordinates of the last pointer click.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.EventSystems.PointerEventData.rawPointerPress">
@@ -1643,7 +1643,7 @@
     </member>
     <member name="M:UnityEngine.EventSystems.UIBehaviour.OnRectTransformDimensionsChange">
       <summary>
-        <para>This callback is called if an associated RectTransform has its dimensions changed. The call is also made to all child rect transforms, even if the child transform itself doesn't change - as it could have, depending on its anchoring.</para>
+        <para>This callback is called if an associated RectTransform has its dimensions changed.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.EventSystems.UIBehaviour.OnTransformParentChanged">
@@ -1790,7 +1790,7 @@
     </member>
     <member name="P:UnityEngine.UI.Button.onClick">
       <summary>
-        <para>UnityEvent that is triggered when the button is pressed.</para>
+        <para>UnityEvent that is triggered when the Button is pressed.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.UI.Button.ButtonClickedEvent">
@@ -2086,7 +2086,7 @@ One point is 112 of a pica, and 172 of an inch.</para>
     </member>
     <member name="T:UnityEngine.UI.ClipperRegistry">
       <summary>
-        <para>Registry class to keep track of all IClippers that exist in the scene.</para>
+        <para>Registry class to keep track of all IClippers that exist in the Scene.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.UI.ClipperRegistry.instance">
@@ -2793,7 +2793,7 @@ If you have modified the list of options, you should call this method afterwards
     </member>
     <member name="M:UnityEngine.UI.Graphic.Raycast(UnityEngine.Vector2,UnityEngine.Camera)">
       <summary>
-        <para>When a GraphicRaycaster is raycasting into the scene it does two things. First it filters the elements using their RectTransform rect. Then it uses this Raycast function to determine the elements hit by the raycast.</para>
+        <para>When a GraphicRaycaster is raycasting into the Scene it does two things. First it filters the elements using their RectTransform rect. Then it uses this Raycast function to determine the elements hit by the raycast.</para>
       </summary>
       <param name="sp">Screen point.</param>
       <param name="eventCamera">Camera.</param>
@@ -3242,7 +3242,7 @@ Used if the native representation has been destroyed.</para>
     </member>
     <member name="?:UnityEngine.UI.ILayoutController">
       <summary>
-        <para>Base interface to implement by componets that control the layout of RectTransforms.</para>
+        <para>Base interface to implement by components that control the layout of RectTransforms.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.UI.ILayoutController.SetLayoutHorizontal">
@@ -3438,6 +3438,11 @@ Used if the native representation has been destroyed.</para>
     <member name="P:UnityEngine.UI.Image.type">
       <summary>
         <para>How to display the image.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.UI.Image.useSpriteMesh">
+      <summary>
+        <para>Allows you to specify whether the UI Image should be displayed using the mesh generated by the TextureImporter, or by a simple quad mesh.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.UI.Image.CalculateLayoutInputHorizontal">
@@ -3784,9 +3789,7 @@ Used if the native representation has been destroyed.</para>
     </member>
     <member name="P:UnityEngine.UI.InputField.placeholder">
       <summary>
-        <para>This is an optional ‘empty’ graphic to show that the InputField text field is empty. Note that this ‘empty' graphic still displays even when the InputField is selected (that is; when there is focus on it).
-
-A placeholder graphic can be used to show subtle hints or make it more obvious that the control is an InputField.</para>
+        <para>This is an optional ‘empty’ graphic to show that the InputField text field is empty.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.UI.InputField.readOnly">
@@ -5288,7 +5291,7 @@ Characters 0-9, . (dot), and - (dash / minus sign) are allowed. The dash is only
     </member>
     <member name="P:UnityEngine.UI.Selectable.allSelectables">
       <summary>
-        <para>List of all the selectable objects currently active in the scene.</para>
+        <para>List of all the selectable objects currently active in the Scene.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.UI.Selectable.animationTriggers">

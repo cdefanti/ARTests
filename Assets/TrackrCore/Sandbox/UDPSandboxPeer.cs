@@ -429,7 +429,7 @@ public class UDPSandboxPeer : TrackerGroup
             Byte[] sendbuf = System.Text.Encoding.UTF8.GetBytes(message);
             IPEndPoint sendEP = new IPEndPoint(IPAddress.Parse(peerClient.IP), network.GetPort());
             peerClient.client.Send(sendbuf, sendbuf.Length, sendEP);
-
+            //Debug.Log("UNITY: sending message to " + id + ": " + message);
         }
         catch (Exception ex)
         {
@@ -556,6 +556,7 @@ public class UDPSandboxPeer : TrackerGroup
         Byte[] recvbuf = c.EndReceive(ar, ref e);
         // parse data
         string clientMessage = System.Text.Encoding.UTF8.GetString(recvbuf);
+        //Debug.Log("UNITY: received message " + clientMessage);
         OnMessage(clientMessage);
         // loop the callback
         UdpState state = new UdpState(e, c);
