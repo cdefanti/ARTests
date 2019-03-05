@@ -28,6 +28,8 @@ public class NetworkManager : MonoBehaviour {
 
         PeerDiscovery.Start();
 
+        // TODO: integrate above a little more (i.e. hook into the connect / receive methods) to completely remove below
+
         // this is not needed, but useful for finding address in an ad-hoc network
         string hostName = Dns.GetHostName();
         foreach (IPAddress addr in Dns.GetHostEntry(hostName).AddressList) {
@@ -99,27 +101,25 @@ public class NetworkManager : MonoBehaviour {
         string message = root.ToString();
         Broadcast(message);
     }
+
+    byte FindClosestPeer()
+    {
+
+        byte minPeer = 0xFF;
+        long minDistance = long.MaxValue;
+
+        foreach (byte peerID in peers.Keys)
+        {
+            peers[peerID].peerClient.latency = Math.Min(peers[peerID].peerClient.latency, minDistance);
+        }
+
+        return minPeer;
+
+    }
 }
 
 /* TODO: Move to global manager
-   byte FindClosestPeer()
-   {
 
-       byte minPeer = 0xFF;
-       long minDistance = long.MaxValue;
-
-       foreach (byte peerID in peerClients.Keys)
-       {
-           if (peerClients[peerID].latency < minDistance)
-           {
-               minPeer = peerID;
-               minDistance = peerClients[peerID].latency;
-           }
-       }
-
-       return minPeer;
-
-   }
 
    void PingAll() {
 

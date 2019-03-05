@@ -25,16 +25,22 @@ public class NetworkStatistics {
         }
     }
 
-    public void tickSent(string messageType, ulong size)
+    public void tickSent(string messageType, int size)
     {
         sent[messageType]++;
-        sentBytes += size;
+        sentBytes += (ulong)size;
+        lastPacketID++;
     }
 
-    public void tickReceived(string messageType, ulong size)
+    public void tickReceived(string messageType, int size)
     {
         received[messageType]++;
-        receivedBytes += size;
+        receivedBytes += (ulong)size;
+    }
+
+    public ulong getLastPacketID()
+    {
+        return lastPacketID;
     }
 
     public override string ToString()
