@@ -459,12 +459,12 @@ public class UDPSandboxPeer : TrackerGroup
         root["id"] = network.id;
         root["type"] = type;
         root["info"] = data;
-
-        statistics.tickSent(root["type"].Value);
-        
-        root["packetID"] = statistics.lastPacketID++;
+        root["packetID"] = statistics.getLastPacketID();
 
         string message = root.ToString();
+
+        statistics.tickSent(root["type"].Value, message.Length);
+
         SendMessage(message);
     }
 
