@@ -7,9 +7,13 @@ public class NetworkStatistics {
     ConcurrentDictionary<string, long> sent;
     ConcurrentDictionary<string, long> received;
 
+    public ulong lastPacketID;
+
     // initialize with all the message types this session should expect
     NetworkStatistics(List<string> messageTypes)
     {
+        lastPacketID = 0;
+
         foreach(var type in messageTypes)
         {
             sent[type] = 0;
@@ -17,17 +21,17 @@ public class NetworkStatistics {
         }
     }
 
-    void tickSent(string messageType)
+    public void tickSent(string messageType)
     {
         sent[messageType]++;
     }
 
-    void tickReceived(string messageType)
+    public void tickReceived(string messageType)
     {
         received[messageType]++;
     }
 
-    void toString()
+    public void ToString()
     {
         foreach(var key in sent.Keys)
         {
