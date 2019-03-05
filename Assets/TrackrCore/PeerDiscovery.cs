@@ -16,7 +16,7 @@ Discoverer.Start();
 */
 
 // simple service discovery protocol
-public class Discoverer
+public class PeerDiscovery
 {
     static string MULTICAST_IP = "239.255.255.250";
     static int MULTICAST_PORT = 1900;

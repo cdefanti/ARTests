@@ -22,6 +22,12 @@ public class NetworkManager : MonoBehaviour {
 
     // Use this for initialization
     public void Start() {
+
+        PeerDiscovery.PeerJoined = ip => Console.WriteLine("JOINED:" + ip);
+        PeerDiscovery.PeerLeft = ip => Console.WriteLine("LEFT:" + ip);
+
+        PeerDiscovery.Start();
+
         // this is not needed, but useful for finding address in an ad-hoc network
         string hostName = Dns.GetHostName();
         foreach (IPAddress addr in Dns.GetHostEntry(hostName).AddressList) {
