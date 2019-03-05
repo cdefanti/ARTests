@@ -18,7 +18,7 @@ public class NetworkManager : MonoBehaviour {
     // maybe this should be a map to a custom struct instead of a tuple, makes it more readable later
     public Dictionary<byte, NetworkConfig> NetworkConfiguration;
 
-   Dictionary<byte, UDPSandboxPeer> peers;
+    Dictionary<byte, UDPSandboxPeer> peers;
 
     // Use this for initialization
     public void Start() {
