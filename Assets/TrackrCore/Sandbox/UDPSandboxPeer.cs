@@ -278,7 +278,7 @@ public class UDPSandboxPeer : TrackerGroup
     {
         var root = JSON.Parse(message);
 
-        statistics.tickReceived(root["type"].Value);
+        statistics.tickReceived(root["type"].Value, message.Length);
 
         if (root["type"].Value == "CONNECT")
         {

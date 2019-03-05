@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class NetworkStatistics {
 
-    ConcurrentDictionary<string, long> sent;
-    ConcurrentDictionary<string, long> received;
+    ConcurrentDictionary<string, ulong> sent;
+    ConcurrentDictionary<string, ulong> received;
+
+    // ideas on things to add dropped packets (??? probably pointless), exceptions, moving averages for some notion of throughput
+    ulong sentBytes;
+    ulong receivedBytes;
 
     public ulong lastPacketID;
 
@@ -21,23 +25,28 @@ public class NetworkStatistics {
         }
     }
 
-    public void tickSent(string messageType)
+    public void tickSent(string messageType, ulong size)
     {
         sent[messageType]++;
+        sentBytes += size;
     }
 
-    public void tickReceived(string messageType)
+    public void tickReceived(string messageType, ulong size)
     {
         received[messageType]++;
+        receivedBytes += size;
     }
 
-    public void ToString()
+    public override string ToString()
     {
+        string ret = "";
+
         foreach(var key in sent.Keys)
         {
-            Debug.Log("S: " + key + " " + this.sent[key].ToString());
-            Debug.Log("R: " + key + " " + this.sent[key].ToString());
+            ret += "S: " + key + " " + this.sent[key].ToString() + "\n";
+            ret += "R: " + key + " " + this.sent[key].ToString() + "\n";
         }
-    }
 
+        return ret;
+    }
 }
