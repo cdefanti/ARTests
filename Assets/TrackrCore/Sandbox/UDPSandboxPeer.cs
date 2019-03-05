@@ -65,6 +65,7 @@ public class UDPSandboxPeer : TrackerGroup
     public ConcurrentQueue<KeyValuePair<byte, string>> messageQueue;
 
     public NetworkManager network;
+    public NetworkStatistics statistics;
 
     //public int heartbeatPeriod = 10000;
 
@@ -277,6 +278,8 @@ public class UDPSandboxPeer : TrackerGroup
     {
         var root = JSON.Parse(message);
 
+        statistics.tickReceived(root["type"].Value);
+
         if (root["type"].Value == "CONNECT")
         {
             //Connect(peerID, client);
@@ -456,9 +459,11 @@ public class UDPSandboxPeer : TrackerGroup
         root["id"] = network.id;
         root["type"] = type;
         root["info"] = data;
-        // TODO: last packet id
-        //lastPacketID++;
-        //root["packetID"] = lastPacketID;
+
+        statistics.tickSent(root["type"].Value);
+        
+        root["packetID"] = statistics.lastPacketID++;
+
         string message = root.ToString();
         SendMessage(message);
     }
@@ -479,7 +484,7 @@ public class UDPSandboxPeer : TrackerGroup
             {
                 latency = reply.RoundtripTime;
             }
-            
+
         }
         catch (PingException)
         {
@@ -499,19 +504,26 @@ public class UDPSandboxPeer : TrackerGroup
     void Ping(byte peerID)
     {
         // obviously stupid to allow ping yourself in this context
-        if (peerID == id) {
+        if (peerID == id)
+        {
             return;
         }
 
-        try {
+        try
+        {
 
             peerClient.latency = PingHost(peerClient.IP);
 
-        } catch (Exception ex) {
-            if (ex is SocketException) {
+        }
+        catch (Exception ex)
+        {
+            if (ex is SocketException)
+            {
                 Debug.Log("Socket exception " + id + "@" + peerID + ": " + ex);
                 return;
-            } else if (ex is InvalidOperationException) {
+            }
+            else if (ex is InvalidOperationException)
+            {
                 Debug.Log("InvalidOperationException " + id + "@" + peerID + ": " + ex);
                 return;
             }
@@ -562,191 +574,4 @@ public class UDPSandboxPeer : TrackerGroup
         UdpState state = new UdpState(e, c);
         c.BeginReceive(new AsyncCallback(ReceiveCallback), state);
     }
-
-
-    /* TODO: Move to global manager
-    byte FindClosestPeer()
-    {
-
-        byte minPeer = 0xFF;
-        long minDistance = long.MaxValue;
-
-        foreach (byte peerID in peerClients.Keys)
-        {
-            if (peerClients[peerID].latency < minDistance)
-            {
-                minPeer = peerID;
-                minDistance = peerClients[peerID].latency;
-            }
-        }
-
-        return minPeer;
-
-    }
-
-    void PingAll() {
-
-        foreach (byte peerID in peerClients.Keys) {
-            try {
-
-                Ping(peerID);
-
-            } catch (Exception ex) {
-                if (ex is SocketException) {
-                    Debug.Log("Socket exception " + id + "@" + peerID + ": " + ex);
-                    return;
-                } else if (ex is InvalidOperationException) {
-                    Debug.Log("InvalidOperationException " + id + "@" + peerID + ": " + ex);
-                    return;
-                }
-
-                throw;
-            }
-        }
-    }
-    */
-
-    /*
-    void timesync()
-    {
-        int latency = currentTime - sentTime;
-        int synchonizationDelta = currentTime - serverTime + (latency / 2);
-        int syncedTime = now + synchonizationDelta;
-    }
-    */
-
-    /* TODO: Move to global manager
-    void OnSpanningTree()
-    {
-
-    }
-    
-
-    void MST()
-    {
-        foreach (byte peerID in peerClients.Keys)
-        {
-
-        }
-    }
-    */
-
-    // TODO: I don't believe we're using this anymore, but I didn't want to delete it in case you needed code from here
-    //private void ThreadProc(TcpClient client)
-    //{
-    //    //var client = (TcpClient)obj;
-    //    // var childSocketThread = new Thread(() =>
-    //    // {
-    //    // Get a stream object for reading 					
-    //    NetworkStream stream = client.GetStream();
-
-    //    // Read incomming stream into byte arrary. 						
-    //    while (true)
-    //    {
-
-    //        //{
-    //        Byte[] bytes = new Byte[1024];
-    //        int length;
-
-    //        if ((length = stream.Read(bytes, 0, bytes.Length)) != 0) {
-    //            var incomingData = new byte[length];
-    //            Array.Copy(bytes, 0, incomingData, 0, length);
-    //            // Convert byte array to string message. 							
-    //            string clientMessage = Encoding.ASCII.GetString(bytes);
-
-    //            var root = JSON.Parse(clientMessage);
-    //            byte peerID = (byte)root["id"].AsInt;
-    //            if (root["type"] == "CONNECT")
-    //            {
-    //                //Connect(peerID, client);
-    //                //Debug.Log("connecting to " + id);
-    //                //peers[id] = client;
-
-    //                connectionPublisher.PublishData(root);
-
-    //                //Broadcast(Connect_ACK_M.ToString(id));
-
-    //            }
-    //            else if (root["type"] == "CONNECT_ACK")
-    //            {
-
-    //                connectionAckPublisher.PublishData(root);
-
-    //            }
-    //            else if (root["type"] == "DISCONNECT")
-    //            {
-
-    //                Disconnect(peerID);
-
-    //            }
-    //            else if (root["type"] == "SPANNINGTREE")
-    //            {
-    //                //n[i], parent = recv(nbr i)
-    //                var id = root["id"];
-    //                var p = root["info"]["parent"];
-
-    //                var d = peerClients[FindClosestPeer()].latency;
-    //                //var d = min(n) + 1;
-    //                //d = min(n) + 1;
-
-    //                /*
-    //                parent = find(i s.t.n[i] = d - 1);
-
-    //                send(parent, < d = d, parent = true >);
-
-    //                for n in nbr {
-    //                    if n != parent {
-    //                        send(n, < d = d, parent = false >)
-    //                    }
-    //                }
-    //                */
-    //            }
-    //            else if (root["type"] == "POSE_SELF")
-    //            {
-    //                Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
-    //                                             root["info"]["rot"]["y"].AsFloat,
-    //                                             root["info"]["rot"]["z"].AsFloat,
-    //                                             root["info"]["rot"]["w"].AsFloat);
-    //                Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
-    //                                          root["info"]["pos"]["y"].AsFloat,
-    //                                          root["info"]["pos"]["z"].AsFloat);
-    //                peerClients[id].SetRot(rot);
-    //                peerClients[id].SetPos(pos);
-    //            }
-    //            else if (root["type"] == "POSE_OTHER")
-    //            {
-    //                Vector3 relpos = new Vector3(root["info"]["diff"]["x"].AsFloat,
-    //                                             root["info"]["diff"]["y"].AsFloat,
-    //                                             root["info"]["diff"]["z"].AsFloat);
-    //                peerClients[id].SetRelPos(relpos);
-    //            }
-    //            else if (root["type"] == "POSE_OBJECT")
-    //            {
-    //                byte objId = (byte)root["info"]["id"].AsInt;
-    //                Quaternion rot = new Quaternion(root["info"]["rot"]["x"].AsFloat,
-    //                                             root["info"]["rot"]["y"].AsFloat,
-    //                                             root["info"]["rot"]["z"].AsFloat,
-    //                                             root["info"]["rot"]["w"].AsFloat);
-    //                Vector3 pos = new Vector3(root["info"]["pos"]["x"].AsFloat,
-    //                                          root["info"]["pos"]["y"].AsFloat,
-    //                                          root["info"]["pos"]["z"].AsFloat);
-    //                Pose p = new Pose();
-    //                p.pos = pos;
-    //                p.rot = rot;
-    //                peerClients[id].objects[objId] = p;
-
-    //            }
-
-    //            Debug.Log("UNITY: " + id + ":client message received as: " + clientMessage);
-    //            //stream = client.GetStream();
-    //        }
-
-    //    }
-    //    //}
-
-
-    //    //});
-    //    //childSocketThread.IsBackground = true;
-    //    //childSocketThread.Start();
-    //}
 }
