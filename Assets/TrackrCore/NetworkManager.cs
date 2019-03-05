@@ -94,3 +94,93 @@ public class NetworkManager : MonoBehaviour {
         Broadcast(message);
     }
 }
+
+/* TODO: Move to global manager
+   byte FindClosestPeer()
+   {
+
+       byte minPeer = 0xFF;
+       long minDistance = long.MaxValue;
+
+       foreach (byte peerID in peerClients.Keys)
+       {
+           if (peerClients[peerID].latency < minDistance)
+           {
+               minPeer = peerID;
+               minDistance = peerClients[peerID].latency;
+           }
+       }
+
+       return minPeer;
+
+   }
+
+   void PingAll() {
+
+       foreach (byte peerID in peerClients.Keys) {
+           try {
+
+               Ping(peerID);
+
+           } catch (Exception ex) {
+               if (ex is SocketException) {
+                   Debug.Log("Socket exception " + id + "@" + peerID + ": " + ex);
+                   return;
+               } else if (ex is InvalidOperationException) {
+                   Debug.Log("InvalidOperationException " + id + "@" + peerID + ": " + ex);
+                   return;
+               }
+
+               throw;
+           }
+       }
+   }
+   */
+
+/*
+void timesync()
+{
+    int latency = currentTime - sentTime;
+    int synchonizationDelta = currentTime - serverTime + (latency / 2);
+    int syncedTime = now + synchonizationDelta;
+}
+*/
+
+/* TODO: Move to global manager
+void OnSpanningTree()
+{
+
+}
+
+
+void MST()
+{
+    foreach (byte peerID in peerClients.Keys)
+    {
+
+    }
+}
+*/
+
+//            else if (root["type"] == "SPANNINGTREE")
+//            {
+//                //n[i], parent = recv(nbr i)
+//                var id = root["id"];
+//                var p = root["info"]["parent"];
+
+//                var d = peerClients[FindClosestPeer()].latency;
+//                //var d = min(n) + 1;
+//                //d = min(n) + 1;
+
+//                /*
+//                parent = find(i s.t.n[i] = d - 1);
+
+//                send(parent, < d = d, parent = true >);
+
+//                for n in nbr {
+//                    if n != parent {
+//                        send(n, < d = d, parent = false >)
+//                    }
+//                }
+//                */
+//            }
